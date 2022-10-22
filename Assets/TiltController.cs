@@ -9,7 +9,7 @@ public class TiltController : MonoBehaviour
     float moveSpeed = 20f;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
     }
@@ -18,10 +18,11 @@ public class TiltController : MonoBehaviour
     void Update()
     {
         dx = Input.acceleration.x * moveSpeed;
-        transform.position = new Vector2(Mathf.Clamp(transform.position.x, -7.5f, 7.5f), transform.position.y);
     }
     void FixedUpdate()
     {
-        rb.velocity = new Vector2(dx, 0f);
+        Vector2 velocity = rb.velocity;
+        velocity.x = dx;
+        rb.velocity = velocity;
     }
 }
