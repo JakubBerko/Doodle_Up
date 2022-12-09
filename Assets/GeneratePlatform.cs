@@ -14,7 +14,7 @@ public class GeneratePlatform : MonoBehaviour
 
         for (int i = 0; i < platformCount; i++)
         {
-            spawnPos.y += Random.Range(.5f, 2f);
+            spawnPos.y += Random.Range(.5f, 1f);
             spawnPos.x = Random.Range(-2.5f, 2.5f);
             Instantiate(platform, spawnPos, Quaternion.identity);
         }
