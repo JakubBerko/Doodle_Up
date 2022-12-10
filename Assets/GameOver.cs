@@ -10,6 +10,6 @@ public class GameOver : MonoBehaviour
     private void OnBecameInvisible()
     {
         Destroy(Doodler);
-        SceneManager.LoadScene("SampleScene");
+        SceneManager.LoadScene("MainGameScene");
     }
 }
