@@ -12,6 +12,5 @@ public class DestroyPlatform : MonoBehaviour
     {
         Destroy(gameObject);
         Debug.Log("Platform destroyed!");
-        
     }
 }

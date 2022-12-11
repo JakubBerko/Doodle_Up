@@ -16,13 +16,7 @@ public class GeneratePlatform : MonoBehaviour
         {
             spawnPos.y += Random.Range(.5f, 1f);
             spawnPos.x = Random.Range(-2.5f, 2.5f);
-            Instantiate(platform, spawnPos, Quaternion.identity);
+            Instantiate(platform, spawnPos, Quaternion.identity); 
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
