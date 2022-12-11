@@ -6,10 +6,13 @@ public class FallThrough : MonoBehaviour
 {
     void OnCollisionEnter2D(Collision2D collision)
     {
-        Rigidbody2D rb = collision.gameObject.GetComponent<Rigidbody2D>();
-        if (rb != null)
+        if (collision.relativeVelocity.y <= 0f)
         {
-            Destroy(gameObject);
+            Rigidbody2D rb = collision.gameObject.GetComponent<Rigidbody2D>();
+            if (rb != null)
+            {
+                Destroy(gameObject);
+            }
         }
     }
 }
