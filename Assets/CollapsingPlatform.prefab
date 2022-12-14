@@ -12,10 +12,11 @@ GameObject:
   - component: {fileID: 1929800858021485196}
   - component: {fileID: 1929800858021485195}
   - component: {fileID: -7111493974984815580}
+  - component: {fileID: 3878567083531973908}
+  - component: {fileID: -2308195547176587662}
   - component: {fileID: 1929800858021485194}
-  - component: {fileID: 1929800858021485193}
   m_Layer: 0
-  m_Name: holographic(destroyable)
+  m_Name: CollapsingPlatform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -135,6 +136,31 @@ PlatformEffector2D:
   m_UseSideFriction: 0
   m_UseSideBounce: 0
   m_SideArc: 1
+--- !u!114 &3878567083531973908
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1929800858021485192}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40ffb3ec3af045641866a86c4ed61ba8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  vel: 9
+--- !u!114 &-2308195547176587662
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1929800858021485192}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 407de69d1f274a44eb51e5d40e0ba656, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1929800858021485194
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -145,17 +171,5 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 15625ac1d2654aa47858b833f3d34d61, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1929800858021485193
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1929800858021485192}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 264dd4a4abbd9384c9fa418739bd11c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
