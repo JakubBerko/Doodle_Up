@@ -8,12 +8,19 @@ public class PausedGame : MonoBehaviour
     [SerializeField] GameObject pausedGame;
     public void StopGame()
     {
-        pausedGame.SetActive(true);
-        Time.timeScale = 0f;
+        pausedGame.SetActive(true); //zobrazí UI pausedGame
+        Time.timeScale = 0f; //nastaví èas na 0
     }
     public void ResumeGame()
     {
-        pausedGame.SetActive(false);
-        Time.timeScale = 1f;
+        pausedGame.SetActive(false); //schová UI pausedGame
+        Time.timeScale = 1f; //nastaví èas na 1
+    }
+    public void ReturnToMainMenu()
+    {
+        //SceneManager.LoadScene("MainGameScene"); //naète novou scénu
+        //pausedGame.SetActive(false); //schová UI pausedGame
+        Time.timeScale = 0f; //nastaví èas na 1
+        Debug.Log("kyskyskyskyks");
     }
 }
