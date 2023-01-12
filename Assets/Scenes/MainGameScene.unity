@@ -1921,7 +1921,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1492171355}
   - component: {fileID: 1492171354}
-  - component: {fileID: 1492171356}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -1941,8 +1940,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70a5472320c6f0a4fa6c55e75f759d07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  platform: {fileID: 5269864528579768921, guid: 50d17025a0663dd48bb1f29eac0c3d55, type: 3}
-  platformCount: 300
+  platform: {fileID: 5269864528579768926, guid: 50d17025a0663dd48bb1f29eac0c3d55, type: 3}
+  player: {fileID: 2111382612}
 --- !u!4 &1492171355
 Transform:
   m_ObjectHideFlags: 0
@@ -1958,18 +1957,6 @@ Transform:
   m_Father: {fileID: 853399642}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1492171356
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1492171353}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3f238d8dfee86894fb256d7e9a4b05bf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1495468499 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5269864528579768926, guid: 50d17025a0663dd48bb1f29eac0c3d55, type: 3}
