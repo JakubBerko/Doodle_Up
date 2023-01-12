@@ -18,9 +18,12 @@ public class PausedGame : MonoBehaviour
     }
     public void ReturnToMainMenu()
     {
-        //SceneManager.LoadScene("MainGameScene"); //naète novou scénu
-        //pausedGame.SetActive(false); //schová UI pausedGame
+        //TODO
+        /*
+        SceneManager.LoadScene("MainGameScene"); //naète novou scénu
+        pausedGame.SetActive(false); //schová UI pausedGame
         Time.timeScale = 0f; //nastaví èas na 1
-        Debug.Log("kyskyskyskyks");
+        Debug.Log("working");
+        */
     }
 }

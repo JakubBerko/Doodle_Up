@@ -9,7 +9,7 @@ public class PlayScript : MonoBehaviour
     [SerializeField] GameObject pausedGame;
     public void StartGame()
     {
-        //SceneManager.LoadScene("MainGameScene");
+        SceneManager.LoadScene("MainGameScene");
     }
     public void ExitGame()
     {
