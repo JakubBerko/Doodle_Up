@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class GeneratePlatform : MonoBehaviour
 {
+    
+
     public GameObject[] prefabs;
 
     public Transform platform;
@@ -22,20 +25,16 @@ public class GeneratePlatform : MonoBehaviour
 
         GeneratePlatforms(30.0f);
     }
-    //testing code TODO
+
     void Start()
     {
-        // Instantiate the prefabs
-        for (int i = 0; i < prefabs.Length; i++)
-        {
-            Instantiate(prefabs[i], new Vector3(i, 0, 0), Quaternion.identity);
-        }
+        
     }
-    //end of testing code
-
 
     void Update()
     {
+        
+
         //Do we need to spawn new platforms yet? (we do this every X meters we climb)
         float playerY = playerTrans.position.y;
         if (playerY > spawnMorePlatformsIn)
@@ -67,33 +66,5 @@ public class GeneratePlatform : MonoBehaviour
         }
         platformsSpawnLimit = limit;
     }
+    
 }
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-//Older code for spawning platforms:
-    public GameObject platformPrefab;
-
-    public int platformCount = 300;
-    // Start is called before the first frame update
-    void Start()
-    {
-        Vector3 spawnPos = new Vector3();
-
-        for (int i = 0; i < platformCount; i++)
-        {
-            spawnPos.y += Random.Range(.5f, 1f);
-            spawnPos.x = Random.Range(-2.5f, 2.5f);
-            Instantiate(platformPrefab, spawnPos, Quaternion.identity); 
-        }
-    }*/
