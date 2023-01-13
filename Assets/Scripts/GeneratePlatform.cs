@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class GeneratePlatform : MonoBehaviour
 {
+    public GameObject[] prefabs;
+
     public Transform platform;
     public GameObject player;
 
@@ -20,6 +22,17 @@ public class GeneratePlatform : MonoBehaviour
 
         GeneratePlatforms(30.0f);
     }
+    //testing code TODO
+    void Start()
+    {
+        // Instantiate the prefabs
+        for (int i = 0; i < prefabs.Length; i++)
+        {
+            Instantiate(prefabs[i], new Vector3(i, 0, 0), Quaternion.identity);
+        }
+    }
+    //end of testing code
+
 
     void Update()
     {
@@ -55,6 +68,17 @@ public class GeneratePlatform : MonoBehaviour
         platformsSpawnLimit = limit;
     }
 }
+
+
+
+
+
+
+
+
+
+
+
 
 /*
 //Older code for spawning platforms:

@@ -1940,6 +1940,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70a5472320c6f0a4fa6c55e75f759d07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  prefabs:
+  - {fileID: 1929800858021485192, guid: 76d522cbee2ef1341b5f918649f63d57, type: 3}
+  - {fileID: 5269864528579768921, guid: 50d17025a0663dd48bb1f29eac0c3d55, type: 3}
+  - {fileID: 5200034386306751694, guid: c08ffc08686730444b15eddf67f4380c, type: 3}
   platform: {fileID: 5269864528579768926, guid: 50d17025a0663dd48bb1f29eac0c3d55, type: 3}
   player: {fileID: 2111382612}
 --- !u!4 &1492171355
