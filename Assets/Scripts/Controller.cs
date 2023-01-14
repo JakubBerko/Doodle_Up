@@ -7,6 +7,15 @@ using TMPro;
 
 public class Controller : MonoBehaviour
 {
+    /*//size decreasing platform
+    public GameObject objectToDecrease;
+    public float minSize = 0.5f;
+    public float maxSize = 2.0f;
+    public float distanceThreshold = 5.0f;
+    private float initialSize;
+    */
+
+    //score, highscore
     private Rigidbody2D rb;
     public TextMeshProUGUI score;
     public TextMeshProUGUI Highscore;
@@ -26,15 +35,27 @@ public class Controller : MonoBehaviour
     //update score
     void Start()
     {
+        /*
+        //size decreasing platform
+        if (objectToDecrease != null)
+        {
+            initialSize = objectToDecrease.transform.localScale.x;
+        }
+        else
+        {
+            Debug.LogError("objectToDecrease neeexistuje");
+        }
+        */
+        //score, highscore
         rb = GetComponent<Rigidbody2D>();
         float highScore = PlayerPrefs.GetFloat("highScore");
         Highscore.text = "BEST:" + highScore.ToString();
     }
 
-    // Update is called once per frame
     void Update()
     {
         UpdateScore();
+        //ChangePlatformSizeByPlayerPosition();
     }
     void UpdateScore()
     {
@@ -55,4 +76,15 @@ public class Controller : MonoBehaviour
             Debug.Log("saved highscore!");
         }
     }
+    /*
+    void ChangePlatformSizeByPlayerPosition()
+    {
+        if (objectToDecrease != null)
+        {
+            float distance = Vector3.Distance(objectToDecrease.transform.position, transform.position);
+            float size = Mathf.Lerp(minSize, maxSize, distance / distanceThreshold);
+            objectToDecrease.transform.localScale = new Vector3(size, size, size);
+        }
+    }
+    */
 }
