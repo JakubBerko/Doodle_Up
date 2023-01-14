@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class Bounce : MonoBehaviour
 {
+    //velocity = rychlost objektu urèitým smìrem
     public float vel = 10f;
 
     void OnCollisionEnter2D(Collision2D collision)
     {
+        //pokud nemají objekty velocity smìrem nahoru, tak se odrazí doodler smìrem nahoru
         if (collision.relativeVelocity.y <= 0f)
         {
             Rigidbody2D rb = collision.gameObject.GetComponent<Rigidbody2D>();

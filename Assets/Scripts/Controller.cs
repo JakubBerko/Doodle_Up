@@ -25,6 +25,7 @@ public class Controller : MonoBehaviour
     //kill doodler
     private void OnBecameInvisible()
     {
+        //když Doodler není vidìt, znièí se a naète se znovu scéna hry
         Destroy(Doodler);
         SceneManager.LoadScene("MainGameScene");
     }
@@ -47,6 +48,7 @@ public class Controller : MonoBehaviour
         }
         */
         //score, highscore
+        //naètení uloženého highscore do promìnné a poté textu
         rb = GetComponent<Rigidbody2D>();
         float highScore = PlayerPrefs.GetFloat("highScore");
         Highscore.text = "BEST:" + highScore.ToString();
@@ -54,20 +56,24 @@ public class Controller : MonoBehaviour
 
     void Update()
     {
+        
         UpdateScore();
         //ChangePlatformSizeByPlayerPosition();
     }
     void UpdateScore()
     {
+        //pokud se hráè pohybuje smìrem nahoru a zároveò pozice na y je vìtsí než aktuální skoré, tak se pøepíše skóre podle pozice
         if (rb.velocity.y > 0 && transform.position.y > maxScore)
         {
             maxScore = transform.position.y;
         }
+        //pøevod floatu na zaokrouhlený string, kvúli textu v UI
         score.text = Mathf.Round(maxScore).ToString();
         
     }
     void SaveHighScore()
     {
+        //naètení highscore a pøepsání pokud hráè dosáhl vìtšího skóre než je highscore
         float highScore = PlayerPrefs.GetFloat("highScore");
         if (maxScore > highScore)
         {

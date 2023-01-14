@@ -9,11 +9,11 @@ public class PlayScript : MonoBehaviour
     [SerializeField] GameObject pausedGame;
     public void StartGame()
     {
-        SceneManager.LoadScene("MainGameScene");
+        SceneManager.LoadScene("MainGameScene"); //naète scénu hry
     }
     public void ExitGame()
     {
-        Application.Quit();
+        Application.Quit(); //vypne aplikaci
         Debug.Log("Zavírání aplikace funguje!");
     }
 }

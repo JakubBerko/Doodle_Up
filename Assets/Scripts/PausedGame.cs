@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class PausedGame : MonoBehaviour
 {
-    [SerializeField] GameObject pausedGame;
+    [SerializeField] GameObject pausedGame; 
     public void StopGame()
     {
         pausedGame.SetActive(true); //zobrazí UI pausedGame
@@ -18,7 +18,7 @@ public class PausedGame : MonoBehaviour
     }
     public void ReturnToMainMenu()
     {
-        //TODO
+        //TODO (NEFUNKÈNÍ - PRODISKUTOVAT S VEDOUCÍM PROJEKTU)
         /*
         SceneManager.LoadScene("MainGameScene"); //naète novou scénu
         pausedGame.SetActive(false); //schová UI pausedGame
