@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 5269864528579768925}
   - component: {fileID: 5269864528579768924}
   - component: {fileID: 7938689080247529494}
+  - component: {fileID: -396346788544748456}
   m_Layer: 0
   m_Name: Dirt-platform
   m_TagString: Untagged
@@ -166,3 +167,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15625ac1d2654aa47858b833f3d34d61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-396346788544748456
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5269864528579768921}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8f577df4ad3f814d8d684981e699f2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  shrinkDistance: 10
+  shrinkAmount: 0.3
