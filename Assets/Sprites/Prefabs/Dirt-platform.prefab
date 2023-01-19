@@ -179,6 +179,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8f577df4ad3f814d8d684981e699f2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  player: {fileID: 8398160971751229405, guid: 1363bfb3c82f46249989d345fce1caa9, type: 3}
   shrinkDistance: 10
   shrinkAmount: 0.3

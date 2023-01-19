@@ -5,7 +5,7 @@ using TMPro;
 
 public class GeneratePlatform : MonoBehaviour
 {
-    
+
 
     public GameObject[] prefabs;
 
@@ -29,12 +29,12 @@ public class GeneratePlatform : MonoBehaviour
 
     void Start()
     {
-        
+
     }
 
     void Update()
     {
-        
+
 
         //Pokud je potøeba spawnout nové platformy, zavoláme managera a ten zavolá generaci platforem
         float playerY = playerTrans.position.y;
@@ -61,11 +61,11 @@ public class GeneratePlatform : MonoBehaviour
             Vector3 spawnPos = new Vector3(spawnPosX, spawnPosY, 12.0f); //pozice spawnu
 
             Transform plat = (Transform)Instantiate(platform, spawnPos, Quaternion.identity); //vytvoøení platformy
-            platforms.Add(plat); //pøidání do arraylistu pro budoucí využití
+            //platforms.Add(plat); //pøidání do arraylistu pro budoucí využití
 
             spawnPosY += Random.Range(.5f, 1f); //odkud kam se spawnou na Y + opakování cyklu dokud while nebude true
         }
         platformsSpawnLimit = limit; //nastavení nového maxima kam se platformy spawnly
     }
-    
+
 }
