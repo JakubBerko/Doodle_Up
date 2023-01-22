@@ -69,3 +69,53 @@ public class GeneratePlatform : MonoBehaviour
     }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+
+    public GameObject[] prefabs;
+
+    void Start()
+    {
+        // Instantiate the prefabs
+        for (int i = 0; i < prefabs.Length; i++)
+        {
+            Instantiate(prefabs[i], new Vector3(i, 0, 0), Quaternion.identity);
+        }
+    }
+ */
