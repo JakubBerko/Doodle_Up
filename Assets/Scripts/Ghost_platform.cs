@@ -17,7 +17,7 @@ public class Ghost_platform : MonoBehaviour
     private bool isInAir = false;
     private float vel = 9;
 
-    public TextMeshProUGUI timer;
+    
 
     void Start()
     {
@@ -29,19 +29,20 @@ public class Ghost_platform : MonoBehaviour
     }
     private void Update()
     {
-        TestFunction();
+        
         if (isInAir)
         {
             rb.velocity = new Vector2(0, flyingSpeed);
             timeInAir += Time.deltaTime;
+            Debug.Log(timeInAir);
             if(timeInAir >= flyingDuration)
             {
-                isInAir = false;
                 playerSprite.sprite = doodlerSprite;
                 timeInAir = 0.0f;
                 Vector2 velocity = rb.velocity;
                 velocity.y = vel;
                 rb.velocity = velocity;
+                isInAir = false;
             }
         }
     }
@@ -54,5 +55,5 @@ public class Ghost_platform : MonoBehaviour
             isInAir = true;
         }
     }
-    //
+    
 }

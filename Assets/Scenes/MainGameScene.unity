@@ -3771,6 +3771,7 @@ MonoBehaviour:
   score: {fileID: 173754194}
   Highscore: {fileID: 1266296403}
   Doodler: {fileID: 0}
+  timer: {fileID: 1185101633}
 --- !u!1001 &5269864528968094979
 PrefabInstance:
   m_ObjectHideFlags: 0

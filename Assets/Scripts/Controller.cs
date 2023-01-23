@@ -21,7 +21,9 @@ public class Controller : MonoBehaviour
     public TextMeshProUGUI Highscore;
     private float maxScore = 0.0f;
     public GameObject Doodler;
-    
+
+    public TextMeshProUGUI timer;
+    private float timerFloat;
     //kill doodler
     private void OnBecameInvisible()
     {
@@ -56,7 +58,7 @@ public class Controller : MonoBehaviour
 
     void Update()
     {
-        
+        //TestFunction();
         UpdateScore();
         //ChangePlatformSizeByPlayerPosition();
     }
@@ -80,6 +82,15 @@ public class Controller : MonoBehaviour
             PlayerPrefs.SetFloat("highScore", Mathf.Round(maxScore));
             PlayerPrefs.Save();
             Debug.Log("saved highscore!");
+        }
+    }
+    void TestFunction()
+    {
+        timerFloat += Time.deltaTime;
+        timer.text = timerFloat.ToString();
+        if (timerFloat >= 5)
+        {
+            timer.text = "0";
         }
     }
     /*
