@@ -1,6 +1,7 @@
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class Ghost_platform : MonoBehaviour
 {
@@ -16,6 +17,8 @@ public class Ghost_platform : MonoBehaviour
     private bool isInAir = false;
     private float vel = 9;
 
+    public TextMeshProUGUI timer;
+
     void Start()
     {
         player = GameObject.Find("Doodler");
@@ -26,6 +29,7 @@ public class Ghost_platform : MonoBehaviour
     }
     private void Update()
     {
+        TestFunction();
         if (isInAir)
         {
             rb.velocity = new Vector2(0, flyingSpeed);
