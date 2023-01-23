@@ -50,4 +50,5 @@ public class Ghost_platform : MonoBehaviour
             isInAir = true;
         }
     }
+    //
 }
