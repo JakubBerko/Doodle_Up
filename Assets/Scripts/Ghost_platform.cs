@@ -2,7 +2,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-
+//skript se smaze po zneviditelni tzn ze nefunguje a je seklá
 public class Ghost_platform : MonoBehaviour
 {
     private Sprite ghostSprite;
@@ -49,7 +49,7 @@ public class Ghost_platform : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject == player && collision.relativeVelocity.y <= 0f)
+        if (collision.gameObject == player && collision.relativeVelocity.y <= 0f&& !isInAir)
         {
             playerSprite.sprite = ghostSprite;
             isInAir = true;
