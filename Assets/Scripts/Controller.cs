@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
-
+using UnityEditor;
+using System.Linq;
 
 public class Controller : MonoBehaviour
 {
@@ -22,10 +23,19 @@ public class Controller : MonoBehaviour
     private float maxScore = 0.0f;
     public GameObject Doodler;
 
-    public TextMeshProUGUI timer;
-    private float timerFloat;
-    //kill doodler
-    private void OnBecameInvisible()
+    //ghost platform script
+    private Sprite ghostSprite;
+    private Sprite doodlerSprite;
+    private SpriteRenderer playerSprite;
+    private GameObject[] ghostPlatforms;
+
+    private float flyingSpeed = 5f;
+    private float flyingDuration = 5f;
+    private float timeInAir = 0.0f;
+    private bool isInAir = false;
+    private float vel = 9;
+
+    private void OnBecameInvisible() //kill doodler
     {
         //když Doodler není vidìt, znièí se a naète se znovu scéna hry
         Destroy(Doodler);
@@ -54,13 +64,22 @@ public class Controller : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         float highScore = PlayerPrefs.GetFloat("highScore");
         Highscore.text = "BEST:" + highScore.ToString();
+
+        //ghost platform script
+        ghostSprite = AssetDatabase.LoadAssetAtPath<Sprite>("Assets/Sprites/hutao_ghost.png");
+        doodlerSprite = AssetDatabase.LoadAssetAtPath<Sprite>("Assets/Sprites/doggie-like-cropped.png");
+        rb = GetComponent<Rigidbody2D>();
+        playerSprite = GetComponent<SpriteRenderer>();
     }
 
     void Update()
     {
-        //TestFunction();
         UpdateScore();
         //ChangePlatformSizeByPlayerPosition();
+        // Ghost platform script
+        ghostPlatforms = GameObject.FindGameObjectsWithTag("GhostPlatform");
+        IsPlayerInAir();
+
     }
     void UpdateScore()
     {
@@ -84,14 +103,42 @@ public class Controller : MonoBehaviour
             Debug.Log("saved highscore!");
         }
     }
-    void TestFunction()
+
+    void IsPlayerInAir()
     {
-        timerFloat += Time.deltaTime;
-        timer.text = timerFloat.ToString();
-        if (timerFloat >= 5)
+        if (isInAir)
         {
-            timer.text = "0";
+            rb.velocity = new Vector2(0, flyingSpeed);
+            timeInAir += Time.deltaTime;
+            //Debug.Log(timeInAir);
+            if (timeInAir >= flyingDuration)
+            {
+                playerSprite.sprite = doodlerSprite;
+                timeInAir = 0.0f;
+                Vector2 velocity = rb.velocity;
+                velocity.y = vel;
+                rb.velocity = velocity;
+                isInAir = false;
+            }
         }
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        //Ghost platform script
+        for (int i = 0; i < ghostPlatforms.Length; i++)
+        {
+            if (collision.gameObject == ghostPlatforms[i])
+            {
+                Debug.Log(collision.relativeVelocity.y);
+            }
+            if (collision.gameObject == ghostPlatforms[i] && collision.relativeVelocity.y <= -1f)
+            {
+                playerSprite.sprite = ghostSprite;
+                isInAir = true;
+            }
+        }
+
     }
     /*
     void ChangePlatformSizeByPlayerPosition()

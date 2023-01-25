@@ -13,10 +13,9 @@ GameObject:
   - component: {fileID: -6981055708347912273}
   - component: {fileID: -3639936149206124399}
   - component: {fileID: -2941440269977086053}
-  - component: {fileID: 7458480744283610293}
   m_Layer: 0
   m_Name: Ghost_platform
-  m_TagString: Untagged
+  m_TagString: GhostPlatform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -153,15 +152,3 @@ PlatformEffector2D:
   m_UseSideFriction: 0
   m_UseSideBounce: 0
   m_SideArc: 1
---- !u!114 &7458480744283610293
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9146681743404018180}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ced45e684f20ec84fac271d475662b5a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
