@@ -23,7 +23,7 @@ public class Controller : MonoBehaviour
     private float maxScore = 0.0f;
     public GameObject Doodler;
 
-    //ghost platform script
+    //ghost platform
     private Sprite ghostSprite;
     private Sprite doodlerSprite;
     private SpriteRenderer playerSprite;
@@ -34,6 +34,11 @@ public class Controller : MonoBehaviour
     private float timeInAir = 0.0f;
     private bool isInAir = false;
     private float vel = 9;
+
+    //shrink on distance
+    public GameObject[] shrinkingPlatform;
+    public float shrinkDistance = 10; // vzdálenost od které se platforma zaène zmenšovat
+    public float shrinkAmount = 0.5f; // jak moc se platforma bude zmenšovat
 
     private void OnBecameInvisible() //kill doodler
     {
@@ -70,15 +75,22 @@ public class Controller : MonoBehaviour
         doodlerSprite = AssetDatabase.LoadAssetAtPath<Sprite>("Assets/Sprites/doggie-like-cropped.png");
         rb = GetComponent<Rigidbody2D>();
         playerSprite = GetComponent<SpriteRenderer>();
+
+        
     }
 
     void Update()
     {
         UpdateScore();
         //ChangePlatformSizeByPlayerPosition();
+
         // Ghost platform script
         ghostPlatforms = GameObject.FindGameObjectsWithTag("GhostPlatform");
         IsPlayerInAir();
+
+        //shrink on distance
+        shrinkingPlatform = GameObject.FindGameObjectsWithTag("ShrinkOnDistancePlatform");
+        ShrinkPlatforms();
 
     }
     void UpdateScore()
@@ -104,7 +116,7 @@ public class Controller : MonoBehaviour
         }
     }
 
-    void IsPlayerInAir()
+    void IsPlayerInAir() //shrink on distance
     {
         if (isInAir)
         {
@@ -139,6 +151,24 @@ public class Controller : MonoBehaviour
             }
         }
 
+    }
+
+    void ShrinkPlatforms() //shrink on distance
+    {
+        for (int j = 0; j <shrinkingPlatform.Length; j++)
+        {
+            float distance = Vector3.Distance(transform.position,shrinkingPlatform[j].transform.position);
+
+            if (distance < shrinkDistance)
+            {
+                //spoèítá shrinkfactor
+                float shrinkFactor = 1 - (distance / shrinkDistance) * shrinkAmount;
+
+                // zmenší objekt shrinkfaktorem
+                shrinkingPlatform[j].transform.localScale = Vector3.one * shrinkFactor;
+            }
+        }
+        
     }
     /*
     void ChangePlatformSizeByPlayerPosition()

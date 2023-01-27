@@ -3828,6 +3828,8 @@ MonoBehaviour:
   score: {fileID: 173754194}
   Highscore: {fileID: 1266296403}
   Doodler: {fileID: 0}
+  shrinkDistance: 10
+  shrinkAmount: 0.5
 --- !u!1001 &5269864528968094979
 PrefabInstance:
   m_ObjectHideFlags: 0
