@@ -36,9 +36,16 @@ public class Controller : MonoBehaviour
     private float vel = 9;
 
     //shrink on distance
-    public GameObject[] shrinkingPlatform;
+    public GameObject[] shrinkingPlatforms;
     public float shrinkDistance = 10; // vzdálenost od které se platforma zaène zmenšovat
     public float shrinkAmount = 0.5f; // jak moc se platforma bude zmenšovat
+
+    //holographic platform
+    public GameObject[] holographicPlatforms;
+
+    //destroyer platform
+    public GameObject[] platformsToBeDestroyed;
+    public GameObject[] destroyerPlatforms;
 
     private void OnBecameInvisible() //kill doodler
     {
@@ -89,9 +96,14 @@ public class Controller : MonoBehaviour
         IsPlayerInAir();
 
         //shrink on distance
-        shrinkingPlatform = GameObject.FindGameObjectsWithTag("ShrinkOnDistancePlatform");
+        shrinkingPlatforms = GameObject.FindGameObjectsWithTag("ShrinkOnDistancePlatform");
         ShrinkPlatforms();
 
+        //holographic platform
+        holographicPlatforms = GameObject.FindGameObjectsWithTag("HolographicPlatform");
+
+        //destroyer platform
+        destroyerPlatforms = GameObject.FindGameObjectsWithTag("DestroyerPlatform");
     }
     void UpdateScore()
     {
@@ -140,14 +152,29 @@ public class Controller : MonoBehaviour
         //Ghost platform script
         for (int i = 0; i < ghostPlatforms.Length; i++)
         {
-            if (collision.gameObject == ghostPlatforms[i])
-            {
-                Debug.Log(collision.relativeVelocity.y);
-            }
-            if (collision.gameObject == ghostPlatforms[i] && collision.relativeVelocity.y <= -1f)
+            if (collision.gameObject == ghostPlatforms[i] && collision.relativeVelocity.y >= 0f)
             {
                 playerSprite.sprite = ghostSprite;
                 isInAir = true;
+            }
+        }
+
+        //holographic platform
+        for (int x = 0; x < holographicPlatforms.Length; x++)
+        {
+            if (collision.gameObject == holographicPlatforms[x]&&collision.relativeVelocity.y >= 0f)
+            {
+                holographicPlatforms[x].GetComponent<EdgeCollider2D>().isTrigger = true;
+                Destroy(holographicPlatforms[x]);
+            }
+        }
+
+        //destroyer platforms
+        for (int u = 0; u < destroyerPlatforms.Length; u++)
+        {
+            if (collision.gameObject == destroyerPlatforms[u] && collision.relativeVelocity.y >= 0f)
+            {
+                DestroyerPlatform();
             }
         }
 
@@ -155,9 +182,9 @@ public class Controller : MonoBehaviour
 
     void ShrinkPlatforms() //shrink on distance
     {
-        for (int j = 0; j <shrinkingPlatform.Length; j++)
+        for (int j = 0; j <shrinkingPlatforms.Length; j++)
         {
-            float distance = Vector3.Distance(transform.position,shrinkingPlatform[j].transform.position);
+            float distance = Vector3.Distance(transform.position,shrinkingPlatforms[j].transform.position);
 
             if (distance < shrinkDistance)
             {
@@ -165,11 +192,29 @@ public class Controller : MonoBehaviour
                 float shrinkFactor = 1 - (distance / shrinkDistance) * shrinkAmount;
 
                 // zmenší objekt shrinkfaktorem
-                shrinkingPlatform[j].transform.localScale = Vector3.one * shrinkFactor;
+                shrinkingPlatforms[j].transform.localScale = Vector3.one * shrinkFactor;
             }
         }
         
     }
+
+    void DestroyerPlatform()
+    {
+        platformsToBeDestroyed = GameObject.FindObjectsOfType<GameObject>();
+        int deleteCount = 0;
+        for (int i = 0; i < platformsToBeDestroyed.Length; i++)
+        {
+            if (platformsToBeDestroyed[i] != Doodler)
+            {
+                deleteCount++;
+                if (deleteCount% 2 == 0)
+                {
+                    Destroy(platformsToBeDestroyed[i]);
+                }
+            }
+        }
+    }
+}
     /*
     void ChangePlatformSizeByPlayerPosition()
     {
@@ -181,4 +226,4 @@ public class Controller : MonoBehaviour
         }
     }
     */
-}
+

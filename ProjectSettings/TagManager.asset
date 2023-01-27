@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Doodler
   - GhostPlatform
+  - ShrinkOnDistancePlatform
+  - HolographicPlatform
+  - DestroyerPlatform
   layers:
   - Default
   - TransparentFX
