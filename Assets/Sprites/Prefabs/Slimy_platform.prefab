@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: -5749985401142931276}
   - component: {fileID: -2747172948577817585}
   - component: {fileID: 6181539788458330741}
+  - component: {fileID: -3981363879367525333}
   m_Layer: 0
   m_Name: Slimy_platform
   m_TagString: Untagged
@@ -160,3 +161,15 @@ PlatformEffector2D:
   m_UseSideFriction: 0
   m_UseSideBounce: 0
   m_SideArc: 1
+--- !u!114 &-3981363879367525333
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5200034386306751694}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4dfa11cddb931c4dbc7d5ba68bdf153, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

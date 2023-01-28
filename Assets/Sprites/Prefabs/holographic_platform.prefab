@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2311768774517544139}
   - component: {fileID: -3203629469267640298}
   - component: {fileID: -8697203366799931181}
+  - component: {fileID: -4217654426951678227}
   m_Layer: 0
   m_Name: holographic_platform
   m_TagString: HolographicPlatform
@@ -128,5 +129,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 15625ac1d2654aa47858b833f3d34d61, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-4217654426951678227
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8697452975249945096}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4dfa11cddb931c4dbc7d5ba68bdf153, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

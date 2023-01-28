@@ -47,10 +47,10 @@ public class GeneratePlatform : MonoBehaviour
     void PlatformManager()
     {
         //nastaví kdy se spawnou další platformy
-        spawnMorePlatformsIn = playerTrans.position.y + 10;
+        spawnMorePlatformsIn = playerTrans.position.y + 5;
 
         //spawne platformy dopøedu, aby hráè generování nevidìl
-        GeneratePlatforms(spawnMorePlatformsIn + 35);
+        GeneratePlatforms(spawnMorePlatformsIn + 15);
     }
     void GeneratePlatforms(float limit)
     {
@@ -63,7 +63,7 @@ public class GeneratePlatform : MonoBehaviour
             Transform plat = (Transform)Instantiate(platform, spawnPos, Quaternion.identity); //vytvoøení platformy
             //platforms.Add(plat); //pøidání do arraylistu pro budoucí využití
 
-            spawnPosY += Random.Range(.5f, 1f); //odkud kam se spawnou na Y + opakování cyklu dokud while nebude true
+            spawnPosY += Random.Range(.3f, 1f); //odkud kam se spawnou na Y + opakování cyklu dokud while nebude true
         }
         platformsSpawnLimit = limit; //nastavení nového maxima kam se platformy spawnly
     }

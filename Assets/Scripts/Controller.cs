@@ -61,17 +61,7 @@ public class Controller : MonoBehaviour
     void Start()
     {
         Debug.Log(gameObject.GetComponent<Rigidbody2D>().gravityScale);
-        /*
-        //size decreasing platform
-        if (objectToDecrease != null)
-        {
-            initialSize = objectToDecrease.transform.localScale.x;
-        }
-        else
-        {
-            Debug.LogError("objectToDecrease neeexistuje");
-        }
-        */
+        
         //score, highscore
         //naètení uloženého highscore do promìnné a poté textu
         rb = GetComponent<Rigidbody2D>();
@@ -166,6 +156,7 @@ public class Controller : MonoBehaviour
             if (collision.gameObject == destroyerPlatforms[u] && collision.relativeVelocity.y >= 0f)
             {
                 DestroyerPlatform();
+                Destroy(destroyerPlatforms[u]);
             }
         }
 
@@ -206,29 +197,26 @@ public class Controller : MonoBehaviour
     void DestroyerPlatform()
     {
         platformsToBeDestroyed = GameObject.FindObjectsOfType<GameObject>();
-        int deleteCount = 0;
-        for (int i = 0; i < platformsToBeDestroyed.Length; i++)
+        int numberOfObjectsToDestroy = platformsToBeDestroyed.Length / 2;
+
+        // Shuffle the array using the Fisher-Yates shuffle algorithm
+        for (int i = platformsToBeDestroyed.Length - 1; i > 0; i--)
         {
-            if (platformsToBeDestroyed[i] != Doodler)
+            int randomIndex = Random.Range(0, i + 1);
+            GameObject temp = platformsToBeDestroyed[i];
+            platformsToBeDestroyed[i] = platformsToBeDestroyed[randomIndex];
+            platformsToBeDestroyed[randomIndex] = temp;
+        }
+
+        for (int i = 0; i < numberOfObjectsToDestroy; i++)
+        {
+            if (platformsToBeDestroyed[i].GetComponent<Platform_tag>() != null)
             {
-                deleteCount++;
-                if (deleteCount% 2 == 0)
-                {
-                    Destroy(platformsToBeDestroyed[i]);
-                }
+                Destroy(platformsToBeDestroyed[i]);
             }
         }
+
     }
+
 }
-    /*
-    void ChangePlatformSizeByPlayerPosition()
-    {
-        if (objectToDecrease != null)
-        {
-            float distance = Vector3.Distance(objectToDecrease.transform.position, transform.position);
-            float size = Mathf.Lerp(minSize, maxSize, distance / distanceThreshold);
-            objectToDecrease.transform.localScale = new Vector3(size, size, size);
-        }
-    }
-    */
 
