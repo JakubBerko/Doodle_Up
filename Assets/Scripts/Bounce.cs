@@ -5,7 +5,7 @@ using UnityEngine;
 public class Bounce : MonoBehaviour
 {
     //velocity = rychlost objektu urèitým smìrem
-    private float vel = 9f; //pokud zmìnìno zde, zmìnit i v Ghost platform
+    public float vel = 9f; //pokud zmìnìno zde, zmìnit i v Ghost platform
 
     void OnCollisionEnter2D(Collision2D collision)
     {

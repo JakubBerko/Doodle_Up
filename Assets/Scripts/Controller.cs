@@ -60,6 +60,7 @@ public class Controller : MonoBehaviour
     //update score
     void Start()
     {
+        Debug.Log(gameObject.GetComponent<Rigidbody2D>().gravityScale);
         /*
         //size decreasing platform
         if (objectToDecrease != null)
@@ -159,16 +160,6 @@ public class Controller : MonoBehaviour
             }
         }
 
-        //holographic platform
-        for (int x = 0; x < holographicPlatforms.Length; x++)
-        {
-            if (collision.gameObject == holographicPlatforms[x]&&collision.relativeVelocity.y >= 0f)
-            {
-                holographicPlatforms[x].GetComponent<EdgeCollider2D>().isTrigger = true;
-                Destroy(holographicPlatforms[x]);
-            }
-        }
-
         //destroyer platforms
         for (int u = 0; u < destroyerPlatforms.Length; u++)
         {
@@ -178,6 +169,20 @@ public class Controller : MonoBehaviour
             }
         }
 
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        //holographic platform
+        Vector2 playerVelocity = rb.velocity;
+        for (int x = 0; x < holographicPlatforms.Length; x++)
+        {
+            if (collision.gameObject == holographicPlatforms[x] && playerVelocity.y <=0f)
+            {
+                //holographicPlatforms[x].GetComponent<EdgeCollider2D>().isTrigger = true;
+                Destroy(holographicPlatforms[x]);
+            }
+        }
     }
 
     void ShrinkPlatforms() //shrink on distance

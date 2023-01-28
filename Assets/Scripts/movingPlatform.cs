@@ -4,11 +4,22 @@ using UnityEngine;
 
 public class movingPlatform : MonoBehaviour
 {
-    public float speed = 1.0f;
-    public float xMin = -0.5f;
-    public float xMax = 0.5f;
+    public float speed = 2f; // adjust the platform speed
+    public float distance = 2f; // adjust the distance the platform moves
+
+    private Vector3 startPos;
+    private Vector3 endPos;
+    private float journeyLength;
+
+    void Start()
+    {
+        startPos = transform.position;
+        endPos = startPos + new Vector3(distance, 0, 0);
+    }
+
     void Update()
     {
-        transform.position = new Vector3(Mathf.PingPong(Time.time * speed, xMax - xMin) + xMin, transform.position.y, transform.position.z);
+        float pingPongValue = Mathf.PingPong(Time.time * speed, distance);
+        transform.position = startPos + new Vector3(pingPongValue, 0, 0);
     }
 }
