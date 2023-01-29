@@ -24,7 +24,7 @@ public class GeneratePlatform : MonoBehaviour
         playerTrans = player.transform;
         platforms = new ArrayList();
 
-        GeneratePlatforms(30.0f);
+        //GeneratePlatforms(30.0f);
     }
 
     void Start()
@@ -40,7 +40,7 @@ public class GeneratePlatform : MonoBehaviour
         float playerY = playerTrans.position.y;
         if (playerY > spawnMorePlatformsIn)
         {
-            PlatformManager(); //spawne platformy
+            //PlatformManager(); //spawne platformy
         }
     }
 

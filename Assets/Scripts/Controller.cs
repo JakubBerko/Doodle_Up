@@ -8,14 +8,6 @@ using System.Linq;
 
 public class Controller : MonoBehaviour
 {
-    /*//size decreasing platform
-    public GameObject objectToDecrease;
-    public float minSize = 0.5f;
-    public float maxSize = 2.0f;
-    public float distanceThreshold = 5.0f;
-    private float initialSize;
-    */
-
     //score, highscore
     private Rigidbody2D rb;
     public TextMeshProUGUI score;
@@ -60,8 +52,8 @@ public class Controller : MonoBehaviour
     //update score
     void Start()
     {
-        Debug.Log(gameObject.GetComponent<Rigidbody2D>().gravityScale);
-        
+        rb = GetComponent<Rigidbody2D>();
+
         //score, highscore
         //naètení uloženého highscore do promìnné a poté textu
         rb = GetComponent<Rigidbody2D>();
@@ -71,7 +63,6 @@ public class Controller : MonoBehaviour
         //ghost platform script
         ghostSprite = AssetDatabase.LoadAssetAtPath<Sprite>("Assets/Sprites/hutao_ghost.png");
         doodlerSprite = AssetDatabase.LoadAssetAtPath<Sprite>("Assets/Sprites/doggie-like-cropped.png");
-        rb = GetComponent<Rigidbody2D>();
         playerSprite = GetComponent<SpriteRenderer>();
 
         
@@ -80,7 +71,6 @@ public class Controller : MonoBehaviour
     void Update()
     {
         UpdateScore();
-        //ChangePlatformSizeByPlayerPosition();
 
         // Ghost platform script
         ghostPlatforms = GameObject.FindGameObjectsWithTag("GhostPlatform");
@@ -119,7 +109,8 @@ public class Controller : MonoBehaviour
         }
     }
 
-    void IsPlayerInAir() //shrink on distance
+    void IsPlayerInAir() //shrink on distance //pokud je hráè ve vzduchu, tak se pousouvá nahoru, a po 5 vteøinách se zmìní sprite, vyresetuje èas ve vzduchu a lehce vyskoèí
+                         //(to jsem pøidal kvùli zlehèení a menšímu pøekvapení z toho že hráè padá dolu) a hráè není ve vzduchu (isInAir = false;)
     {
         if (isInAir)
         {
@@ -140,7 +131,7 @@ public class Controller : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        //Ghost platform script
+        //Ghost platform script //po dotknutí platformy se hráèovi zmìní sprite a bool isInAir
         for (int i = 0; i < ghostPlatforms.Length; i++)
         {
             if (collision.gameObject == ghostPlatforms[i] && collision.relativeVelocity.y >= 0f)
@@ -150,7 +141,7 @@ public class Controller : MonoBehaviour
             }
         }
 
-        //destroyer platforms
+        //destroyer platforms //po dotknutí platformy se aktivuje skript a znièí platforma, na kterou skoèil (aby hráè nemohl nièt platformy vícekrát)
         for (int u = 0; u < destroyerPlatforms.Length; u++)
         {
             if (collision.gameObject == destroyerPlatforms[u] && collision.relativeVelocity.y >= 0f)
@@ -164,42 +155,41 @@ public class Controller : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        //holographic platform
+        //holographic platform //(zde jsem použil on trigger, jelikož pøes OnCollisionEnter se hráè zasekl o platformu) pokud hráè projde platformou, tak se znièí objekt platformy
         Vector2 playerVelocity = rb.velocity;
         for (int x = 0; x < holographicPlatforms.Length; x++)
         {
             if (collision.gameObject == holographicPlatforms[x] && playerVelocity.y <=0f)
             {
-                //holographicPlatforms[x].GetComponent<EdgeCollider2D>().isTrigger = true;
                 Destroy(holographicPlatforms[x]);
             }
         }
     }
 
-    void ShrinkPlatforms() //shrink on distance
+    void ShrinkPlatforms() //shrink on distance 
     {
         for (int j = 0; j <shrinkingPlatforms.Length; j++)
         {
-            float distance = Vector3.Distance(transform.position,shrinkingPlatforms[j].transform.position);
+            float distance = Vector3.Distance(transform.position,shrinkingPlatforms[j].transform.position); //vzdálenost hráèe od platformy
 
             if (distance < shrinkDistance)
             {
-                //spoèítá shrinkfactor
-                float shrinkFactor = 1 - (distance / shrinkDistance) * shrinkAmount;
+                //spoèítá shrinkElementu (o kolik se zmensi)
+                float shrinkElement = 1 - (distance / shrinkDistance) * shrinkAmount;
 
-                // zmenší objekt shrinkfaktorem
-                shrinkingPlatforms[j].transform.localScale = Vector3.one * shrinkFactor;
+                //zmenší objekt shrinkfaktorem vynásobením normálního vektoru tím zmenšením,,
+                shrinkingPlatforms[j].transform.localScale = Vector3.one * shrinkElement;
             }
         }
         
     }
 
-    void DestroyerPlatform()
+    void DestroyerPlatform() //najde všechny spawnuté platformy na obrazovce (jelikož platformy se spawnují tìsnì nad limitem obrazovky) a rozpùlí ho
     {
         platformsToBeDestroyed = GameObject.FindObjectsOfType<GameObject>();
         int numberOfObjectsToDestroy = platformsToBeDestroyed.Length / 2;
 
-        // Shuffle the array using the Fisher-Yates shuffle algorithm
+        // zaíchání pole Fisher-Yates shuffle algoritmem ((VELMI zajímavý algoritmus!), kvùli tomu, že platformy jsou v poli od vrchu obrazovky dolu)
         for (int i = platformsToBeDestroyed.Length - 1; i > 0; i--)
         {
             int randomIndex = Random.Range(0, i + 1);
@@ -208,7 +198,7 @@ public class Controller : MonoBehaviour
             platformsToBeDestroyed[randomIndex] = temp;
         }
 
-        for (int i = 0; i < numberOfObjectsToDestroy; i++)
+        for (int i = 0; i < numberOfObjectsToDestroy; i++) // zde se smažou všechny objekty s komponentem (prázdný skript Platform_Tag), je to kvùli oddìlení platform od ostatních gameobjektù, jak je napø. hráè, nepøátelé
         {
             if (platformsToBeDestroyed[i].GetComponent<Platform_tag>() != null)
             {
