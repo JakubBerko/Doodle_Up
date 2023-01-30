@@ -5,8 +5,6 @@ using TMPro;
 
 public class GeneratePlatform : MonoBehaviour
 {
-
-
     public GameObject[] prefabs;
 
     public Transform platform;
@@ -24,7 +22,77 @@ public class GeneratePlatform : MonoBehaviour
         playerTrans = player.transform;
         platforms = new ArrayList();
 
-        //GeneratePlatforms(30.0f);
+        GeneratePlatforms(30.0f);
+    }
+
+    void Start()
+    {
+
+    }
+
+    void Update()
+    {
+        //Pokud je potøeba spawnout nové platformy, zavoláme managera a ten zavolá generaci platforem
+        float playerY = playerTrans.position.y;
+        if (playerY > spawnMorePlatformsIn)
+        {
+            PlatformManager(); //spawne platformy
+        }
+    }
+
+    void PlatformManager()
+    {
+        //nastaví kdy se spawnou další platformy
+        spawnMorePlatformsIn = playerTrans.position.y + 5;
+
+        //spawne platformy dopøedu, aby hráè generování nevidìl
+        GeneratePlatforms(spawnMorePlatformsIn + 15);
+    }
+    void GeneratePlatforms(float limit)
+    {
+        float spawnPosY = platformsSpawnLimit;
+        while (spawnPosY <= limit)
+        {
+            float spawnPosX = Random.Range(-2.5f, 2.5f);
+            Vector3 spawnPos = new Vector3(spawnPosX, spawnPosY, 12.0f);
+
+            int prefabIndex;
+            float randomNumber = Random.Range(0f, 1f);
+            if (randomNumber < 0.76f)
+            {
+                prefabIndex = 0; // platforma na 0 indexu se spawne vicekrat
+            }
+            else
+            {
+                prefabIndex = Random.Range(1, prefabs.Length); // zbytek platforem
+            }
+
+            Transform plat = (Transform)Instantiate(prefabs[prefabIndex].transform, spawnPos, Quaternion.identity);
+            spawnPosY += Random.Range(0.5f, 1.5f);
+        }
+        platformsSpawnLimit = limit;
+    }
+
+    //OLDER CODE 
+    /*
+    public GameObject[] prefabs;
+
+    public Transform platform;
+    public GameObject player;
+
+    private Transform playerTrans;
+    private float platformsSpawnLimit = 0.0f;
+    private ArrayList platforms;
+    private float spawnMorePlatformsIn = 0.0f;
+
+
+    void Awake()
+    {
+
+        playerTrans = player.transform;
+        platforms = new ArrayList();
+
+        GeneratePlatforms(30.0f);
     }
 
     void Start()
@@ -40,7 +108,7 @@ public class GeneratePlatform : MonoBehaviour
         float playerY = playerTrans.position.y;
         if (playerY > spawnMorePlatformsIn)
         {
-            //PlatformManager(); //spawne platformy
+            PlatformManager(); //spawne platformy
         }
     }
 
@@ -67,6 +135,7 @@ public class GeneratePlatform : MonoBehaviour
         }
         platformsSpawnLimit = limit; //nastavení nového maxima kam se platformy spawnly
     }
+    */
 
 }
 
