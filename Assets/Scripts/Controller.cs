@@ -61,8 +61,10 @@ public class Controller : MonoBehaviour
         Highscore.text = "BEST:" + highScore.ToString();
 
         //ghost platform script
-        ghostSprite = AssetDatabase.LoadAssetAtPath<Sprite>("Assets/Sprites/hutao_ghost.png");
-        doodlerSprite = AssetDatabase.LoadAssetAtPath<Sprite>("Assets/Sprites/doggie-like-cropped.png");
+        //ghostSprite = AssetDatabase.LoadAssetAtPath<Sprite>("Assets/Sprites/hutao_ghost.png");
+        //doodlerSprite = AssetDatabase.LoadAssetAtPath<Sprite>("Assets/Sprites/doggie-like-cropped.png");
+        doodlerSprite = Resources.Load<Sprite>("doggie-like-cropped");
+        ghostSprite = Resources.Load<Sprite>("hutao_ghost");
         playerSprite = GetComponent<SpriteRenderer>();
 
         
