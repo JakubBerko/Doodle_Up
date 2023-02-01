@@ -10,6 +10,7 @@ TagManager:
   - HolographicPlatform
   - DestroyerPlatform
   - SalivaBullet
+  - BubbleBullet
   layers:
   - Default
   - TransparentFX
