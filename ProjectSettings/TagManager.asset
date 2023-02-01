@@ -9,6 +9,7 @@ TagManager:
   - ShrinkOnDistancePlatform
   - HolographicPlatform
   - DestroyerPlatform
+  - SalivaBullet
   layers:
   - Default
   - TransparentFX

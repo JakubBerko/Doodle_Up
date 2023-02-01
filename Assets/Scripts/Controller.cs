@@ -191,7 +191,7 @@ public class Controller : MonoBehaviour
         platformsToBeDestroyed = GameObject.FindObjectsOfType<GameObject>();
         int numberOfObjectsToDestroy = platformsToBeDestroyed.Length / 2;
 
-        // zaíchání pole Fisher-Yates shuffle algoritmem ((VELMI zajímavý algoritmus!), kvùli tomu, že platformy jsou v poli od vrchu obrazovky dolu)
+        // zamíchání pole Fisher-Yates shuffle algoritmem ((VELMI zajímavý algoritmus!), kvùli tomu, že platformy jsou v poli od vrchu obrazovky dolu)
         for (int i = platformsToBeDestroyed.Length - 1; i > 0; i--)
         {
             int randomIndex = Random.Range(0, i + 1);

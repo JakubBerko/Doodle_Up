@@ -7,7 +7,6 @@ public class GeneratePlatform : MonoBehaviour
 {
     public GameObject[] prefabs;
 
-    public Transform platform;
     public GameObject player;
 
     private Transform playerTrans;
@@ -72,6 +71,8 @@ public class GeneratePlatform : MonoBehaviour
         }
         platformsSpawnLimit = limit;
     }
+
+    
 
     //OLDER CODE 
     /*

@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: -2308195547176587662}
   - component: {fileID: 1929800858021485194}
   - component: {fileID: -8981518441940831449}
+  - component: {fileID: -5715526449282479501}
   m_Layer: 0
   m_Name: CollapsingPlatform
   m_TagString: Untagged
@@ -186,3 +187,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4dfa11cddb931c4dbc7d5ba68bdf153, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-5715526449282479501
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1929800858021485192}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33aa385a2677d0c4487c33a9774d7ca5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  platformPrefabs:
+  - {fileID: 9146681743404018180, guid: 87f0d3eda1271784eaa203c45c8e27ce, type: 3}
+  - {fileID: 1929800858021485192}
+  - {fileID: 839140379516161495, guid: c703ac19b51329f4aab3a18b53daacd2, type: 3}
+  - {fileID: 2472389579067421393, guid: 64f449b01aadbe54e9294fb00aaa223e, type: 3}
+  - {fileID: 8697452975249945096, guid: 0faa3c24829c0d942bb1f34fdb825bc4, type: 3}
+  - {fileID: 9062458455220841938, guid: 51e7056cef62aef47951e233c47fddd1, type: 3}
+  - {fileID: 5200034386306751694, guid: c08ffc08686730444b15eddf67f4380c, type: 3}

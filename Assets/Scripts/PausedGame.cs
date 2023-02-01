@@ -5,16 +5,20 @@ using UnityEngine.SceneManagement;
 
 public class PausedGame : MonoBehaviour
 {
-    [SerializeField] GameObject pausedGame; 
+    [SerializeField] GameObject pausedGame;
+    private bool isPaused = false;
     public void StopGame()
     {
         pausedGame.SetActive(true); //zobrazí UI pausedGame
         Time.timeScale = 0f; //nastaví èas na 0
+        isPaused = true;
+
     }
     public void ResumeGame()
     {
         pausedGame.SetActive(false); //schová UI pausedGame
         Time.timeScale = 1f; //nastaví èas na 1
+        isPaused = false;
     }
     public void ReturnToMainMenu()
     {
