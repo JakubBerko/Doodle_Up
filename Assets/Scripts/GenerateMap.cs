@@ -68,7 +68,7 @@ public class GenerateMap : MonoBehaviour
             Vector3 monsterSpawnPos = new Vector3(monsterSpawnPosX, spawnPosY, 12.0f);
             int MonsterPrefabIndex;
             float MonsterRandomNumber = Random.Range(0f, 1f);
-            if (MonsterRandomNumber < 0.05f)
+            if (MonsterRandomNumber < 0.03f)
             {
                 MonsterPrefabIndex = Random.Range(0, monsterPrefabs.Length);
                 Transform monst = (Transform)Instantiate(monsterPrefabs[MonsterPrefabIndex].transform, monsterSpawnPos, Quaternion.identity);
