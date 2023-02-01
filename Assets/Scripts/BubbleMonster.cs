@@ -9,15 +9,23 @@ public class BubbleMonster : MonoBehaviour
     public GameObject bubbleBulletPrefab;
     private Transform playerTrans;
 
+    private bool wasOnScreen;
+
     void Update()
     {
-        lastShotTime += Time.deltaTime;
-        if (lastShotTime >= ShootingInterval)
+        if (wasOnScreen)
         {
-            //ShootAtPlayer();
-            lastShotTime = 0f;
+            lastShotTime += Time.deltaTime;
+            if (lastShotTime >= ShootingInterval)
+            {
+                ShootAtPlayer();
+                lastShotTime = 0f;
+            }
         }
-        
+    }
+    public void OnBecameVisible()
+    {
+        wasOnScreen = true;
     }
     public void ShootAtPlayer()
     {
