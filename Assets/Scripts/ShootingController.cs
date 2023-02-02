@@ -24,7 +24,7 @@ public class ShootingController : MonoBehaviour
 
     public void Shoot()
     {
-        GameObject salivaBullet = Instantiate(salivaBulletPrefab, bulletDirection.position, bulletDirection.rotation);
+        GameObject salivaBullet = Instantiate(salivaBulletPrefab, bulletDirection.position + new Vector3(0, 0.5f, 0), bulletDirection.rotation);
         Rigidbody2D rb = salivaBullet.GetComponent<Rigidbody2D>();
         rb.AddForce(bulletDirection.up * 1000f);
     }

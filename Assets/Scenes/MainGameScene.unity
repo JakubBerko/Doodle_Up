@@ -1834,6 +1834,8 @@ MonoBehaviour:
   - {fileID: 8697452975249945096, guid: 0faa3c24829c0d942bb1f34fdb825bc4, type: 3}
   monsterPrefabs:
   - {fileID: 1106839075685018291, guid: 9f7f3a958893a9542b88f1ad45fb42be, type: 3}
+  - {fileID: 101459249460948646, guid: b412d8fd3763c1047bd5f431780d5e0a, type: 3}
+  - {fileID: 2204317909445413257, guid: 8a2bf0dbd90fc8c4fab36739e1ca24e9, type: 3}
   player: {fileID: 2111382612}
 --- !u!4 &1492171355
 Transform:
@@ -2118,7 +2120,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.16096321, y: -0.25451446}
+  m_Offset: {x: -0.16096321, y: -0.033625603}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -2129,7 +2131,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.51230437, y: 0.1907773}
+  m_Size: {x: 0.51230437, y: 0.632555}
   m_EdgeRadius: 0
 --- !u!50 &2111382614
 Rigidbody2D:
