@@ -14,6 +14,11 @@ public class MonsterBulletHit : MonoBehaviour
             {
                 Destroy(collision.gameObject);
             }
+            if (collision.gameObject.tag == "SalivaBullet")
+            {
+                Destroy(gameObject);
+                Destroy(collision.gameObject);
+            }
         }
     }
 }
