@@ -39,6 +39,8 @@ public class Controller : MonoBehaviour
     public GameObject[] platformsToBeDestroyed;
     public GameObject[] destroyerPlatforms;
 
+    //PowerUp
+
     private void OnBecameInvisible() //kill doodler
     {
         //když Doodler není vidìt, znièí se a naète se znovu scéna hry
@@ -165,6 +167,11 @@ public class Controller : MonoBehaviour
             {
                 Destroy(holographicPlatforms[x]);
             }
+        }
+        //PowerUp
+        if (collision.gameObject.tag == "TeleportPowerUp")
+        {
+            
         }
     }
 

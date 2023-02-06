@@ -6,7 +6,7 @@ public class TiltController : MonoBehaviour
 {
     //screenWrap
     private float halfHeight; 
-    private float halfWidth; 
+    private float halfWidth;
 
     Rigidbody2D rb;
     float dx; //smìr a rychlost pohybu na x
@@ -18,6 +18,7 @@ public class TiltController : MonoBehaviour
     }
     void Start()
     {
+        //screenWrap
         halfHeight = Camera.main.orthographicSize;
         halfWidth = halfHeight * Camera.main.aspect;
     }

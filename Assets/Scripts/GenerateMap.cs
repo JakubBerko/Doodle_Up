@@ -7,6 +7,7 @@ public class GenerateMap : MonoBehaviour
 {
     public GameObject[] prefabs;
     public GameObject[] monsterPrefabs;
+    public GameObject[] powerUpPrefabs;
 
     public GameObject player;
 
@@ -47,6 +48,7 @@ public class GenerateMap : MonoBehaviour
         float spawnPosY = platformsSpawnLimit;
         while (spawnPosY <= limit)
         {
+            //platformy
             float spawnPosX = Random.Range(-2.5f, 2.5f);
             Vector3 spawnPos = new Vector3(spawnPosX, spawnPosY, 12.0f);
 
@@ -72,6 +74,17 @@ public class GenerateMap : MonoBehaviour
             {
                 MonsterPrefabIndex = Random.Range(0, monsterPrefabs.Length);
                 Transform monst = (Transform)Instantiate(monsterPrefabs[MonsterPrefabIndex].transform, monsterSpawnPos, Quaternion.identity);
+            }
+
+            //powerUps
+            float powerUpSpawnPosX = Random.Range(-2.5f, 2.5f);
+            Vector3 powerUpSpawnPos = new Vector3(powerUpSpawnPosX, spawnPosY, 12.0f);
+            int powerUpPrefabIndex;
+            float powerUpRandomNumber = Random.Range(0f, 1f);
+            if (powerUpRandomNumber < 0.1f)
+            {
+                powerUpPrefabIndex = Random.Range(0, powerUpPrefabs.Length);
+                Transform powerUp = (Transform)Instantiate(powerUpPrefabs[powerUpPrefabIndex].transform, powerUpSpawnPos, Quaternion.identity);
             }
             spawnPosY += Random.Range(0.5f, 1.5f);
         }

@@ -12,6 +12,7 @@ TagManager:
   - SalivaBullet
   - BubbleBullet
   - Monster
+  - TeleportPowerUp
   layers:
   - Default
   - TransparentFX
