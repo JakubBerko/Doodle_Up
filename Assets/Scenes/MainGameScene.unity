@@ -595,6 +595,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 346206420}
   m_CullTransparentMesh: 1
+--- !u!1 &421388740
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 421388741}
+  m_Layer: 0
+  m_Name: PowerUp
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &421388741
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 421388740}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 32.302624, y: -10.521491, z: 1990820.8}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 853399642}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &457818908
 GameObject:
   m_ObjectHideFlags: 0
@@ -1073,6 +1104,7 @@ Transform:
   - {fileID: 819974523}
   - {fileID: 506753953}
   - {fileID: 1316448333}
+  - {fileID: 421388741}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1832,6 +1864,8 @@ MonoBehaviour:
   - {fileID: 5200034386306751694, guid: c08ffc08686730444b15eddf67f4380c, type: 3}
   - {fileID: 2472389579067421393, guid: 64f449b01aadbe54e9294fb00aaa223e, type: 3}
   - {fileID: 8697452975249945096, guid: 0faa3c24829c0d942bb1f34fdb825bc4, type: 3}
+  - {fileID: 839140379516161495, guid: c703ac19b51329f4aab3a18b53daacd2, type: 3}
+  - {fileID: 1929800858021485192, guid: 76d522cbee2ef1341b5f918649f63d57, type: 3}
   monsterPrefabs:
   - {fileID: 1106839075685018291, guid: 9f7f3a958893a9542b88f1ad45fb42be, type: 3}
   - {fileID: 101459249460948646, guid: b412d8fd3763c1047bd5f431780d5e0a, type: 3}
