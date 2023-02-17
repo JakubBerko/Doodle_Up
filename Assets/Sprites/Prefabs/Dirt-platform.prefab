@@ -16,7 +16,8 @@ GameObject:
   - component: {fileID: 7938689080247529494}
   - component: {fileID: 3834627570861920536}
   - component: {fileID: 1384629222631597310}
-  m_Layer: 0
+  - component: {fileID: 2565368810358862101}
+  m_Layer: 8
   m_Name: Dirt-platform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -200,3 +201,25 @@ MonoBehaviour:
   - {fileID: 8697452975249945096, guid: 0faa3c24829c0d942bb1f34fdb825bc4, type: 3}
   - {fileID: 9062458455220841938, guid: 51e7056cef62aef47951e233c47fddd1, type: 3}
   - {fileID: 5200034386306751694, guid: c08ffc08686730444b15eddf67f4380c, type: 3}
+--- !u!68 &2565368810358862101
+EdgeCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5269864528579768921}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_EdgeRadius: 0
+  m_Points:
+  - {x: -0.49888888, y: 0}
+  - {x: 0.49888888, y: 0}
+  m_AdjacentStartPoint: {x: 0, y: 0}
+  m_AdjacentEndPoint: {x: 0, y: 0}
+  m_UseAdjacentStartPoint: 0
+  m_UseAdjacentEndPoint: 0

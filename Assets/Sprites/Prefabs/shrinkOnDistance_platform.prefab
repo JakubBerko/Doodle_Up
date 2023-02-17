@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: -8147602849928984508}
   - component: {fileID: 1523135773100761086}
   - component: {fileID: -7923092997215110980}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: shrinkOnDistance_platform
   m_TagString: ShrinkOnDistancePlatform
   m_Icon: {fileID: 0}

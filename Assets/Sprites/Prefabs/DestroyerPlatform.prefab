@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 861191063769969118}
   - component: {fileID: 5183506788663884372}
   - component: {fileID: 8133108950329555337}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: DestroyerPlatform
   m_TagString: DestroyerPlatform
   m_Icon: {fileID: 0}

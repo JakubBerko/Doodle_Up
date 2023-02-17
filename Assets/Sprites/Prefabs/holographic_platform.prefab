@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -8697203366799931181}
   - component: {fileID: -4217654426951678227}
   - component: {fileID: -4439529158147657429}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: holographic_platform
   m_TagString: HolographicPlatform
   m_Icon: {fileID: 0}

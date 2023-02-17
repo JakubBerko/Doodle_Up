@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -2941440269977086053}
   - component: {fileID: -691700348212196085}
   - component: {fileID: 3664511828040450170}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ghost_platform
   m_TagString: GhostPlatform
   m_Icon: {fileID: 0}

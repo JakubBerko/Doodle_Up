@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 6181539788458330741}
   - component: {fileID: -3981363879367525333}
   - component: {fileID: -7394701263922396653}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Slimy_platform
   m_TagString: Untagged
   m_Icon: {fileID: 0}

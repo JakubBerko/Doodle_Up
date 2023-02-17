@@ -37,7 +37,7 @@ public class BubbleMonster : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.relativeVelocity.y <= 0f && collision.gameObject.tag == "Doodler")
+        if (collision.relativeVelocity.y <= 0f && collision.gameObject.tag == "Doodler" || collision.relativeVelocity.y <= 0f && collision.gameObject.tag == "Doodler" && collision.gameObject.layer == 8)
         {
             Destroy(gameObject);
         }
@@ -50,7 +50,12 @@ public class BubbleMonster : MonoBehaviour
         {
             Destroy(collision.gameObject);
         }
-
-        
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Doodler" && collision.gameObject.layer == 9)
+        {
+            Destroy(gameObject);
+        }
     }
 }

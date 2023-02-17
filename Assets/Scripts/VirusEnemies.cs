@@ -26,7 +26,7 @@ public class VirusEnemies : MonoBehaviour
             float pingPongValue = Mathf.PingPong(Time.time * speed, distance);
             transform.position = startPos + new Vector3(pingPongValue, 0, 0);
         }
-        
+
     }
     public void OnBecameVisible()
     {
@@ -47,5 +47,10 @@ public class VirusEnemies : MonoBehaviour
         {
             Destroy(collision.gameObject);
         }
+    }
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        Debug.Log("michal smrdí");
+        Destroy(gameObject);
     }
 }

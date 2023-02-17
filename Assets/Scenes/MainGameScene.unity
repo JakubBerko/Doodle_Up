@@ -1074,7 +1074,7 @@ Transform:
   - {fileID: 506753953}
   - {fileID: 1316448333}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1016366392
 GameObject:
@@ -1636,6 +1636,63 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5269864528579768926, guid: 50d17025a0663dd48bb1f29eac0c3d55, type: 3}
   m_PrefabInstance: {fileID: 5269864528968094979}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1360456640
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 478079116560857083, guid: b8d1c119a211f814ba056a7a11ca6afa, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 478079116560857083, guid: b8d1c119a211f814ba056a7a11ca6afa, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.041028142
+      objectReference: {fileID: 0}
+    - target: {fileID: 478079116560857083, guid: b8d1c119a211f814ba056a7a11ca6afa, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.0241662
+      objectReference: {fileID: 0}
+    - target: {fileID: 478079116560857083, guid: b8d1c119a211f814ba056a7a11ca6afa, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 478079116560857083, guid: b8d1c119a211f814ba056a7a11ca6afa, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 478079116560857083, guid: b8d1c119a211f814ba056a7a11ca6afa, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 478079116560857083, guid: b8d1c119a211f814ba056a7a11ca6afa, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 478079116560857083, guid: b8d1c119a211f814ba056a7a11ca6afa, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 478079116560857083, guid: b8d1c119a211f814ba056a7a11ca6afa, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 478079116560857083, guid: b8d1c119a211f814ba056a7a11ca6afa, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 478079116560857083, guid: b8d1c119a211f814ba056a7a11ca6afa, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 478079116560857086, guid: b8d1c119a211f814ba056a7a11ca6afa, type: 3}
+      propertyPath: m_Name
+      value: TeleportPowerUp
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b8d1c119a211f814ba056a7a11ca6afa, type: 3}
 --- !u!1 &1360730797
 GameObject:
   m_ObjectHideFlags: 0
@@ -2258,6 +2315,7 @@ MonoBehaviour:
   holographicPlatforms: []
   platformsToBeDestroyed: []
   destroyerPlatforms: []
+  invincibilityPowerUps: []
 --- !u!1001 &5269864528968094979
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -21,4 +21,18 @@ public class Bounce : MonoBehaviour
             }
         }
     }
+    private void OnTriggerEnter(Collider col)
+    {
+        // Check if the collider that entered the trigger is the invincible object
+        if (col.gameObject.layer == LayerMask.NameToLayer("Invincible"))
+        {
+            Rigidbody2D rb = col.gameObject.GetComponent<Rigidbody2D>();
+            if (rb != null)
+            {
+                Vector2 velocity = rb.velocity;
+                velocity.y = vel;
+                rb.velocity = velocity;
+            }
+        }
+    }
 }

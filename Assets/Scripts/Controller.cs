@@ -40,6 +40,10 @@ public class Controller : MonoBehaviour
     public GameObject[] destroyerPlatforms;
 
     //PowerUp
+    public GameObject[] invincibilityPowerUps;
+    private float timeInvincible = 0.0f;
+    private bool isInvincible = false;
+    private float invincibilityDuration = 5f;
 
     private void OnBecameInvisible() //kill doodler
     {
@@ -89,6 +93,10 @@ public class Controller : MonoBehaviour
 
         //destroyer platform
         destroyerPlatforms = GameObject.FindGameObjectsWithTag("DestroyerPlatform");
+
+        //powerUp
+        invincibilityPowerUps = GameObject.FindGameObjectsWithTag("TeleportPowerUp");
+        isPlayerInvincible();
     }
     void UpdateScore()
     {
@@ -120,7 +128,6 @@ public class Controller : MonoBehaviour
         {
             rb.velocity = new Vector2(0, flyingSpeed);
             timeInAir += Time.deltaTime;
-            //Debug.Log(timeInAir);
             if (timeInAir >= flyingDuration)
             {
                 playerSprite.sprite = doodlerSprite;
@@ -129,6 +136,20 @@ public class Controller : MonoBehaviour
                 velocity.y = vel;
                 rb.velocity = velocity;
                 isInAir = false;
+            }
+        }
+    }
+    void isPlayerInvincible()
+    {
+        if (isInvincible)
+        {
+            timeInvincible += Time.deltaTime;
+            //Debug.Log(timeInAir);
+            if (timeInvincible >= invincibilityDuration)
+            {
+                timeInvincible = 0.0f;
+                isInvincible = false;
+                gameObject.layer = 0;
             }
         }
     }
@@ -171,7 +192,15 @@ public class Controller : MonoBehaviour
         //PowerUp
         if (collision.gameObject.tag == "TeleportPowerUp")
         {
-            
+            for (int x = 0; x < invincibilityPowerUps.Length; x++)
+            {
+                if (collision.gameObject == invincibilityPowerUps[x])
+                {
+                    Destroy(invincibilityPowerUps[x]);
+                }
+            }
+            gameObject.layer = 9;
+            isInvincible = true;
         }
     }
 
