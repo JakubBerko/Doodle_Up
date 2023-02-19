@@ -5,6 +5,25 @@ using UnityEngine.SceneManagement;
 using TMPro;
 using UnityEditor;
 using System.Linq;
+//using UnityEngine;
+//using UnityEngine.UI;
+
+//public class PowerUpController : MonoBehaviour
+//{
+//    public float powerUpTimeLeft = 5f;
+//    public Text powerUpTimeText;
+
+//    void Update()
+//    {
+//        powerUpTimeLeft -= Time.deltaTime;
+//        if (powerUpTimeLeft <= 0f)
+//        {
+//            // Power up has expired
+//            Destroy(gameObject);
+//        }
+//        powerUpTimeText.text = string.Format("{0:0.00}", powerUpTimeLeft);
+//    }
+//}
 
 public class Controller : MonoBehaviour
 {
