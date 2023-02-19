@@ -51,6 +51,8 @@ public class BubbleMonster : MonoBehaviour
             Destroy(collision.gameObject);
         }
     }
+    //TODO:
+    /*
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Doodler" && collision.gameObject.layer == 9)
@@ -58,4 +60,5 @@ public class BubbleMonster : MonoBehaviour
             Destroy(gameObject);
         }
     }
+    */
 }

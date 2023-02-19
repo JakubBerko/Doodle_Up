@@ -72,8 +72,6 @@ public class Controller : MonoBehaviour
         doodlerSprite = Resources.Load<Sprite>("doggie-like-cropped");
         ghostSprite = Resources.Load<Sprite>("hutao_ghost");
         playerSprite = GetComponent<SpriteRenderer>();
-
-        
     }
 
     void Update()
@@ -219,7 +217,6 @@ public class Controller : MonoBehaviour
                 shrinkingPlatforms[j].transform.localScale = Vector3.one * shrinkElement;
             }
         }
-        
     }
 
     void DestroyerPlatform() //najde všechny spawnuté platformy na obrazovce (jelikož platformy se spawnují tìsnì nad limitem obrazovky) a rozpùlí ho
@@ -243,8 +240,6 @@ public class Controller : MonoBehaviour
                 Destroy(platformsToBeDestroyed[i]);
             }
         }
-
     }
-
 }
 

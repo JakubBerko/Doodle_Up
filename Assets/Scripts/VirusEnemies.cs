@@ -48,9 +48,4 @@ public class VirusEnemies : MonoBehaviour
             Destroy(collision.gameObject);
         }
     }
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        Debug.Log("michal smrdí");
-        Destroy(gameObject);
-    }
 }
