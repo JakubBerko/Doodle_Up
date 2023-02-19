@@ -16,7 +16,6 @@ GameObject:
   - component: {fileID: 7938689080247529494}
   - component: {fileID: 3834627570861920536}
   - component: {fileID: 1384629222631597310}
-  - component: {fileID: 2565368810358862101}
   m_Layer: 8
   m_Name: Dirt-platform
   m_TagString: Untagged
@@ -107,8 +106,8 @@ EdgeCollider2D:
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0
   m_Points:
-  - {x: -0.4963692, y: 0.022676706}
-  - {x: -0.4599844, y: 0.064273834}
+  - {x: -0.45851707, y: 0.0761745}
+  - {x: -0.40345848, y: 0.07840538}
   - {x: -0.37943947, y: 0.079726696}
   - {x: -0.29845735, y: 0.08087325}
   - {x: -0.24939254, y: 0.07558322}
@@ -118,9 +117,9 @@ EdgeCollider2D:
   - {x: 0.20177492, y: 0.07712102}
   - {x: 0.26510155, y: 0.07557011}
   - {x: 0.32172334, y: 0.07327962}
-  - {x: 0.38646606, y: 0.0609591}
-  - {x: 0.4462831, y: 0.044434547}
-  - {x: 0.49132994, y: 0.002519846}
+  - {x: 0.37202153, y: 0.069625616}
+  - {x: 0.4068014, y: 0.06754589}
+  - {x: 0.47239813, y: 0.060188532}
   m_AdjacentStartPoint: {x: 0, y: 0}
   m_AdjacentEndPoint: {x: 0, y: 0}
   m_UseAdjacentStartPoint: 0
@@ -201,25 +200,3 @@ MonoBehaviour:
   - {fileID: 8697452975249945096, guid: 0faa3c24829c0d942bb1f34fdb825bc4, type: 3}
   - {fileID: 9062458455220841938, guid: 51e7056cef62aef47951e233c47fddd1, type: 3}
   - {fileID: 5200034386306751694, guid: c08ffc08686730444b15eddf67f4380c, type: 3}
---- !u!68 &2565368810358862101
-EdgeCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5269864528579768921}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_EdgeRadius: 0
-  m_Points:
-  - {x: -0.49888888, y: 0}
-  - {x: 0.49888888, y: 0}
-  m_AdjacentStartPoint: {x: 0, y: 0}
-  m_AdjacentEndPoint: {x: 0, y: 0}
-  m_UseAdjacentStartPoint: 0
-  m_UseAdjacentEndPoint: 0

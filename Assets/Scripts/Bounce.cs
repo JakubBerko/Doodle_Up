@@ -23,7 +23,7 @@ public class Bounce : MonoBehaviour
     }
     private void OnTriggerEnter(Collider col)
     {
-        // Check if the collider that entered the trigger is the invincible object
+        // Zkontroluje zdali collider trefil invincible objekt
         if (col.gameObject.layer == LayerMask.NameToLayer("Invincible"))
         {
             Rigidbody2D rb = col.gameObject.GetComponent<Rigidbody2D>();
