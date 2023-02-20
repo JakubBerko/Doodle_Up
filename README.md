@@ -7,3 +7,4 @@ TODO: Timer for invincibility
       4.Making the powerups not appear behind platforms
       5.Sound effects
       6.Střílení při pozastavené hře
+      7.Floating on a platform while jumping
