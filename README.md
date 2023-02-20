@@ -8,3 +8,4 @@ TODO: Timer for invincibility
       5.Sound effects
       6.Střílení při pozastavené hře
       7.Floating on a platform while jumping
+      8.Animace délky powerupu (bublinka a kolem ni se meni podle delky)
