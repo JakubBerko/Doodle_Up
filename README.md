@@ -6,3 +6,4 @@ TODO: Timer for invincibility
       3.Doodler hitting the side of the platform
       4.Making the powerups not appear behind platforms
       5.Sound effects
+      6.Střílení při pozastavené hře
