@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
 using UnityEditor;
@@ -63,6 +64,8 @@ public class Controller : MonoBehaviour
     private float timeInvincible = 0.0f;
     private bool isInvincible = false;
     private float invincibilityDuration = 5f;
+    public TextMeshProUGUI powerUpTimeText;
+    public Image powerUpTimeImg;
 
     private void OnBecameInvisible() //kill doodler
     {
@@ -91,6 +94,10 @@ public class Controller : MonoBehaviour
         doodlerSprite = Resources.Load<Sprite>("doggie-like-cropped");
         ghostSprite = Resources.Load<Sprite>("hutao_ghost");
         playerSprite = GetComponent<SpriteRenderer>();
+
+        //PowerUp
+        powerUpTimeText.enabled = false;
+        powerUpTimeImg.enabled = false;
     }
 
     void Update()
@@ -161,12 +168,22 @@ public class Controller : MonoBehaviour
         if (isInvincible)
         {
             timeInvincible += Time.deltaTime;
+            Debug.Log(timeInvincible);
+            if (invincibilityDuration - timeInvincible <1)
+            {
+                powerUpTimeText.text = string.Format("{0:0.0}", invincibilityDuration - timeInvincible);
+            }
+            else
+            {
+                powerUpTimeText.text = string.Format("{0:0}", invincibilityDuration - timeInvincible);
+            }
             //Debug.Log(timeInAir);
             if (timeInvincible >= invincibilityDuration)
             {
-                timeInvincible = 0.0f;
                 isInvincible = false;
                 gameObject.layer = 0;
+                powerUpTimeText.enabled = false;
+                powerUpTimeImg.enabled = false;
             }
         }
     }
@@ -209,6 +226,10 @@ public class Controller : MonoBehaviour
         //PowerUp
         if (collision.gameObject.tag == "TeleportPowerUp")
         {
+            timeInvincible = 0f;
+            isInvincible = false;
+            powerUpTimeText.enabled = true;
+            powerUpTimeImg.enabled = true;
             for (int x = 0; x < invincibilityPowerUps.Length; x++)
             {
                 if (collision.gameObject == invincibilityPowerUps[x])
