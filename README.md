@@ -1,5 +1,6 @@
 # Doodle_Up
  School Project
+<!--
 TODO:
       1.Shy platform fix 
       2.Shooting at a platform wont be able to change to itself
@@ -9,3 +10,5 @@ TODO:
       6.Střílení při pozastavené hře
       7.Floating on a platform while jumping
       8.Animace délky powerupu (bublinka a kolem ni se meni podle delky)
+      
+-->
