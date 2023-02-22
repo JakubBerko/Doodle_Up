@@ -1,7 +1,7 @@
 # Doodle_Up
  School Project
 TODO:
-      1.Shy platform fix 
+      1.Shy platform fix \n
       2.Shooting at a platform wont be able to change to itself
       3.Doodler hitting the side of the platform
       4.Making the powerups not appear behind platforms
