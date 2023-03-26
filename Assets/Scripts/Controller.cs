@@ -67,6 +67,9 @@ public class Controller : MonoBehaviour
     public TextMeshProUGUI powerUpTimeText;
     public Image powerUpTimeImg;
 
+    //Animator
+    public Animator animator;
+
     private void OnBecameInvisible() //kill doodler
     {
         //když Doodler není vidìt, znièí se a naète se znovu scéna hry
@@ -121,6 +124,12 @@ public class Controller : MonoBehaviour
         //powerUp
         invincibilityPowerUps = GameObject.FindGameObjectsWithTag("TeleportPowerUp");
         isPlayerInvincible();
+
+        //animator
+        animator.SetFloat("A_time_inv", timeInvincible);
+        animator.SetBool("A_isInv", isInvincible);
+        animator.SetFloat("A_rbVel", rb.velocity.y);
+        animator.SetBool("A_isInAir", isInAir);
     }
     void UpdateScore()
     {
@@ -154,7 +163,6 @@ public class Controller : MonoBehaviour
             timeInAir += Time.deltaTime;
             if (timeInAir >= flyingDuration)
             {
-                playerSprite.sprite = doodlerSprite;
                 timeInAir = 0.0f;
                 Vector2 velocity = rb.velocity;
                 velocity.y = vel;
@@ -184,18 +192,19 @@ public class Controller : MonoBehaviour
                 gameObject.layer = 0;
                 powerUpTimeText.enabled = false;
                 powerUpTimeImg.enabled = false;
+                timeInvincible = 0f;
             }
         }
     }
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        //Ghost platform script //po dotknutí platformy se hráèovi zmìní sprite a bool isInAir
+        //Ghost platform script //po dotknutí platformy se hráèovi zmìní bool isInAir
         for (int i = 0; i < ghostPlatforms.Length; i++)
         {
             if (collision.gameObject == ghostPlatforms[i] && collision.relativeVelocity.y >= 0f)
             {
-                playerSprite.sprite = ghostSprite;
+               
                 isInAir = true;
             }
         }

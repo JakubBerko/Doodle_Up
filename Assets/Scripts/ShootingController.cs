@@ -7,6 +7,7 @@ public class ShootingController : MonoBehaviour
     public GameObject salivaBulletPrefab;
     public Transform bulletDirection;
     private bool isPaused;
+    public Animator animator;
 
     
     void Update()
@@ -14,6 +15,8 @@ public class ShootingController : MonoBehaviour
         if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
         {
             Shoot();
+            animator.SetTrigger("A_shoot");
+            //animator.ResetTrigger("A_shoot");
         }
 
         if (isPaused)
