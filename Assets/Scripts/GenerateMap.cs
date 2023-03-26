@@ -81,7 +81,7 @@ public class GenerateMap : MonoBehaviour
             Vector3 powerUpSpawnPos = new Vector3(powerUpSpawnPosX, spawnPosY, 12.0f);
             int powerUpPrefabIndex;
             float powerUpRandomNumber = Random.Range(0f, 1f);
-            if (powerUpRandomNumber < 0.1f)
+            if (powerUpRandomNumber < 0.02f)
             {
                 powerUpPrefabIndex = Random.Range(0, powerUpPrefabs.Length);
                 Transform powerUp = (Transform)Instantiate(powerUpPrefabs[powerUpPrefabIndex].transform, powerUpSpawnPos, Quaternion.identity);
