@@ -19,7 +19,7 @@ using System.Linq;
 //        powerUpTimeLeft -= Time.deltaTime;
 //        if (powerUpTimeLeft <= 0f)
 //        {
-//            // Power up has expired
+//            // Power up vypršel
 //            Destroy(gameObject);
 //        }
 //        powerUpTimeText.text = string.Format("{0:0.00}", powerUpTimeLeft);
@@ -70,6 +70,10 @@ public class Controller : MonoBehaviour
     //Animator
     public Animator animator;
 
+    //Coins
+    public TextMeshProUGUI coinText;
+    private float coinAmount;
+
     private void OnBecameInvisible() //kill doodler
     {
         //když Doodler není vidìt, znièí se a naète se znovu scéna hry
@@ -78,7 +82,7 @@ public class Controller : MonoBehaviour
     }
     private void OnDestroy()
     {
-        SaveHighScore();
+        SaveRunInfo();
     }
     //update score
     void Start()
@@ -101,6 +105,8 @@ public class Controller : MonoBehaviour
         //PowerUp
         powerUpTimeText.enabled = false;
         powerUpTimeImg.enabled = false;
+        //coins
+        coinAmount = 0;
     }
 
     void Update()
@@ -142,7 +148,7 @@ public class Controller : MonoBehaviour
         score.text = Mathf.Round(maxScore).ToString();
         
     }
-    void SaveHighScore()
+    void SaveRunInfo()
     {
         //naètení highscore a pøepsání pokud hráè dosáhl vìtšího skóre než je highscore
         float highScore = PlayerPrefs.GetFloat("highScore");
@@ -152,6 +158,10 @@ public class Controller : MonoBehaviour
             PlayerPrefs.Save();
             Debug.Log("saved highscore!");
         }
+        //uložení coinù do PlayerPrefs
+        float coins = PlayerPrefs.GetFloat("coins");
+        coins += coinAmount;
+        PlayerPrefs.SetFloat("coins",coins);
     }
 
     void IsPlayerInAir() //shrink on distance //pokud je hráè ve vzduchu, tak se pousouvá nahoru, a po 5 vteøinách se zmìní sprite, vyresetuje èas ve vzduchu a lehce vyskoèí
@@ -218,7 +228,6 @@ public class Controller : MonoBehaviour
                 Destroy(destroyerPlatforms[u]);
             }
         }
-
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -248,6 +257,13 @@ public class Controller : MonoBehaviour
             }
             gameObject.layer = 9;
             isInvincible = true;
+        }
+        //coins score update
+        if (collision.gameObject.tag == "Coin")
+        {
+            Destroy(collision.gameObject);
+            coinAmount++;
+            coinText.text = coinAmount.ToString();
         }
     }
 

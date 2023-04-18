@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class VirusEnemies : MonoBehaviour
@@ -15,6 +16,9 @@ public class VirusEnemies : MonoBehaviour
 
     //Animator
     public Animator animator;
+
+    public TextMeshProUGUI coinText;
+    private float coinAmount;
 
     void Start()
     {
@@ -43,6 +47,8 @@ public class VirusEnemies : MonoBehaviour
         if (collision.relativeVelocity.y <= 0f && collision.gameObject.tag == "Doodler")
         {
             Destroy(gameObject);
+            coinAmount++;
+            coinText.text = coinAmount.ToString();
         }
         else if (collision.gameObject.tag == "SalivaBullet")
         {

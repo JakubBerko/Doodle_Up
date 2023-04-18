@@ -13,6 +13,7 @@ TagManager:
   - BubbleBullet
   - Monster
   - TeleportPowerUp
+  - Coin
   layers:
   - Default
   - TransparentFX

@@ -653,7 +653,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 50000
+  m_text: 0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 735fa43747837d2439bcbdcdcc5a752b, type: 2}
   m_sharedMaterial: {fileID: 8366250195308087550, guid: 735fa43747837d2439bcbdcdcc5a752b, type: 2}
@@ -2341,6 +2341,7 @@ MonoBehaviour:
   powerUpTimeText: {fileID: 1185101633}
   powerUpTimeImg: {fileID: 1895931315}
   animator: {fileID: 2111382620}
+  coinText: {fileID: 457818910}
 --- !u!95 &2111382620
 Animator:
   serializedVersion: 4

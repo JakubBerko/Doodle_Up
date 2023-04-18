@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class BubbleMonster : MonoBehaviour
@@ -11,6 +12,8 @@ public class BubbleMonster : MonoBehaviour
 
     private bool wasOnScreen;
 
+    public TextMeshProUGUI coinText;
+    private float coinAmount;
     void Update()
     {
         if (wasOnScreen)
@@ -40,6 +43,8 @@ public class BubbleMonster : MonoBehaviour
         if (collision.relativeVelocity.y <= 0f && collision.gameObject.tag == "Doodler" || collision.relativeVelocity.y <= 0f && collision.gameObject.tag == "Doodler" && collision.gameObject.layer == 9)
         {
             Destroy(gameObject);
+            coinAmount++;
+            coinText.text = coinAmount.ToString();
         }
         else if(collision.gameObject.tag == "SalivaBullet")
         {
