@@ -8,6 +8,7 @@ public class GenerateMap : MonoBehaviour
     public GameObject[] prefabs;
     public GameObject[] monsterPrefabs;
     public GameObject[] powerUpPrefabs;
+    public GameObject coinPrefab;
 
     public GameObject player;
 
@@ -63,8 +64,25 @@ public class GenerateMap : MonoBehaviour
                 prefabIndex = Random.Range(1, prefabs.Length); // zbytek platforem
             }
 
+
             Transform plat = (Transform)Instantiate(prefabs[prefabIndex].transform, spawnPos, Quaternion.identity);
 
+            //spawnování coinù
+            
+            if (randomNumber < 0.2)
+            {
+                Transform coinSpawnPoint = plat.Find("CoinSpawnLocation");
+
+                if (coinSpawnPoint != null)
+                {
+                    GameObject coin = Instantiate(coinPrefab, coinSpawnPoint.position, coinPrefab.transform.rotation);
+                    coin.transform.parent = plat;
+                }
+                else
+                {
+                    Debug.LogError("Coin spawn point neexistuje: " + plat.name);
+                }
+            }
             //monsters
             float monsterSpawnPosX = Random.Range(-2.5f, 2.5f);
             Vector3 monsterSpawnPos = new Vector3(monsterSpawnPosX, spawnPosY, 12.0f);
