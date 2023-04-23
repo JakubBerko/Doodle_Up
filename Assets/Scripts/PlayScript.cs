@@ -16,4 +16,8 @@ public class PlayScript : MonoBehaviour
         Application.Quit(); //vypne aplikaci
         Debug.Log("Zavírání aplikace funguje!");
     }
+    public void OpenAchievements()
+    {
+        SceneManager.LoadScene("AchievementScene");
+    }
 }
