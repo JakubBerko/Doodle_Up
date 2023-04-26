@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   achievements:
     array:
-    - id: HelloWorld
-      nazev: Assdsd
-      popis: ily
-    - id: Achievement2
-      nazev: hihi
-      popis: haha
+    - id: _Shoot
+      nazev: Shoot!
+      popis: Shoot one time
+    - id: _Die
+      nazev: Die
+      popis: Die once

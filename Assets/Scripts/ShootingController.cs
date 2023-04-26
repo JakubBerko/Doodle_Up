@@ -9,7 +9,7 @@ public class ShootingController : MonoBehaviour
     private bool isPaused;
     public Animator animator;
 
-    
+    public AchievementManager achievementManager;
     void Update()
     {
         if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
@@ -17,6 +17,7 @@ public class ShootingController : MonoBehaviour
             Shoot();
             animator.SetTrigger("A_shoot");
             //animator.ResetTrigger("A_shoot");
+            achievementManager.UnlockAchievement(Achievements._Shoot);
         }
 
         if (isPaused)

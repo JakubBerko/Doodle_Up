@@ -1,1 +1,1 @@
-public enum Achievements{HelloWorld,Achievement2,}
+public enum Achievements{_Shoot,_Die,}

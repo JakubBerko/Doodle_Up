@@ -74,11 +74,22 @@ public class Controller : MonoBehaviour
     public TextMeshProUGUI coinText;
     private float coinAmount;
 
+    //Achievements
+    public AchievementManager achievementManager;
+
     private void OnBecameInvisible() //kill doodler
     {
+        achievementManager.UnlockAchievement(Achievements._Die);
         //když Doodler není vidìt, znièí se a naète se znovu scéna hry
-        Destroy(Doodler);
-        SceneManager.LoadScene("MainGameScene");
+        IEnumerator WaitaSecond()
+        {
+            yield return new WaitForSeconds(1);
+
+            Destroy(Doodler);
+            SceneManager.LoadScene("MainGameScene");
+        }
+        StartCoroutine(WaitaSecond());
+
     }
     private void OnDestroy()
     {
