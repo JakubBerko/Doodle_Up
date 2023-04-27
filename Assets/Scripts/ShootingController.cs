@@ -6,23 +6,18 @@ public class ShootingController : MonoBehaviour
 {
     public GameObject salivaBulletPrefab;
     public Transform bulletDirection;
-    private bool isPaused;
     public Animator animator;
-
+    public bool isPaused = false;
     public AchievementManager achievementManager;
     void Update()
     {
+        if (isPaused) return;
         if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
         {
             Shoot();
             animator.SetTrigger("A_shoot");
             //animator.ResetTrigger("A_shoot");
             achievementManager.UnlockAchievement(Achievements._Shoot);
-        }
-
-        if (isPaused)
-        {
-            return;
         }
     }
 

@@ -49,8 +49,12 @@ public class Controller : MonoBehaviour
 
     //shrink on distance
     public GameObject[] shrinkingPlatforms;
-    public float shrinkDistance = 10; // vzdálenost od které se platforma zaène zmenšovat
     public float shrinkAmount = 0.5f; // jak moc se platforma bude zmenšovat
+    private float distance;
+    private GameObject platform;
+    private float radius;
+    [SerializeField] GameObject shrinkPlatform;
+    private float shrink;
 
     //holographic platform
     public GameObject[] holographicPlatforms;
@@ -81,14 +85,8 @@ public class Controller : MonoBehaviour
     {
         achievementManager.UnlockAchievement(Achievements._Die);
         //když Doodler není vidìt, znièí se a naète se znovu scéna hry
-        IEnumerator WaitaSecond()
-        {
-            yield return new WaitForSeconds(1);
-
-            Destroy(Doodler);
-            SceneManager.LoadScene("MainGameScene");
-        }
-        StartCoroutine(WaitaSecond());
+        Destroy(Doodler);
+        SceneManager.LoadScene("MainGameScene");
 
     }
     private void OnDestroy()
@@ -118,6 +116,8 @@ public class Controller : MonoBehaviour
         powerUpTimeImg.enabled = false;
         //coins
         coinAmount = 0;
+        //shrinkOnPlatform
+        radius = 1;
     }
 
     void Update()
@@ -130,7 +130,7 @@ public class Controller : MonoBehaviour
 
         //shrink on distance
         shrinkingPlatforms = GameObject.FindGameObjectsWithTag("ShrinkOnDistancePlatform");
-        ShrinkPlatforms();
+        //ShrinkPlatforms();
 
         //holographic platform
         holographicPlatforms = GameObject.FindGameObjectsWithTag("HolographicPlatform");
@@ -241,6 +241,21 @@ public class Controller : MonoBehaviour
         }
     }
 
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        platform = collision.gameObject;
+        Debug.Log(platform.name);
+        Debug.Log(platform.tag);
+        Debug.Log(platform.gameObject.tag);
+        Debug.Log(platform.gameObject.name);
+        if (platform.tag != "ShrinkOnDistancePlatform") return;
+        distance = (platform.transform.position - transform.position).magnitude;
+        Debug.Log(distance);
+        if (distance > radius) return;
+        shrink = (1 - distance / radius) * shrinkAmount;
+        platform.transform.localScale -= new Vector3(shrink, shrink, shrink);
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         //holographic platform //(zde jsem použil on trigger, jelikož pøes OnCollisionEnter se hráè zasekl o platformu) pokud hráè projde platformou, tak se znièí objekt platformy
@@ -278,22 +293,22 @@ public class Controller : MonoBehaviour
         }
     }
 
-    void ShrinkPlatforms() //shrink on distance 
-    {
-        for (int j = 0; j <shrinkingPlatforms.Length; j++)
-        {
-            float distance = Vector3.Distance(transform.position,shrinkingPlatforms[j].transform.position); //vzdálenost hráèe od platformy
+    //void ShrinkPlatforms() //shrink on distance 
+    //{
+    //    for (int j = 0; j <shrinkingPlatforms.Length; j++)
+    //    {
+    //        float distance = Vector3.Distance(transform.position,shrinkingPlatforms[j].transform.position); //vzdálenost hráèe od platformy
 
-            if (distance < shrinkDistance)
-            {
-                //spoèítá shrinkElementu (o kolik se zmensi)
-                float shrinkElement = 1 - (distance / shrinkDistance) * shrinkAmount;
+    //        if (distance < shrinkDistance)
+    //        {
+    //            //spoèítá shrinkElementu (o kolik se zmensi)
+    //            float shrinkElement = 1 - (distance / shrinkDistance) * shrinkAmount;
 
-                //zmenší objekt shrinkfaktorem vynásobením normálního vektoru tím zmenšením,,
-                shrinkingPlatforms[j].transform.localScale = Vector3.one * shrinkElement;
-            }
-        }
-    }
+    //            //zmenší objekt shrinkfaktorem vynásobením normálního vektoru tím zmenšením,,
+    //            shrinkingPlatforms[j].transform.localScale = Vector3.one * shrinkElement;
+    //        }
+    //    }
+    //}
 
     void DestroyerPlatform() //najde všechny spawnuté platformy na obrazovce (jelikož platformy se spawnují tìsnì nad limitem obrazovky) a rozpùlí ho
     {

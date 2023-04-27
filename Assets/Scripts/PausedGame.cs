@@ -6,19 +6,24 @@ using UnityEngine.SceneManagement;
 public class PausedGame : MonoBehaviour
 {
     [SerializeField] GameObject pausedGame;
-    private bool isPaused = false;
+    private ShootingController shootingController;
+    private void Start()
+    {
+        shootingController = GameObject.Find("GameManager").GetComponent<ShootingController>();
+    }
     public void StopGame()
     {
         pausedGame.SetActive(true); //zobrazí UI pausedGame
         Time.timeScale = 0f; //nastaví èas na 0
-        isPaused = true;
+        shootingController.isPaused = true;
+
 
     }
     public void ResumeGame()
     {
         pausedGame.SetActive(false); //schová UI pausedGame
         Time.timeScale = 1f; //nastaví èas na 1
-        isPaused = false;
+        shootingController.isPaused = false;
     }
     public void ReturnToMainMenu()
     {
@@ -27,6 +32,7 @@ public class PausedGame : MonoBehaviour
         SceneManager.LoadScene("MainGameScene"); //naète novou scénu
         pausedGame.SetActive(false); //schová UI pausedGame
         Time.timeScale = 1f; //nastaví èas na 1
+        shootingController.isPaused = false;
         //Debug.Log("working");
         
     }

@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEditor;
 using System;
 using System.IO;
-
+/*
 [CustomEditor(typeof(AchievementDatabase))]
 public class AchievementDatabaseEditor : Editor
 {
@@ -37,3 +37,4 @@ public class AchievementDatabaseEditor : Editor
         AssetDatabase.ImportAsset("Assets/Achievements.cs");
     }
 }
+*/

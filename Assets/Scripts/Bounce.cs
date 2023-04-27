@@ -6,33 +6,27 @@ public class Bounce : MonoBehaviour
 {
     //velocity = rychlost objektu urèitým smìrem
     public float vel = 9f; //pokud zmìnìno zde, zmìnit i v Ghost platform
-
+    Rigidbody2D rb;
+    Vector2 velocity;
     void OnCollisionEnter2D(Collision2D collision)
     {
+        if (collision.relativeVelocity.y > 0f) return;
+        rb = collision.gameObject.GetComponent<Rigidbody2D>();
+        if (rb == null) return;
         //pokud nemají objekty velocity smìrem nahoru, tak se odrazí doodler smìrem nahoru
-        if (collision.relativeVelocity.y <= 0f)
-        {
-            Rigidbody2D rb = collision.gameObject.GetComponent<Rigidbody2D>();
-            if (rb != null)
-            {
-                Vector2 velocity = rb.velocity;
-                velocity.y = vel;
-                rb.velocity = velocity;
-            }
-        }
+        rb.position.Set(rb.position.x, rb.position.y + 100);
+        velocity = rb.velocity;
+        velocity.y = vel;
+        rb.velocity = velocity;
     }
     private void OnTriggerEnter(Collider col)
     {
         // Zkontroluje zdali collider trefil invincible objekt
-        if (col.gameObject.layer == LayerMask.NameToLayer("Invincible"))
-        {
-            Rigidbody2D rb = col.gameObject.GetComponent<Rigidbody2D>();
-            if (rb != null)
-            {
-                Vector2 velocity = rb.velocity;
-                velocity.y = vel;
-                rb.velocity = velocity;
-            }
-        }
+        if (col.gameObject.layer != LayerMask.NameToLayer("Invincible")) return;
+        rb = col.gameObject.GetComponent<Rigidbody2D>();
+        if (rb == null) return;
+        Vector2 velocity = rb.velocity;
+        velocity.y = vel;
+        rb.velocity = velocity;
     }
 }

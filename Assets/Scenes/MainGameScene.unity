@@ -3231,13 +3231,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefabs:
-  - {fileID: 5269864528579768921, guid: 50d17025a0663dd48bb1f29eac0c3d55, type: 3}
+  - {fileID: 9062458455220841938, guid: 51e7056cef62aef47951e233c47fddd1, type: 3}
   - {fileID: 1929800858021485192, guid: 76d522cbee2ef1341b5f918649f63d57, type: 3}
   - {fileID: 839140379516161495, guid: c703ac19b51329f4aab3a18b53daacd2, type: 3}
   - {fileID: 9146681743404018180, guid: 87f0d3eda1271784eaa203c45c8e27ce, type: 3}
   - {fileID: 8697452975249945096, guid: 0faa3c24829c0d942bb1f34fdb825bc4, type: 3}
   - {fileID: 2472389579067421393, guid: 64f449b01aadbe54e9294fb00aaa223e, type: 3}
   - {fileID: 5200034386306751694, guid: c08ffc08686730444b15eddf67f4380c, type: 3}
+  - {fileID: 9062458455220841938, guid: 51e7056cef62aef47951e233c47fddd1, type: 3}
   monsterPrefabs:
   - {fileID: 1106839075685018291, guid: 9f7f3a958893a9542b88f1ad45fb42be, type: 3}
   - {fileID: 101459249460948646, guid: b412d8fd3763c1047bd5f431780d5e0a, type: 3}
@@ -3276,6 +3277,7 @@ MonoBehaviour:
   salivaBulletPrefab: {fileID: 4401238383103157476, guid: 0bcbf95cac500c24cb2812606c71ef9d, type: 3}
   bulletDirection: {fileID: 2111382617}
   animator: {fileID: 2111382620}
+  isPaused: 0
   achievementManager: {fileID: 1492171357}
 --- !u!114 &1492171357
 MonoBehaviour:
@@ -3935,7 +3937,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0.0000038587023, y: 383.10004}
+  m_AnchoredPosition: {x: 0.0000038587023, y: 383.1001}
   m_SizeDelta: {x: 963.1, y: 726.7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1843380021
@@ -4552,8 +4554,8 @@ MonoBehaviour:
   Highscore: {fileID: 1266296403}
   Doodler: {fileID: 2111382612}
   shrinkingPlatforms: []
-  shrinkDistance: 10
   shrinkAmount: 0.5
+  shrinkPlatform: {fileID: 9062458455220841938, guid: 51e7056cef62aef47951e233c47fddd1, type: 3}
   holographicPlatforms: []
   platformsToBeDestroyed: []
   destroyerPlatforms: []
