@@ -2456,6 +2456,7 @@ MonoBehaviour:
   shopUI: {fileID: 1250965565}
   openShopButton: {fileID: 1860786812}
   closeShopButton: {fileID: 1430045680}
+  coinsUI: {fileID: 779933164}
 --- !u!1001 &2019779871
 PrefabInstance:
   m_ObjectHideFlags: 0

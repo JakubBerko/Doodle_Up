@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class SkinShopUI : MonoBehaviour
 {
@@ -22,6 +23,7 @@ public class SkinShopUI : MonoBehaviour
 	[SerializeField] Button openShopButton;
 	[SerializeField] Button closeShopButton;
 
+	[SerializeField] TMP_Text coinsUI;
 	int newSelectedSkinIndex = 0;
 	int previousSelectedSkinIndex = 0;
 
@@ -42,6 +44,12 @@ public class SkinShopUI : MonoBehaviour
 	}
 	private void GenerateShopSkinsUI()
     {
+		for (int i = 0; i < GameDataManager.GetAllPurchasedSkin().Count; i++)
+		{
+			int purchasedSkinIndex = GameDataManager.GetPurchasedSkin(i);
+			skinDB.PurchaseSkin(purchasedSkinIndex);
+		}
+
 		skinHeight = ShopSkinsContainer.GetChild(0).GetComponent<RectTransform>().sizeDelta.y;
 		Destroy(ShopSkinsContainer.GetChild(0).gameObject);
 		ShopSkinsContainer.DetachChildren();
@@ -88,19 +96,41 @@ public class SkinShopUI : MonoBehaviour
 		previousSelectedSkinIndex = newSelectedSkinIndex;
 		newSelectedSkinIndex = skinIndex;
 
-		SkinUI prevUiSkin = GetItemUI(previousSelectedSkinIndex);
-		SkinUI newUiSkin = GetItemUI(newSelectedSkinIndex);
+		SkinUI prevUiSkin = GetSkinUI(previousSelectedSkinIndex);
+		SkinUI newUiSkin = GetSkinUI(newSelectedSkinIndex);
 
 		prevUiSkin.DeselectSkin();
 		newUiSkin.SelectSkin();
 	}
-	SkinUI GetItemUI(int index)
+	SkinUI GetSkinUI(int index)
 	{
 		return ShopSkinsContainer.GetChild(index).GetComponent<SkinUI>();
 	}
 	void OnSkinPurchased(int index)
     {
-		Debug.Log("purchase" + index);
+		Skin skin = skinDB.GetSkin(index);
+		SkinUI uiSkin = GetSkinUI(index);
+
+		if (GameDataManager.CanSpendCoins(skin.price))
+		{
+			//Proceed with the purchase operation
+			GameDataManager.SpendCoins(skin.price);
+			//Update Coins UI text
+			coinsUI.text = PlayerPrefs.GetFloat("coins").ToString();
+
+			//Update DB's Data
+			skinDB.PurchaseSkin(index);
+
+			uiSkin.SetSkinAsPurchased();
+			uiSkin.OnSkinSelect(index, OnSkinSelected);
+
+			//Add purchased item to Shop Data
+			GameDataManager.AddPurchasedSkin(index);
+		}
+        else
+        {
+			Debug.Log("Nemáš prachy");
+        }
 	}
 	void AddShopEvents()
 	{

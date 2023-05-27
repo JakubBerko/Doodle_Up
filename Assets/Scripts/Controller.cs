@@ -81,6 +81,9 @@ public class Controller : MonoBehaviour
     //Achievements
     public AchievementManager achievementManager;
 
+    //Skin
+    [SerializeField] SpriteRenderer playerSkin;
+
     private void OnBecameInvisible() //kill doodler
     {
         achievementManager.UnlockAchievement(Achievements._Die);
@@ -98,6 +101,8 @@ public class Controller : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
 
+        ChangePlayerSkin();
+
         //score, highscore
         //naètení uloženého highscore do promìnné a poté textu
         rb = GetComponent<Rigidbody2D>();
@@ -105,8 +110,6 @@ public class Controller : MonoBehaviour
         Highscore.text = "BEST:" + highScore.ToString();
 
         //ghost platform script
-        //ghostSprite = AssetDatabase.LoadAssetAtPath<Sprite>("Assets/Sprites/hutao_ghost.png");
-        //doodlerSprite = AssetDatabase.LoadAssetAtPath<Sprite>("Assets/Sprites/doggie-like-cropped.png");
         doodlerSprite = Resources.Load<Sprite>("doggie-like-cropped");
         ghostSprite = Resources.Load<Sprite>("hutao_ghost");
         playerSprite = GetComponent<SpriteRenderer>();
@@ -244,13 +247,8 @@ public class Controller : MonoBehaviour
     private void OnCollisionStay2D(Collision2D collision)
     {
         platform = collision.gameObject;
-        Debug.Log(platform.name);
-        Debug.Log(platform.tag);
-        Debug.Log(platform.gameObject.tag);
-        Debug.Log(platform.gameObject.name);
         if (platform.tag != "ShrinkOnDistancePlatform") return;
         distance = (platform.transform.position - transform.position).magnitude;
-        Debug.Log(distance);
         if (distance > radius) return;
         shrink = (1 - distance / radius) * shrinkAmount;
         platform.transform.localScale -= new Vector3(shrink, shrink, shrink);
@@ -330,6 +328,15 @@ public class Controller : MonoBehaviour
             {
                 Destroy(platformsToBeDestroyed[i]);
             }
+        }
+    }
+    void ChangePlayerSkin()
+    {
+        Skin skin = GameDataManager.GetSelectedCharacter();
+        if (skin.image != null)
+        {
+            playerSkin.sprite = skin.image;
+            Debug.LogWarning("Changed skin");
         }
     }
 }

@@ -3231,7 +3231,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefabs:
-  - {fileID: 9062458455220841938, guid: 51e7056cef62aef47951e233c47fddd1, type: 3}
+  - {fileID: 9146681743404018180, guid: 87f0d3eda1271784eaa203c45c8e27ce, type: 3}
   - {fileID: 1929800858021485192, guid: 76d522cbee2ef1341b5f918649f63d57, type: 3}
   - {fileID: 839140379516161495, guid: c703ac19b51329f4aab3a18b53daacd2, type: 3}
   - {fileID: 9146681743404018180, guid: 87f0d3eda1271784eaa203c45c8e27ce, type: 3}
@@ -4565,6 +4565,7 @@ MonoBehaviour:
   animator: {fileID: 2111382620}
   coinText: {fileID: 457818910}
   achievementManager: {fileID: 1492171357}
+  playerSkin: {fileID: 2111382616}
 --- !u!95 &2111382620
 Animator:
   serializedVersion: 4
@@ -4573,7 +4574,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2111382612}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: f05f5658b8a917a4e8e5e68c469d2d65, type: 2}
   m_CullingMode: 0
