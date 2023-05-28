@@ -84,10 +84,18 @@ public class Controller : MonoBehaviour
     //Skin
     [SerializeField] SpriteRenderer playerSkin;
 
+    public bool mainMenu = false;
+
     private void OnBecameInvisible() //kill doodler
     {
         achievementManager.UnlockAchievement(Achievements._Die);
         //když Doodler není vidìt, znièí se a naète se znovu scéna hry
+
+        if (mainMenu==true)
+        {
+            SceneManager.LoadScene("MainMenuScreen");
+            return;
+        }
         Destroy(Doodler);
         SceneManager.LoadScene("MainGameScene");
 
@@ -99,6 +107,8 @@ public class Controller : MonoBehaviour
     //update score
     void Start()
     {
+        
+
         rb = GetComponent<Rigidbody2D>();
 
         ChangePlayerSkin();
