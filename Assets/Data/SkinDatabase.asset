@@ -20,8 +20,4 @@ MonoBehaviour:
   - image: {fileID: 21300000, guid: 3021a151f14df1849ac22d16509e412f, type: 3}
     name: BeeDawg
     price: 5
-    isPurchased: 1
-  - image: {fileID: 21300000, guid: 5d52b20f865aff242bfcb08c3b6f61a5, type: 3}
-    name: huhskin
-    price: 555
     isPurchased: 0
