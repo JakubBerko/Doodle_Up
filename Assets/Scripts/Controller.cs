@@ -84,6 +84,7 @@ public class Controller : MonoBehaviour
     //Skin
     [SerializeField] SpriteRenderer playerSkin;
 
+    //Pause
     public bool mainMenu = false;
 
     private void OnBecameInvisible() //kill doodler
