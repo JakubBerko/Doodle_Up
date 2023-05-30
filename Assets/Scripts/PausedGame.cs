@@ -35,6 +35,7 @@ public class PausedGame : MonoBehaviour
         shootingController.isPaused = false;
         controller.mainMenu = true;
         SceneManager.LoadScene("MainMenuScreen"); //naète novou scénu
+        //SceneManager.LoadScene("MainMenuScreen", LoadSceneMode.Single); //force? - nefunguje
     }
     
 }

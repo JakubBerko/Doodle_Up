@@ -3230,7 +3230,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefabs:
-  - {fileID: 9146681743404018180, guid: 87f0d3eda1271784eaa203c45c8e27ce, type: 3}
+  - {fileID: 5269864528579768921, guid: 50d17025a0663dd48bb1f29eac0c3d55, type: 3}
   - {fileID: 1929800858021485192, guid: 76d522cbee2ef1341b5f918649f63d57, type: 3}
   - {fileID: 839140379516161495, guid: c703ac19b51329f4aab3a18b53daacd2, type: 3}
   - {fileID: 9146681743404018180, guid: 87f0d3eda1271784eaa203c45c8e27ce, type: 3}
@@ -4566,6 +4566,7 @@ MonoBehaviour:
   coinText: {fileID: 457818910}
   achievementManager: {fileID: 1492171357}
   playerSkin: {fileID: 2111382616}
+  mainMenu: 0
 --- !u!95 &2111382620
 Animator:
   serializedVersion: 4
