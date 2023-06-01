@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,23 +8,6 @@ using UnityEditor;
 using System.Linq;
 //using UnityEngine;
 //using UnityEngine.UI;
-
-//public class PowerUpController : MonoBehaviour
-//{
-//    public float powerUpTimeLeft = 5f;
-//    public Text powerUpTimeText;
-
-//    void Update()
-//    {
-//        powerUpTimeLeft -= Time.deltaTime;
-//        if (powerUpTimeLeft <= 0f)
-//        {
-//            // Power up vypršel
-//            Destroy(gameObject);
-//        }
-//        powerUpTimeText.text = string.Format("{0:0.00}", powerUpTimeLeft);
-//    }
-//}
 
 public class Controller : MonoBehaviour
 {
@@ -49,12 +32,8 @@ public class Controller : MonoBehaviour
 
     //shrink on distance
     public GameObject[] shrinkingPlatforms;
-    public float shrinkAmount = 0.5f; // jak moc se platforma bude zmenšovat
-    private float distance;
-    private GameObject platform;
-    private float radius;
-    [SerializeField] GameObject shrinkPlatform;
-    private float shrink;
+    [SerializeField] float shrinkDistance = 10; // vzdÃ¡lenost od kterÃ© se platforma zaÃ¨ne zmenÅ¡ovat
+    [SerializeField] float shrinkAmount = 0.8f; // jak moc se platforma bude zmenÅ¡ovat
 
     //holographic platform
     public GameObject[] holographicPlatforms;
@@ -90,7 +69,7 @@ public class Controller : MonoBehaviour
     private void OnBecameInvisible() //kill doodler
     {
         achievementManager.UnlockAchievement(Achievements._Die);
-        //kdy Doodler není vidìt, znièí se a naète se znovu scéna hry
+        //kdyÅ¾ Doodler nenÃ­ vidÄ›t, zniÄÃ­ se a naÄte se znovu scÃ©na hry
 
         if (mainMenu==true)
         {
@@ -108,14 +87,12 @@ public class Controller : MonoBehaviour
     //update score
     void Start()
     {
-        
-
         rb = GetComponent<Rigidbody2D>();
 
         ChangePlayerSkin();
 
         //score, highscore
-        //naètení uloeného highscore do promìnné a poté textu
+        //naÄtenÃ­ uloÅ¾enÃ©ho highscore do promÄ›nnÃ© a potÃ© textu
         rb = GetComponent<Rigidbody2D>();
         float highScore = PlayerPrefs.GetFloat("highScore");
         Highscore.text = "BEST:" + highScore.ToString();
@@ -131,11 +108,12 @@ public class Controller : MonoBehaviour
         //coins
         coinAmount = 0;
         //shrinkOnPlatform
-        radius = 1;
     }
 
     void Update()
     {
+        Debug.Log(shrinkingPlatforms.Length);
+
         UpdateScore();
 
         // Ghost platform script
@@ -144,7 +122,7 @@ public class Controller : MonoBehaviour
 
         //shrink on distance
         shrinkingPlatforms = GameObject.FindGameObjectsWithTag("ShrinkOnDistancePlatform");
-        //ShrinkPlatforms();
+        ShrinkPlatforms();
 
         //holographic platform
         holographicPlatforms = GameObject.FindGameObjectsWithTag("HolographicPlatform");
@@ -164,18 +142,18 @@ public class Controller : MonoBehaviour
     }
     void UpdateScore()
     {
-        //pokud se hráè pohybuje smìrem nahoru a zároveò pozice na y je vìtsí ne aktuální skoré, tak se pøepíše skóre podle pozice
+        //pokud se hrÃ¡Ä pohybuje smÄ›rem nahoru a zÃ¡roveÅˆ pozice na y je vÄ›tsÃ­ neÅ¾ aktuÃ¡lnÃ­ skorÃ©, tak se pÅ™epÃ­Å¡e skÃ³re podle pozice
         if (rb.velocity.y > 0 && transform.position.y > maxScore)
         {
             maxScore = transform.position.y;
         }
-        //pøevod floatu na zaokrouhlenı string, kvúli textu v UI
+        //pÅ™evod floatu na zaokrouhlenÃ½ string, kvÃºli textu v UI
         score.text = Mathf.Round(maxScore).ToString();
         
     }
     void SaveRunInfo()
     {
-        //naètení highscore a pøepsání pokud hráè dosáhl vìtšího skóre ne je highscore
+        //naÄtenÃ­ highscore a pÅ™epsÃ¡nÃ­ pokud hrÃ¡Ä dosÃ¡hl vÄ›tÅ¡Ã­ho skÃ³re neÅ¾ je highscore
         float highScore = PlayerPrefs.GetFloat("highScore");
         if (maxScore > highScore)
         {
@@ -183,14 +161,14 @@ public class Controller : MonoBehaviour
             PlayerPrefs.Save();
             Debug.Log("saved highscore!");
         }
-        //uloení coinù do PlayerPrefs
+        //uloÅ¾enÃ­ coinÅ¯ do PlayerPrefs
         float coins = PlayerPrefs.GetFloat("coins");
         coins += coinAmount;
         PlayerPrefs.SetFloat("coins",coins);
     }
 
-    void IsPlayerInAir() //shrink on distance //pokud je hráè ve vzduchu, tak se pousouvá nahoru, a po 5 vteøinách se zmìní sprite, vyresetuje èas ve vzduchu a lehce vyskoèí
-                         //(to jsem pøidal kvùli zlehèení a menšímu pøekvapení z toho e hráè padá dolu) a hráè není ve vzduchu (isInAir = false;)
+    void IsPlayerInAir() //shrink on distance //pokud je hrÃ¡Ä ve vzduchu, tak se pousouvÃ¡ nahoru, a po 5 vteÅ™inÃ¡ch se zmÄ›nÃ­ sprite, vyresetuje Äas ve vzduchu a lehce vyskoÄÃ­
+                         //(to jsem pÅ™idal kvÅ¯li zlehÄenÃ­ a menÅ¡Ã­mu pÅ™ekvapenÃ­ z toho Å¾e hrÃ¡Ä padÃ¡ dolu) a hrÃ¡Ä nenÃ­ ve vzduchu (isInAir = false;)
     {
         if (isInAir)
         {
@@ -234,7 +212,7 @@ public class Controller : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        //Ghost platform script //po dotknutí platformy se hráèovi zmìní bool isInAir
+        //Ghost platform script //po dotknutÃ­ platformy se hrÃ¡Äovi zmÄ›nÃ­ bool isInAir
         for (int i = 0; i < ghostPlatforms.Length; i++)
         {
             if (collision.gameObject == ghostPlatforms[i] && collision.relativeVelocity.y >= 0f)
@@ -244,7 +222,7 @@ public class Controller : MonoBehaviour
             }
         }
 
-        //destroyer platforms //po dotknutí platformy se aktivuje skript a znièí platforma, na kterou skoèil (aby hráè nemohl nièt platformy vícekrát)
+        //destroyer platforms //po dotknutÃ­ platformy se aktivuje skript a zniÄÃ­ platforma, na kterou skoÄil (aby hrÃ¡Ä nemohl niÄt platformy vÃ­cekrÃ¡t)
         for (int u = 0; u < destroyerPlatforms.Length; u++)
         {
             if (collision.gameObject == destroyerPlatforms[u] && collision.relativeVelocity.y >= 0f)
@@ -255,19 +233,9 @@ public class Controller : MonoBehaviour
         }
     }
 
-    private void OnCollisionStay2D(Collision2D collision)
-    {
-        platform = collision.gameObject;
-        if (platform.tag != "ShrinkOnDistancePlatform") return;
-        distance = (platform.transform.position - transform.position).magnitude;
-        if (distance > radius) return;
-        shrink = (1 - distance / radius) * shrinkAmount;
-        platform.transform.localScale -= new Vector3(shrink, shrink, shrink);
-    }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        //holographic platform //(zde jsem pouil on trigger, jeliko pøes OnCollisionEnter se hráè zasekl o platformu) pokud hráè projde platformou, tak se znièí objekt platformy
+        //holographic platform //(zde jsem pouÅ¾il on trigger, jelikoÅ¾ pÅ™es OnCollisionEnter se hrÃ¡Ä zasekl o platformu) pokud hrÃ¡Ä projde platformou, tak se zniÄÃ­ objekt platformy
         Vector2 playerVelocity = rb.velocity;
         for (int x = 0; x < holographicPlatforms.Length; x++)
         {
@@ -302,29 +270,29 @@ public class Controller : MonoBehaviour
         }
     }
 
-    //void ShrinkPlatforms() //shrink on distance 
-    //{
-    //    for (int j = 0; j <shrinkingPlatforms.Length; j++)
-    //    {
-    //        float distance = Vector3.Distance(transform.position,shrinkingPlatforms[j].transform.position); //vzdálenost hráèe od platformy
+    void ShrinkPlatforms() //shrink on distance 
+    {
+        for (int j = 0; j < shrinkingPlatforms.Length; j++)
+        {
+            float distance = Vector3.Distance(transform.position, shrinkingPlatforms[j].transform.position); //vzdÃ¡lenost hrÃ¡Äe od platformy
 
-    //        if (distance < shrinkDistance)
-    //        {
-    //            //spoèítá shrinkElementu (o kolik se zmensi)
-    //            float shrinkElement = 1 - (distance / shrinkDistance) * shrinkAmount;
+            if (distance < shrinkDistance)
+            {
+                //spoÄÃ­tÃ¡ shrinkElementu (o kolik se zmensi)
+                float shrinkElement = 0.8f + ((distance / shrinkDistance) * shrinkAmount);
 
-    //            //zmenší objekt shrinkfaktorem vynásobením normálního vektoru tím zmenšením,,
-    //            shrinkingPlatforms[j].transform.localScale = Vector3.one * shrinkElement;
-    //        }
-    //    }
-    //}
+                //zmenÅ¡Ã­ objekt shrinkfaktorem vynÃ¡sobenÃ­m normÃ¡lnÃ­ho vektoru tÃ­m zmenÅ¡enÃ­m
+                shrinkingPlatforms[j].transform.localScale = Vector3.one * shrinkElement;
+            }
+        }
+    }
 
-    void DestroyerPlatform() //najde všechny spawnuté platformy na obrazovce (jeliko platformy se spawnují tìsnì nad limitem obrazovky) a rozpùlí ho
+    void DestroyerPlatform() //najde vÅ¡echny spawnutÃ© platformy na obrazovce (jelikoÅ¾ platformy se spawnujÃ­ tÄ›snÄ› nad limitem obrazovky) a rozpÅ¯lÃ­ ho
     {
         platformsToBeDestroyed = GameObject.FindObjectsOfType<GameObject>();
         int numberOfObjectsToDestroy = platformsToBeDestroyed.Length / 2;
 
-        // zamíchání pole Fisher-Yates shuffle algoritmem ((VELMI zajímavı algoritmus!), kvùli tomu, e platformy jsou v poli od vrchu obrazovky dolu)
+        // zamÃ­chÃ¡nÃ­ pole Fisher-Yates shuffle algoritmem ((VELMI zajÃ­mavÃ½ algoritmus!), kvÅ¯li tomu, Å¾e platformy jsou v poli od vrchu obrazovky dolu)
         for (int i = platformsToBeDestroyed.Length - 1; i > 0; i--)
         {
             int randomIndex = Random.Range(0, i + 1);
@@ -333,7 +301,7 @@ public class Controller : MonoBehaviour
             platformsToBeDestroyed[randomIndex] = temp;
         }
 
-        for (int i = 0; i < numberOfObjectsToDestroy; i++) // zde se smaou všechny objekty s komponentem (prázdnı skript Platform_Tag), je to kvùli oddìlení platform od ostatních gameobjektù, jak je napø. hráè, nepøátelé
+        for (int i = 0; i < numberOfObjectsToDestroy; i++) // zde se smaÅ¾ou vÅ¡echny objekty s komponentem (prÃ¡zdnÃ½ skript Platform_Tag), je to kvÅ¯li oddÄ›lenÃ­ platform od ostatnÃ­ch gameobjektÅ¯, jak je napÅ™. hrÃ¡Ä, nepÅ™Ã¡telÃ©
         {
             if (platformsToBeDestroyed[i].GetComponent<Platform_tag>() != null)
             {

@@ -47,7 +47,6 @@ GameObject:
   - component: {fileID: -8147602849928984508}
   - component: {fileID: 1523135773100761086}
   - component: {fileID: -7923092997215110980}
-  - component: {fileID: 339827139604311320}
   m_Layer: 8
   m_Name: shrinkOnDistance_platform
   m_TagString: ShrinkOnDistancePlatform
@@ -233,19 +232,3 @@ MonoBehaviour:
   - {fileID: 8697452975249945096, guid: 0faa3c24829c0d942bb1f34fdb825bc4, type: 3}
   - {fileID: 9062458455220841938}
   - {fileID: 5200034386306751694, guid: c08ffc08686730444b15eddf67f4380c, type: 3}
---- !u!58 &339827139604311320
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9062458455220841938}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 2

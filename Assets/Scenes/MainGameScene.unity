@@ -4554,8 +4554,8 @@ MonoBehaviour:
   Highscore: {fileID: 1266296403}
   Doodler: {fileID: 2111382612}
   shrinkingPlatforms: []
+  shrinkDistance: 10
   shrinkAmount: 0.5
-  shrinkPlatform: {fileID: 9062458455220841938, guid: 51e7056cef62aef47951e233c47fddd1, type: 3}
   holographicPlatforms: []
   platformsToBeDestroyed: []
   destroyerPlatforms: []
