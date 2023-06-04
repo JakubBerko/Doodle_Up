@@ -4,7 +4,7 @@ public class ShrinkOnDistance : MonoBehaviour
 
     //POZN.: mìl by být pøesunut v conroleru
 {
-    public GameObject player; 
+    private GameObject player; 
     public float shrinkDistance = 10; // vzdálenost od které se platforma zaène zmenšovat
     public float shrinkAmount = 0.5f; // jak moc se platforma bude zmenšovat
 

@@ -47,6 +47,7 @@ GameObject:
   - component: {fileID: -8147602849928984508}
   - component: {fileID: 1523135773100761086}
   - component: {fileID: -7923092997215110980}
+  - component: {fileID: 1070817526413153364}
   m_Layer: 8
   m_Name: shrinkOnDistance_platform
   m_TagString: ShrinkOnDistancePlatform
@@ -232,3 +233,17 @@ MonoBehaviour:
   - {fileID: 8697452975249945096, guid: 0faa3c24829c0d942bb1f34fdb825bc4, type: 3}
   - {fileID: 9062458455220841938}
   - {fileID: 5200034386306751694, guid: c08ffc08686730444b15eddf67f4380c, type: 3}
+--- !u!114 &1070817526413153364
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9062458455220841938}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a5ccae3e23943d4c9911eb7bda6e9e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shrinkDistance: 10
+  shrinkAmount: 0.5

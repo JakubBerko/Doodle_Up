@@ -112,7 +112,6 @@ public class Controller : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(shrinkingPlatforms.Length);
 
         UpdateScore();
 
@@ -121,8 +120,8 @@ public class Controller : MonoBehaviour
         IsPlayerInAir();
 
         //shrink on distance
-        shrinkingPlatforms = GameObject.FindGameObjectsWithTag("ShrinkOnDistancePlatform");
-        ShrinkPlatforms();
+        //shrinkingPlatforms = GameObject.FindGameObjectsWithTag("ShrinkOnDistancePlatform");
+        //ShrinkPlatforms();
 
         //holographic platform
         holographicPlatforms = GameObject.FindGameObjectsWithTag("HolographicPlatform");

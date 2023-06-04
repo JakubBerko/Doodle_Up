@@ -17,7 +17,7 @@ MonoBehaviour:
     name: Doggie
     price: 0
     isPurchased: 1
-  - image: {fileID: 21300000, guid: c79e3121d0adc2941bf617ba3479c0d5, type: 3}
+  - image: {fileID: 21300000, guid: 7a6ed3bc398f22c479be76d60bab97af, type: 3}
     name: new_skin
     price: 5
     isPurchased: 0
