@@ -5,7 +5,7 @@ using UnityEngine;
 public class shrinkingPlatform : MonoBehaviour
 {
     public float shrinkDistance = 10f; // Vzdálenost, ve které se platforma zaène zmenšovat
-    public float shrinkAmount = 0.5f; // Hodnota, o kterou se platforma zmenší
+    public float shrinkAmount = 1f; // Hodnota, o kterou se platforma zmenší
 
     private Transform playerTransform;
 
@@ -16,11 +16,11 @@ public class shrinkingPlatform : MonoBehaviour
 
     private void Update()
     {
-        float distance = Vector3.Distance(transform.position, playerTransform.position); // Vzdálenost hráèe od platformy
+        float distance = Vector2.Distance(transform.position, playerTransform.position); // Vzdálenost hráèe od platformy
 
         if (distance < shrinkDistance)
         {
-            float shrinkElement = 1f - (distance / shrinkDistance) * shrinkAmount; // Výpoèet faktoru zmenšení
+            float shrinkElement = 0.85f + (distance / shrinkDistance) * shrinkAmount; // Výpoèet faktoru zmenšení
 
             // Zmenšení platformy
             transform.localScale = Vector3.one * shrinkElement;
