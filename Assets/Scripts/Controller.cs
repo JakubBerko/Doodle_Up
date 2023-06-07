@@ -6,8 +6,6 @@ using UnityEngine.SceneManagement;
 using TMPro;
 using UnityEditor;
 using System.Linq;
-//using UnityEngine;
-//using UnityEngine.UI;
 
 public class Controller : MonoBehaviour
 {
@@ -29,11 +27,6 @@ public class Controller : MonoBehaviour
     private float timeInAir = 0.0f;
     private bool isInAir = false;
     private float vel = 9;
-
-    //shrink on distance
-    public GameObject[] shrinkingPlatforms;
-    [SerializeField] float shrinkDistance = 10; // vzdálenost od které se platforma zaène zmenšovat
-    [SerializeField] float shrinkAmount = 0.8f; // jak moc se platforma bude zmenšovat
 
     //holographic platform
     public GameObject[] holographicPlatforms;
@@ -63,21 +56,13 @@ public class Controller : MonoBehaviour
     //Skin
     [SerializeField] SpriteRenderer playerSkin;
 
-    //Pause
-    public bool mainMenu = false;
-
     private void OnBecameInvisible() //kill doodler
     {
         achievementManager.UnlockAchievement(Achievements._Die);
         //když Doodler není vidět, zničí se a načte se znovu scéna hry
 
-        if (mainMenu==true)
-        {
-            SceneManager.LoadScene("MainMenuScreen");
-            return;
-        }
         Destroy(Doodler);
-        SceneManager.LoadScene("MainGameScene");
+        SceneManager.LoadScene("MainMenuScreen");
 
     }
     private void OnDestroy()
@@ -107,7 +92,6 @@ public class Controller : MonoBehaviour
         powerUpTimeImg.enabled = false;
         //coins
         coinAmount = 0;
-        //shrinkOnPlatform
     }
 
     void Update()
@@ -118,10 +102,6 @@ public class Controller : MonoBehaviour
         // Ghost platform script
         ghostPlatforms = GameObject.FindGameObjectsWithTag("GhostPlatform");
         IsPlayerInAir();
-
-        //shrink on distance
-        //shrinkingPlatforms = GameObject.FindGameObjectsWithTag("ShrinkOnDistancePlatform");
-        //ShrinkPlatforms();
 
         //holographic platform
         holographicPlatforms = GameObject.FindGameObjectsWithTag("HolographicPlatform");
@@ -266,23 +246,6 @@ public class Controller : MonoBehaviour
             Destroy(collision.gameObject);
             coinAmount++;
             coinText.text = coinAmount.ToString();
-        }
-    }
-
-    void ShrinkPlatforms() //shrink on distance 
-    {
-        for (int j = 0; j < shrinkingPlatforms.Length; j++)
-        {
-            float distance = Vector3.Distance(transform.position, shrinkingPlatforms[j].transform.position); //vzdálenost hráče od platformy
-
-            if (distance < shrinkDistance)
-            {
-                //spočítá shrinkElementu (o kolik se zmensi)
-                float shrinkElement = 0.8f + ((distance / shrinkDistance) * shrinkAmount);
-
-                //zmenší objekt shrinkfaktorem vynásobením normálního vektoru tím zmenšením
-                shrinkingPlatforms[j].transform.localScale = Vector3.one * shrinkElement;
-            }
         }
     }
 

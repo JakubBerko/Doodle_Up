@@ -7,11 +7,9 @@ public class PausedGame : MonoBehaviour
 {
     [SerializeField] GameObject pausedGame;
     private ShootingController shootingController;
-    private Controller controller;
     private void Start()
     {
         shootingController = GameObject.Find("GameManager").GetComponent<ShootingController>();
-        controller = GameObject.Find("GameManager").GetComponent<Controller>();
     }
     public void StopGame()
     {
@@ -33,9 +31,7 @@ public class PausedGame : MonoBehaviour
         pausedGame.SetActive(false); //schová UI pausedGame
         Time.timeScale = 1f; //nastaví èas na 1
         shootingController.isPaused = false;
-        controller.mainMenu = true;
         SceneManager.LoadScene("MainMenuScreen"); //naète novou scénu
-        //SceneManager.LoadScene("MainMenuScreen", LoadSceneMode.Single); //force? - nefunguje
     }
     
 }
