@@ -11,7 +11,7 @@ public class shrinkingPlatform : MonoBehaviour
 
     private void Awake()
     {
-        playerTransform = GameObject.FindGameObjectWithTag("Doodler").transform;
+        playerTransform = GameObject.FindGameObjectWithTag("Doodler").transform; // nalezení hráèe
     }
 
     private void Update()
@@ -22,8 +22,7 @@ public class shrinkingPlatform : MonoBehaviour
         {
             float shrinkElement = 0.85f + (distance / shrinkDistance) * shrinkAmount; // Výpoèet faktoru zmenšení
 
-            // Zmenšení platformy
-            transform.localScale = Vector3.one * shrinkElement;
+            transform.localScale = Vector3.one * shrinkElement; // Zmenšení platformy
         }
     }
 }
