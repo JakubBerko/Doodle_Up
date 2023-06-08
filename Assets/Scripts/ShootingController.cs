@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class ShootingController : MonoBehaviour
 {
@@ -14,10 +15,14 @@ public class ShootingController : MonoBehaviour
         if (isPaused) return;
         if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
         {
+            if (EventSystem.current.IsPointerOverGameObject())
+            {
+                return;
+            }
+            else 
+            { 
             Shoot();
-            animator.SetTrigger("A_shoot");
-            //animator.ResetTrigger("A_shoot");
-            achievementManager.UnlockAchievement(Achievements._Shoot);
+            }
         }
     }
 
@@ -26,6 +31,7 @@ public class ShootingController : MonoBehaviour
         GameObject salivaBullet = Instantiate(salivaBulletPrefab, bulletDirection.position + new Vector3(0, 0.5f, 0), bulletDirection.rotation);
         Rigidbody2D rb = salivaBullet.GetComponent<Rigidbody2D>();
         rb.AddForce(bulletDirection.up * 1000f);
+        animator.SetTrigger("A_shoot");
     }
     
 }

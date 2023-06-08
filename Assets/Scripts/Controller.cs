@@ -1,11 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
-using TMPro;
-using UnityEditor;
-using System.Linq;
 
 public class Controller : MonoBehaviour
 {
@@ -60,6 +55,7 @@ public class Controller : MonoBehaviour
     [SerializeField] GameObject deathMenuUI;
     [SerializeField] TMP_Text deathScore_text;
     [SerializeField] TMP_Text deathCoin_text;
+    [SerializeField] GameObject gameManager;
     //update score
     void Start()
     {
@@ -114,6 +110,8 @@ public class Controller : MonoBehaviour
     {
         achievementManager.UnlockAchievement(Achievements._Die);
         Doodler.SetActive(false);
+        gameManager.GetComponent<ShootingController>().enabled = false;
+        gameManager.GetComponent<GenerateMap>().enabled = false;
         Time.timeScale = 0f;
         deathScore_text.text = "Score: "+ Mathf.Round(maxScore).ToString();
         deathCoin_text.text = "Coins: "+ coinAmount.ToString();

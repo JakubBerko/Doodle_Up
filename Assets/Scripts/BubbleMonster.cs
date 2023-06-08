@@ -14,6 +14,13 @@ public class BubbleMonster : MonoBehaviour
 
     public TextMeshProUGUI coinText;
     private float coinAmount;
+
+    //handle Death
+    private Controller controller;
+    private void Start()
+    {
+        controller = GameObject.FindGameObjectWithTag("Doodler").GetComponent<Controller>();
+    }
     void Update()
     {
         if (wasOnScreen)
@@ -51,7 +58,7 @@ public class BubbleMonster : MonoBehaviour
         }
         else 
         {
-            Destroy(collision.gameObject);
+            controller.DeathHandler();
         }
     }
     //TODO:

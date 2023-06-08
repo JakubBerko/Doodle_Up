@@ -458,6 +458,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pausedGame: {fileID: 1076972896}
   deathMenu: {fileID: 0}
+  button: {fileID: 0}
 --- !u!114 &339082249
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5488,6 +5489,7 @@ MonoBehaviour:
   deathMenuUI: {fileID: 1634974093}
   deathScore_text: {fileID: 1880851816}
   deathCoin_text: {fileID: 1237463579}
+  gameManager: {fileID: 1492171353}
 --- !u!95 &2111382620
 Animator:
   serializedVersion: 4
