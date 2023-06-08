@@ -27,6 +27,7 @@ public class ShootingController : MonoBehaviour
         Rigidbody2D rb = salivaBullet.GetComponent<Rigidbody2D>();
         rb.AddForce(bulletDirection.up * 1000f);
     }
+    
 }
 
 

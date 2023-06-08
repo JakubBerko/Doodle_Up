@@ -56,19 +56,10 @@ public class Controller : MonoBehaviour
     //Skin
     [SerializeField] SpriteRenderer playerSkin;
 
-    private void OnBecameInvisible() //kill doodler
-    {
-        achievementManager.UnlockAchievement(Achievements._Die);
-        //když Doodler není vidět, zničí se a načte se znovu scéna hry
-
-        Destroy(Doodler);
-        SceneManager.LoadScene("MainMenuScreen");
-
-    }
-    private void OnDestroy()
-    {
-        SaveRunInfo();
-    }
+    //Death handler
+    [SerializeField] GameObject deathMenuUI;
+    [SerializeField] TMP_Text deathScore_text;
+    [SerializeField] TMP_Text deathCoin_text;
     //update score
     void Start()
     {
@@ -93,7 +84,6 @@ public class Controller : MonoBehaviour
         //coins
         coinAmount = 0;
     }
-
     void Update()
     {
 
@@ -118,6 +108,17 @@ public class Controller : MonoBehaviour
         animator.SetBool("A_isInv", isInvincible);
         animator.SetFloat("A_rbVel", rb.velocity.y);
         animator.SetBool("A_isInAir", isInAir);
+    }
+
+    public void DeathHandler()
+    {
+        achievementManager.UnlockAchievement(Achievements._Die);
+        Doodler.SetActive(false);
+        Time.timeScale = 0f;
+        deathScore_text.text = "Score: "+ Mathf.Round(maxScore).ToString();
+        deathCoin_text.text = "Coins: "+ coinAmount.ToString();
+        SaveRunInfo();
+        deathMenuUI.SetActive(true);
     }
     void UpdateScore()
     {

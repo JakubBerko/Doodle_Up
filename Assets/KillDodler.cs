@@ -6,16 +6,18 @@ using UnityEngine.SceneManagement;
 public class KillDodler : MonoBehaviour
 {
     private GameObject Doodler;
+    private Controller controller;
     // Start is called before the first frame update
     void Start()
     {
         Doodler = GameObject.FindGameObjectWithTag("Doodler");
+        controller = Doodler.GetComponent<Controller>();
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject == Doodler)
         {
-            SceneManager.LoadScene("MainMenuScreen"); //TODO HandleDeath() + vsude kde umre doodler !!!
+            controller.DeathHandler();
         }
     }
 }

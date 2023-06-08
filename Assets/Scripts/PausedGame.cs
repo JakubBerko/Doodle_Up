@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class PausedGame : MonoBehaviour
 {
     [SerializeField] GameObject pausedGame;
+    public GameObject deathMenu;
     private ShootingController shootingController;
     private void Start()
     {
@@ -16,8 +17,6 @@ public class PausedGame : MonoBehaviour
         pausedGame.SetActive(true); //zobrazí UI pausedGame
         Time.timeScale = 0f; //nastaví èas na 0
         shootingController.isPaused = true;
-
-
     }
     public void ResumeGame()
     {
@@ -27,11 +26,19 @@ public class PausedGame : MonoBehaviour
     }
     public void ReturnToMainMenu()
     {
-        //TODO (NEFUNKÈNÍ - PRODISKUTOVAT S VEDOUCÍM PROJEKTU)
+        deathMenu = GameObject.Find("DeathMenu");
         pausedGame.SetActive(false); //schová UI pausedGame
         Time.timeScale = 1f; //nastaví èas na 1
         shootingController.isPaused = false;
         SceneManager.LoadScene("MainMenuScreen"); //naète novou scénu
+    }
+    public void Retry()
+    {
+        deathMenu = GameObject.Find("DeathMenu");
+        deathMenu.SetActive(false);
+        Time.timeScale = 1f;
+        shootingController.isPaused = false;
+        SceneManager.LoadScene("MainGameScene");
     }
     
 }

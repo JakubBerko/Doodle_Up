@@ -20,9 +20,13 @@ public class VirusEnemies : MonoBehaviour
     public TextMeshProUGUI coinText;
     private float coinAmount;
 
+    //DeathHandler
+    private Controller controller;
+
     void Start()
     {
         animator = GameObject.Find("Doodler").GetComponent<Animator>();
+        controller = GameObject.FindGameObjectWithTag("Doodler").GetComponent<Controller>();
 
         startPos = transform.position;
         endPos = startPos + new Vector3(distance, 0, 0);
@@ -35,8 +39,6 @@ public class VirusEnemies : MonoBehaviour
             float pingPongValue = Mathf.PingPong(Time.time * speed, distance);
             transform.position = startPos + new Vector3(pingPongValue, 0, 0);
         }
-        
-
     }
     public void OnBecameVisible()
     {
@@ -46,9 +48,8 @@ public class VirusEnemies : MonoBehaviour
     {
         if (collision.relativeVelocity.y <= 0f && collision.gameObject.tag == "Doodler")
         {
+            animator.SetTrigger("A_kill");
             Destroy(gameObject);
-            coinAmount++;
-            coinText.text = coinAmount.ToString();
         }
         else if (collision.gameObject.tag == "SalivaBullet")
         {
@@ -58,8 +59,7 @@ public class VirusEnemies : MonoBehaviour
         }
         else
         {
-            Destroy(collision.gameObject);
-            animator.SetTrigger("A_kill");
+            controller.DeathHandler();
         }
     }
 }
