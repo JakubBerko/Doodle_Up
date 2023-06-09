@@ -56,6 +56,7 @@ public class Controller : MonoBehaviour
     [SerializeField] TMP_Text deathScore_text;
     [SerializeField] TMP_Text deathCoin_text;
     [SerializeField] GameObject gameManager;
+    [SerializeField] Button pauseButton;
     //update score
     void Start()
     {
@@ -108,6 +109,7 @@ public class Controller : MonoBehaviour
 
     public void DeathHandler()
     {
+        pauseButton.enabled = false;
         achievementManager.UnlockAchievement(Achievements._Die);
         Doodler.SetActive(false);
         gameManager.GetComponent<ShootingController>().enabled = false;

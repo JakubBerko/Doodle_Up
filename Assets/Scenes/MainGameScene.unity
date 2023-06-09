@@ -458,7 +458,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pausedGame: {fileID: 1076972896}
   deathMenu: {fileID: 0}
-  button: {fileID: 0}
 --- !u!114 &339082249
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3509,7 +3508,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
-  m_SortingLayerID: 0
+  m_SortingLayerID: -1420172087
   m_SortingOrder: 3
   m_TargetDisplay: 0
 --- !u!224 &1360730801
@@ -5432,8 +5431,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1744654359
+  m_SortingLayer: 1
   m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: 7a6ed3bc398f22c479be76d60bab97af, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -5490,6 +5489,7 @@ MonoBehaviour:
   deathScore_text: {fileID: 1880851816}
   deathCoin_text: {fileID: 1237463579}
   gameManager: {fileID: 1492171353}
+  pauseButton: {fileID: 339082249}
 --- !u!95 &2111382620
 Animator:
   serializedVersion: 4
