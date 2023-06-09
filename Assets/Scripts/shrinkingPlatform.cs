@@ -20,7 +20,7 @@ public class shrinkingPlatform : MonoBehaviour
 
         if (distance < shrinkDistance)
         {
-            float shrinkElement = 0.85f + (distance / shrinkDistance) * shrinkAmount; // Výpoèet faktoru zmenšení
+            float shrinkElement = 0.75f + (distance / shrinkDistance) * shrinkAmount; // Výpoèet faktoru zmenšení
 
             transform.localScale = Vector3.one * shrinkElement; // Zmenšení platformy
         }
