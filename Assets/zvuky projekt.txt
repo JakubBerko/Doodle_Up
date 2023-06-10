@@ -1,10 +1,7 @@
-monster kill
 death sound
 jump sound
-achievement sound
 
-hotovo: 
-holographic platform sound (phase through)
+hotovo:
 
 hotovo v projektu:
 shoot
