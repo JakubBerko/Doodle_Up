@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class BubbleMonster : MonoBehaviour
@@ -11,6 +12,15 @@ public class BubbleMonster : MonoBehaviour
 
     private bool wasOnScreen;
 
+    public TextMeshProUGUI coinText;
+    private float coinAmount;
+
+    //handle Death
+    private Controller controller;
+    private void Start()
+    {
+        controller = GameObject.FindGameObjectWithTag("Doodler").GetComponent<Controller>();
+    }
     void Update()
     {
         if (wasOnScreen)
@@ -37,7 +47,7 @@ public class BubbleMonster : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.relativeVelocity.y <= 0f && collision.gameObject.tag == "Doodler")
+        if (collision.relativeVelocity.y <= 0f && collision.gameObject.tag == "Doodler" || collision.relativeVelocity.y <= 0f && collision.gameObject.tag == "Doodler" && collision.gameObject.layer == 9)
         {
             Destroy(gameObject);
         }
@@ -48,9 +58,17 @@ public class BubbleMonster : MonoBehaviour
         }
         else 
         {
-            Destroy(collision.gameObject);
+            controller.DeathHandler();
         }
-
-        
     }
+    //TODO:
+    /*
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Doodler" && collision.gameObject.layer == 9)
+        {
+            Destroy(gameObject);
+        }
+    }
+    */
 }

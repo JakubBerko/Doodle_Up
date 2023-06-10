@@ -2,32 +2,44 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PausedGame : MonoBehaviour
 {
     [SerializeField] GameObject pausedGame;
-    private bool isPaused = false;
+    public GameObject deathMenu;
+    private ShootingController shootingController;
+    private void Start()
+    {
+        shootingController = GameObject.Find("GameManager").GetComponent<ShootingController>();
+    }
     public void StopGame()
     {
         pausedGame.SetActive(true); //zobrazí UI pausedGame
         Time.timeScale = 0f; //nastaví èas na 0
-        isPaused = true;
-
+        shootingController.isPaused = true;
     }
     public void ResumeGame()
     {
         pausedGame.SetActive(false); //schová UI pausedGame
         Time.timeScale = 1f; //nastaví èas na 1
-        isPaused = false;
+        shootingController.isPaused = false;
     }
     public void ReturnToMainMenu()
     {
-        //TODO (NEFUNKÈNÍ - PRODISKUTOVAT S VEDOUCÍM PROJEKTU)
-        
-        SceneManager.LoadScene("MainGameScene"); //naète novou scénu
+        deathMenu = GameObject.Find("DeathMenu");
         pausedGame.SetActive(false); //schová UI pausedGame
         Time.timeScale = 1f; //nastaví èas na 1
-        //Debug.Log("working");
-        
+        shootingController.isPaused = false;
+        SceneManager.LoadScene("MainMenuScreen"); //naète novou scénu
     }
+    public void Retry()
+    {
+        deathMenu = GameObject.Find("DeathMenu");
+        deathMenu.SetActive(false);
+        Time.timeScale = 1f;
+        shootingController.isPaused = false;
+        SceneManager.LoadScene("MainGameScene");
+    }
+    
 }

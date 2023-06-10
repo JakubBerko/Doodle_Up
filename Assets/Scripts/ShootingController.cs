@@ -1,24 +1,34 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class ShootingController : MonoBehaviour
 {
     public GameObject salivaBulletPrefab;
     public Transform bulletDirection;
-    private bool isPaused;
+    public Animator animator;
+    public bool isPaused = false;
+    public AchievementManager achievementManager;
+    private Controller controller;
 
-    
+    private void Awake()
+    {
+        controller = GameObject.FindGameObjectWithTag("Doodler").GetComponent<Controller>();
+    }
     void Update()
     {
-        if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
+        if (isPaused) return;
+        if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began && !controller.isInAir)
         {
+            if (EventSystem.current.IsPointerOverGameObject())
+            {
+                return;
+            }
+            else 
+            { 
             Shoot();
-        }
-
-        if (isPaused)
-        {
-            return;
+            }
         }
     }
 
@@ -27,7 +37,10 @@ public class ShootingController : MonoBehaviour
         GameObject salivaBullet = Instantiate(salivaBulletPrefab, bulletDirection.position + new Vector3(0, 0.5f, 0), bulletDirection.rotation);
         Rigidbody2D rb = salivaBullet.GetComponent<Rigidbody2D>();
         rb.AddForce(bulletDirection.up * 1000f);
+        animator.SetTrigger("A_shoot");
+        achievementManager.UnlockAchievement(Achievements._Shoot);
     }
+    
 }
 
 

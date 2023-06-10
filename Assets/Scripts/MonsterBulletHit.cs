@@ -5,6 +5,11 @@ using UnityEngine;
 public class MonsterBulletHit : MonoBehaviour
 {
     private GameObject[] bubbleBullets;
+    private Controller controller;
+    private void Awake()
+    {
+        controller = GameObject.FindGameObjectWithTag("Doodler").GetComponent<Controller>();
+    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         bubbleBullets = GameObject.FindGameObjectsWithTag("BubbleBullet");
@@ -12,7 +17,7 @@ public class MonsterBulletHit : MonoBehaviour
         {
             if (collision.gameObject.tag == "Doodler")
             {
-                Destroy(collision.gameObject);
+                controller.DeathHandler();
             }
             if (collision.gameObject.tag == "SalivaBullet")
             {

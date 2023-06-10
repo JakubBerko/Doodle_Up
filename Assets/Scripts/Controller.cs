@@ -1,10 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
+Ôªøusing TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using TMPro;
-using UnityEditor;
-using System.Linq;
+using UnityEngine.UI;
 
 public class Controller : MonoBehaviour
 {
@@ -24,13 +20,8 @@ public class Controller : MonoBehaviour
     private float flyingSpeed = 5f;
     private float flyingDuration = 5f;
     private float timeInAir = 0.0f;
-    private bool isInAir = false;
+    public bool isInAir = false;
     private float vel = 9;
-
-    //shrink on distance
-    public GameObject[] shrinkingPlatforms;
-    public float shrinkDistance = 10; // vzd·lenost od kterÈ se platforma zaËne zmenöovat
-    public float shrinkAmount = 0.5f; // jak moc se platforma bude zmenöovat
 
     //holographic platform
     public GameObject[] holographicPlatforms;
@@ -39,69 +30,113 @@ public class Controller : MonoBehaviour
     public GameObject[] platformsToBeDestroyed;
     public GameObject[] destroyerPlatforms;
 
-    private void OnBecameInvisible() //kill doodler
-    {
-        //kdyû Doodler nenÌ vidÏt, zniËÌ se a naËte se znovu scÈna hry
-        Destroy(Doodler);
-        SceneManager.LoadScene("MainGameScene");
-    }
-    private void OnDestroy()
-    {
-        SaveHighScore();
-    }
+    //PowerUp
+    public GameObject[] invincibilityPowerUps;
+    private float timeInvincible = 0.0f;
+    private bool isInvincible = false;
+    private float invincibilityDuration = 5f;
+    public TextMeshProUGUI powerUpTimeText;
+    public Image powerUpTimeImg;
+
+    //Animator
+    public Animator animator;
+
+    //Coins
+    public TextMeshProUGUI coinText;
+    private float coinAmount;
+
+    //Achievements
+    public AchievementManager achievementManager;
+
+    //Skin
+    [SerializeField] SpriteRenderer playerSkin;
+    [SerializeField] RuntimeAnimatorController animatorController;
+
+    //Death handler
+    [SerializeField] GameObject deathMenuUI;
+    [SerializeField] TMP_Text deathScore_text;
+    [SerializeField] TMP_Text deathCoin_text;
+    [SerializeField] GameObject gameManager;
+    [SerializeField] Button pauseButton;
     //update score
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
 
+        ChangePlayerSkin();
+
         //score, highscore
-        //naËtenÌ uloûenÈho highscore do promÏnnÈ a potÈ textu
+        //naƒçten√≠ ulo≈æen√©ho highscore do promƒõnn√© a pot√© textu
         rb = GetComponent<Rigidbody2D>();
         float highScore = PlayerPrefs.GetFloat("highScore");
         Highscore.text = "BEST:" + highScore.ToString();
 
         //ghost platform script
-        //ghostSprite = AssetDatabase.LoadAssetAtPath<Sprite>("Assets/Sprites/hutao_ghost.png");
-        //doodlerSprite = AssetDatabase.LoadAssetAtPath<Sprite>("Assets/Sprites/doggie-like-cropped.png");
         doodlerSprite = Resources.Load<Sprite>("doggie-like-cropped");
         ghostSprite = Resources.Load<Sprite>("hutao_ghost");
         playerSprite = GetComponent<SpriteRenderer>();
 
-        
+        //PowerUp
+        powerUpTimeText.enabled = false;
+        powerUpTimeImg.enabled = false;
+        //coins
+        coinAmount = 0;
+        //shop
+        Animator animator = GetComponent<Animator>();
     }
-
     void Update()
     {
+
         UpdateScore();
 
         // Ghost platform script
         ghostPlatforms = GameObject.FindGameObjectsWithTag("GhostPlatform");
         IsPlayerInAir();
 
-        //shrink on distance
-        shrinkingPlatforms = GameObject.FindGameObjectsWithTag("ShrinkOnDistancePlatform");
-        ShrinkPlatforms();
-
         //holographic platform
         holographicPlatforms = GameObject.FindGameObjectsWithTag("HolographicPlatform");
 
         //destroyer platform
         destroyerPlatforms = GameObject.FindGameObjectsWithTag("DestroyerPlatform");
+
+        //powerUp
+        invincibilityPowerUps = GameObject.FindGameObjectsWithTag("TeleportPowerUp");
+        isPlayerInvincible();
+
+        //animator
+        animator.SetFloat("A_time_inv", timeInvincible);
+        animator.SetBool("A_isInv", isInvincible);
+        animator.SetFloat("A_rbVel", rb.velocity.y);
+        animator.SetBool("A_isInAir", isInAir);
+    }
+
+    public void DeathHandler()
+    {
+        pauseButton.enabled = false;
+        achievementManager.UnlockAchievement(Achievements._Die);
+        Doodler.SetActive(false);
+        gameManager.GetComponent<ShootingController>().enabled = false;
+        gameManager.GetComponent<GenerateMap>().enabled = false;
+        Time.timeScale = 0f;
+        deathScore_text.text = "Score: "+ Mathf.Round(maxScore).ToString();
+        deathCoin_text.text = "Coins: "+ coinAmount.ToString();
+        SaveRunInfo();
+        deathMenuUI.SetActive(true);
     }
     void UpdateScore()
     {
-        //pokud se hr·Ë pohybuje smÏrem nahoru a z·roveÚ pozice na y je vÏtsÌ neû aktu·lnÌ skorÈ, tak se p¯epÌöe skÛre podle pozice
+        //pokud se hr√°ƒç pohybuje smƒõrem nahoru a z√°rove≈à pozice na y je vƒõts√≠ ne≈æ aktu√°ln√≠ skor√©, tak se p≈ôep√≠≈°e sk√≥re podle pozice
         if (rb.velocity.y > 0 && transform.position.y > maxScore)
         {
             maxScore = transform.position.y;
         }
-        //p¯evod floatu na zaokrouhlen˝ string, kv˙li textu v UI
+        //p≈ôevod floatu na zaokrouhlen√Ω string, kv√∫li textu v UI
         score.text = Mathf.Round(maxScore).ToString();
         
     }
-    void SaveHighScore()
+    void SaveRunInfo()
     {
-        //naËtenÌ highscore a p¯eps·nÌ pokud hr·Ë dos·hl vÏtöÌho skÛre neû je highscore
+        //naƒçten√≠ highscore a p≈ôeps√°n√≠ pokud hr√°ƒç dos√°hl vƒõt≈°√≠ho sk√≥re ne≈æ je highscore
         float highScore = PlayerPrefs.GetFloat("highScore");
         if (maxScore > highScore)
         {
@@ -109,19 +144,21 @@ public class Controller : MonoBehaviour
             PlayerPrefs.Save();
             Debug.Log("saved highscore!");
         }
+        //ulo≈æen√≠ coin≈Ø do PlayerPrefs
+        float coins = PlayerPrefs.GetFloat("coins");
+        coins += coinAmount;
+        PlayerPrefs.SetFloat("coins",coins);
     }
 
-    void IsPlayerInAir() //shrink on distance //pokud je hr·Ë ve vzduchu, tak se pousouv· nahoru, a po 5 vte¯in·ch se zmÏnÌ sprite, vyresetuje Ëas ve vzduchu a lehce vyskoËÌ
-                         //(to jsem p¯idal kv˘li zlehËenÌ a menöÌmu p¯ekvapenÌ z toho ûe hr·Ë pad· dolu) a hr·Ë nenÌ ve vzduchu (isInAir = false;)
+    void IsPlayerInAir() //shrink on distance //pokud je hr√°ƒç ve vzduchu, tak se pousouv√° nahoru, a po 5 vte≈ôin√°ch se zmƒõn√≠ sprite, vyresetuje ƒças ve vzduchu a lehce vyskoƒç√≠
+                         //(to jsem p≈ôidal kv≈Øli zlehƒçen√≠ a men≈°√≠mu p≈ôekvapen√≠ z toho ≈æe hr√°ƒç pad√° dolu) a hr√°ƒç nen√≠ ve vzduchu (isInAir = false;)
     {
         if (isInAir)
         {
             rb.velocity = new Vector2(0, flyingSpeed);
             timeInAir += Time.deltaTime;
-            //Debug.Log(timeInAir);
             if (timeInAir >= flyingDuration)
             {
-                playerSprite.sprite = doodlerSprite;
                 timeInAir = 0.0f;
                 Vector2 velocity = rb.velocity;
                 velocity.y = vel;
@@ -130,20 +167,45 @@ public class Controller : MonoBehaviour
             }
         }
     }
+    void isPlayerInvincible()
+    {
+        if (isInvincible)
+        {
+            timeInvincible += Time.deltaTime;
+            Debug.Log(timeInvincible);
+            if (invincibilityDuration - timeInvincible <1)
+            {
+                powerUpTimeText.text = string.Format("{0:0.0}", invincibilityDuration - timeInvincible);
+            }
+            else
+            {
+                powerUpTimeText.text = string.Format("{0:0}", invincibilityDuration - timeInvincible);
+            }
+            //Debug.Log(timeInAir);
+            if (timeInvincible >= invincibilityDuration)
+            {
+                isInvincible = false;
+                gameObject.layer = 0;
+                powerUpTimeText.enabled = false;
+                powerUpTimeImg.enabled = false;
+                timeInvincible = 0f;
+            }
+        }
+    }
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        //Ghost platform script //po dotknutÌ platformy se hr·Ëovi zmÏnÌ sprite a bool isInAir
+        //Ghost platform script //po dotknut√≠ platformy se hr√°ƒçovi zmƒõn√≠ bool isInAir
         for (int i = 0; i < ghostPlatforms.Length; i++)
         {
             if (collision.gameObject == ghostPlatforms[i] && collision.relativeVelocity.y >= 0f)
             {
-                playerSprite.sprite = ghostSprite;
+               
                 isInAir = true;
             }
         }
 
-        //destroyer platforms //po dotknutÌ platformy se aktivuje skript a zniËÌ platforma, na kterou skoËil (aby hr·Ë nemohl niËt platformy vÌcekr·t)
+        //destroyer platforms //po dotknut√≠ platformy se aktivuje skript a zniƒç√≠ platforma, na kterou skoƒçil (aby hr√°ƒç nemohl niƒçt platformy v√≠cekr√°t)
         for (int u = 0; u < destroyerPlatforms.Length; u++)
         {
             if (collision.gameObject == destroyerPlatforms[u] && collision.relativeVelocity.y >= 0f)
@@ -152,12 +214,11 @@ public class Controller : MonoBehaviour
                 Destroy(destroyerPlatforms[u]);
             }
         }
-
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        //holographic platform //(zde jsem pouûil on trigger, jelikoû p¯es OnCollisionEnter se hr·Ë zasekl o platformu) pokud hr·Ë projde platformou, tak se zniËÌ objekt platformy
+        //holographic platform //(zde jsem pou≈æil on trigger, jeliko≈æ p≈ôes OnCollisionEnter se hr√°ƒç zasekl o platformu) pokud hr√°ƒç projde platformou, tak se zniƒç√≠ objekt platformy
         Vector2 playerVelocity = rb.velocity;
         for (int x = 0; x < holographicPlatforms.Length; x++)
         {
@@ -166,32 +227,38 @@ public class Controller : MonoBehaviour
                 Destroy(holographicPlatforms[x]);
             }
         }
-    }
-
-    void ShrinkPlatforms() //shrink on distance 
-    {
-        for (int j = 0; j <shrinkingPlatforms.Length; j++)
+        //PowerUp
+        if (collision.gameObject.tag == "TeleportPowerUp")
         {
-            float distance = Vector3.Distance(transform.position,shrinkingPlatforms[j].transform.position); //vzd·lenost hr·Ëe od platformy
-
-            if (distance < shrinkDistance)
+            timeInvincible = 0f;
+            isInvincible = false;
+            powerUpTimeText.enabled = true;
+            powerUpTimeImg.enabled = true;
+            for (int x = 0; x < invincibilityPowerUps.Length; x++)
             {
-                //spoËÌt· shrinkElementu (o kolik se zmensi)
-                float shrinkElement = 1 - (distance / shrinkDistance) * shrinkAmount;
-
-                //zmenöÌ objekt shrinkfaktorem vyn·sobenÌm norm·lnÌho vektoru tÌm zmenöenÌm,,
-                shrinkingPlatforms[j].transform.localScale = Vector3.one * shrinkElement;
+                if (collision.gameObject == invincibilityPowerUps[x])
+                {
+                    Destroy(invincibilityPowerUps[x]);
+                }
             }
+            gameObject.layer = 9;
+            isInvincible = true;
         }
-        
+        //coins score update
+        if (collision.gameObject.tag == "Coin")
+        {
+            Destroy(collision.gameObject);
+            coinAmount++;
+            coinText.text = coinAmount.ToString();
+        }
     }
 
-    void DestroyerPlatform() //najde vöechny spawnutÈ platformy na obrazovce (jelikoû platformy se spawnujÌ tÏsnÏ nad limitem obrazovky) a rozp˘lÌ ho
+    void DestroyerPlatform() //najde v≈°echny spawnut√© platformy na obrazovce (jeliko≈æ platformy se spawnuj√≠ tƒõsnƒõ nad limitem obrazovky) a rozp≈Øl√≠ ho
     {
         platformsToBeDestroyed = GameObject.FindObjectsOfType<GameObject>();
         int numberOfObjectsToDestroy = platformsToBeDestroyed.Length / 2;
 
-        // zamÌch·nÌ pole Fisher-Yates shuffle algoritmem ((VELMI zajÌmav˝ algoritmus!), kv˘li tomu, ûe platformy jsou v poli od vrchu obrazovky dolu)
+        // zam√≠ch√°n√≠ pole Fisher-Yates shuffle algoritmem ((VELMI zaj√≠mav√Ω algoritmus!), kv≈Øli tomu, ≈æe platformy jsou v poli od vrchu obrazovky dolu)
         for (int i = platformsToBeDestroyed.Length - 1; i > 0; i--)
         {
             int randomIndex = Random.Range(0, i + 1);
@@ -200,15 +267,24 @@ public class Controller : MonoBehaviour
             platformsToBeDestroyed[randomIndex] = temp;
         }
 
-        for (int i = 0; i < numberOfObjectsToDestroy; i++) // zde se smaûou vöechny objekty s komponentem (pr·zdn˝ skript Platform_Tag), je to kv˘li oddÏlenÌ platform od ostatnÌch gameobjekt˘, jak je nap¯. hr·Ë, nep¯·telÈ
+        for (int i = 0; i < numberOfObjectsToDestroy; i++) // zde se sma≈æou v≈°echny objekty s komponentem (pr√°zdn√Ω skript Platform_Tag), je to kv≈Øli oddƒõlen√≠ platform od ostatn√≠ch gameobjekt≈Ø, jak je nap≈ô. hr√°ƒç, nep≈ô√°tel√©
         {
             if (platformsToBeDestroyed[i].GetComponent<Platform_tag>() != null)
             {
                 Destroy(platformsToBeDestroyed[i]);
             }
         }
-
     }
-
+    void ChangePlayerSkin()
+    {
+        Skin skin = GameDataManager.GetSelectedCharacter();
+        if (skin.image != null)
+        {
+            playerSkin.sprite = skin.image;
+            animatorController = skin.animatorController;
+            animator.runtimeAnimatorController = animatorController;
+            Debug.LogWarning("Changed skin");
+        }
+    }
 }
 
