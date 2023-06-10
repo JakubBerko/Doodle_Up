@@ -20,7 +20,7 @@ public class Controller : MonoBehaviour
     private float flyingSpeed = 5f;
     private float flyingDuration = 5f;
     private float timeInAir = 0.0f;
-    private bool isInAir = false;
+    public bool isInAir = false;
     private float vel = 9;
 
     //holographic platform

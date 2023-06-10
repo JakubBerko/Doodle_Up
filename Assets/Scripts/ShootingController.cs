@@ -10,10 +10,16 @@ public class ShootingController : MonoBehaviour
     public Animator animator;
     public bool isPaused = false;
     public AchievementManager achievementManager;
+    private Controller controller;
+
+    private void Awake()
+    {
+        controller = GameObject.FindGameObjectWithTag("Doodler").GetComponent<Controller>();
+    }
     void Update()
     {
         if (isPaused) return;
-        if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
+        if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began && !controller.isInAir)
         {
             if (EventSystem.current.IsPointerOverGameObject())
             {
