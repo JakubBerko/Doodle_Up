@@ -63,12 +63,17 @@ public class Controller : MonoBehaviour
     [SerializeField] GameObject gameManager;
     [SerializeField] Button pauseButton;
     //Sound
-    public AudioSource highJump;
+    public AudioSource audioSource;
+    public AudioSource managerAudioSource;
+    public AudioClip highJumpClip;
+    public AudioClip ghostClip;
+    public AudioClip coinClip;
 
     //Delay time
     private DelayTimeScaleZero delayTimeScaleZero;
     void Start()
     {
+        managerAudioSource = GameObject.Find("GameManager").GetComponent<AudioSource>();
         delayTimeScaleZero = GameObject.Find("GameManager").GetComponent<DelayTimeScaleZero>();
         rb = GetComponent<Rigidbody2D>();
 
@@ -123,7 +128,12 @@ public class Controller : MonoBehaviour
         if (jumps == 100) achievementManager.UnlockAchievement(Achievements._JumpOnPlatforms100);
 
         //sound
-        if (rb.velocity.y > 9) highJump.Play();
+
+        if (rb.velocity.y > 9) 
+        {
+            audioSource.clip = highJumpClip;
+            audioSource.Play(); 
+        }
     }
 
     public void DeathHandler()
@@ -217,7 +227,8 @@ public class Controller : MonoBehaviour
         {
             if (collision.gameObject == ghostPlatforms[i] && collision.relativeVelocity.y >= 0f)
             {
-               
+                managerAudioSource.clip = ghostClip;
+                managerAudioSource.Play();
                 isInAir = true;
             }
         }
@@ -264,6 +275,8 @@ public class Controller : MonoBehaviour
         //coins score update
         if (collision.gameObject.tag == "Coin")
         {
+            audioSource.clip = coinClip;
+            audioSource.Play();
             Destroy(collision.gameObject);
             coinAmount++;
             coinText.text = coinAmount.ToString();

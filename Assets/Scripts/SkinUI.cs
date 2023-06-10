@@ -9,7 +9,6 @@ public class SkinUI : MonoBehaviour
 	[SerializeField] Color skinSelectedColor;
 
 	[SerializeField] Image skinImage;
-	[SerializeField] Image ammoImage;
 	[SerializeField] RuntimeAnimatorController skinController;
 	[SerializeField] TMP_Text skinNameText;
 	[SerializeField] TMP_Text skinPriceText;

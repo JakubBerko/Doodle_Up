@@ -1,0 +1,13 @@
+monster kill
+death sound
+jump sound
+achievement sound
+
+hotovo: 
+holographic platform sound (phase through)
+
+hotovo v projektu:
+shoot
+high jump
+coin pickup
+ghost

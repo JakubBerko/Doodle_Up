@@ -3895,6 +3895,7 @@ MonoBehaviour:
   achievementManager: {fileID: 1492171357}
   shootCooldown: 0.5
   shootSound: {fileID: 1492171358}
+  shootClip: {fileID: 8300000, guid: f1cd5fe6e34d4d049933ed37b7b62f6c, type: 3}
 --- !u!114 &1492171357
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5606,7 +5607,11 @@ MonoBehaviour:
   deathCoin_text: {fileID: 1237463579}
   gameManager: {fileID: 1492171353}
   pauseButton: {fileID: 339082249}
-  highJump: {fileID: 2111382621}
+  audioSource: {fileID: 2111382621}
+  managerAudioSource: {fileID: 0}
+  highJumpClip: {fileID: 8300000, guid: 8ed5b63eca7ba54438a4882396e35812, type: 3}
+  ghostClip: {fileID: 8300000, guid: b7ca4f1663a0cc741aa84e6d2f950762, type: 3}
+  coinClip: {fileID: 8300000, guid: 1f1ae2f50c9c13948b8ae47d5d43cc19, type: 3}
 --- !u!95 &2111382620
 Animator:
   serializedVersion: 4

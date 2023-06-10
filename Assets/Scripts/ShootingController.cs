@@ -14,6 +14,7 @@ public class ShootingController : MonoBehaviour
     private bool canShoot = true;
     public float shootCooldown = 0.3f;
     public AudioSource shootSound;
+    public AudioClip shootClip;
 
     private void Awake()
     {
@@ -47,6 +48,7 @@ public class ShootingController : MonoBehaviour
         Rigidbody2D rb = salivaBullet.GetComponent<Rigidbody2D>();
         rb.AddForce(bulletDirection.up * 1000f);
         animator.SetTrigger("A_shoot");
+        shootSound.clip = shootClip;
         shootSound.Play();
         achievementManager.UnlockAchievement(Achievements._Shoot);
     }
