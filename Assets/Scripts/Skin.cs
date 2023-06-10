@@ -8,7 +8,7 @@ using UnityEngine;
 		public Sprite image;
 		public string name;
 		public int price;
+		public RuntimeAnimatorController animatorController;
 
-		public bool isPurchased;
+	public bool isPurchased;
 	}
-

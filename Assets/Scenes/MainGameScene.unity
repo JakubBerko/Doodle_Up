@@ -5475,6 +5475,7 @@ MonoBehaviour:
   score: {fileID: 173754194}
   Highscore: {fileID: 1266296403}
   Doodler: {fileID: 2111382612}
+  isInAir: 0
   holographicPlatforms: []
   platformsToBeDestroyed: []
   destroyerPlatforms: []

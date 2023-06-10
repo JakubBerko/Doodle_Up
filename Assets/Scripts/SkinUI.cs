@@ -9,6 +9,7 @@ public class SkinUI : MonoBehaviour
 	[SerializeField] Color skinSelectedColor;
 
 	[SerializeField] Image skinImage;
+	[SerializeField] RuntimeAnimatorController skinController;
 	[SerializeField] TMP_Text skinNameText;
 	[SerializeField] TMP_Text skinPriceText;
 	[SerializeField] Button skinPurchaseButton;
@@ -26,6 +27,10 @@ public class SkinUI : MonoBehaviour
 	{
 		skinImage.sprite = sprite;
 	}
+	public void SetSkinController(RuntimeAnimatorController runtimeAnimatorController)
+    {
+		skinController = runtimeAnimatorController;
+    }
 
 	public void SetSkinName(string name)
 	{

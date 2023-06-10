@@ -70,6 +70,7 @@ public class SkinShopUI : MonoBehaviour
 			uiSkin.SetSkinName(skin.name);
 			uiSkin.SetSkinImage(skin.image);
 			uiSkin.SetSkinPrice(skin.price);
+			uiSkin.SetSkinController(skin.animatorController);
 
 			if (skin.isPurchased)
 			{

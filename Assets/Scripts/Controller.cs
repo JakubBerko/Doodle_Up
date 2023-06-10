@@ -50,6 +50,7 @@ public class Controller : MonoBehaviour
 
     //Skin
     [SerializeField] SpriteRenderer playerSkin;
+    [SerializeField] RuntimeAnimatorController animatorController;
 
     //Death handler
     [SerializeField] GameObject deathMenuUI;
@@ -80,6 +81,8 @@ public class Controller : MonoBehaviour
         powerUpTimeImg.enabled = false;
         //coins
         coinAmount = 0;
+        //shop
+        Animator animator = GetComponent<Animator>();
     }
     void Update()
     {
@@ -278,6 +281,8 @@ public class Controller : MonoBehaviour
         if (skin.image != null)
         {
             playerSkin.sprite = skin.image;
+            animatorController = skin.animatorController;
+            animator.runtimeAnimatorController = animatorController;
             Debug.LogWarning("Changed skin");
         }
     }

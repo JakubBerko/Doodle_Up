@@ -16,8 +16,10 @@ MonoBehaviour:
   - image: {fileID: 21300000, guid: e9f800eee605d484a9ef0493708b7114, type: 3}
     name: Doggie
     price: 0
+    animatorController: {fileID: 0}
     isPurchased: 1
   - image: {fileID: 21300000, guid: 7a6ed3bc398f22c479be76d60bab97af, type: 3}
     name: new_skin
     price: 5
+    animatorController: {fileID: 0}
     isPurchased: 0
