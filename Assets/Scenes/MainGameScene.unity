@@ -5486,6 +5486,7 @@ MonoBehaviour:
   coinText: {fileID: 457818910}
   achievementManager: {fileID: 1492171357}
   playerSkin: {fileID: 2111382616}
+  animatorController: {fileID: 0}
   deathMenuUI: {fileID: 1634974093}
   deathScore_text: {fileID: 1880851816}
   deathCoin_text: {fileID: 1237463579}
