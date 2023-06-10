@@ -16,10 +16,12 @@ MonoBehaviour:
   - image: {fileID: 21300000, guid: e9f800eee605d484a9ef0493708b7114, type: 3}
     name: Doggie
     price: 0
+    ammoImage: {fileID: 21300000, guid: 3ea37e58e3b4b16448f585501c0d344c, type: 3}
     animatorController: {fileID: 9100000, guid: f05f5658b8a917a4e8e5e68c469d2d65, type: 2}
     isPurchased: 1
   - image: {fileID: 21300000, guid: 7a6ed3bc398f22c479be76d60bab97af, type: 3}
     name: new_skin
     price: 5
+    ammoImage: {fileID: 21300000, guid: 26a66e22e5a6a8d4e8ff6e544f38d021, type: 3}
     animatorController: {fileID: 9100000, guid: bc0e5c9b8ccde6a46b1f0438dc9ac4eb, type: 2}
     isPurchased: 0

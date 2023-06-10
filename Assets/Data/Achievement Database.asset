@@ -20,3 +20,12 @@ MonoBehaviour:
     - id: _Die
       nazev: Die
       popis: Die once
+    - id: _JumpOnPlatforms10
+      nazev: Jump x10 in a run
+      popis: Jump 10 times in one run
+    - id: _JumpOnPlatforms50
+      nazev: Jump x50 in a run
+      popis: Jump 50 times in one run
+    - id: _JumpOnPlatforms100
+      nazev: Jump x100 in a run
+      popis: Jump 100 times in one run

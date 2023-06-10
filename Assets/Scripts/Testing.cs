@@ -4,14 +4,5 @@ using UnityEngine;
 
 public class Testing : MonoBehaviour
 {
-    public RuntimeAnimatorController newAnimatorController;
-    void Start()
-    {
-        OverrideAnim();
-    }
-    void OverrideAnim()
-    {
-        Animator animator = GetComponent<Animator>();
-        animator.runtimeAnimatorController = newAnimatorController;
-    }
+    //testing script
 }

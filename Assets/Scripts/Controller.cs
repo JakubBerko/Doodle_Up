@@ -1,4 +1,6 @@
-﻿using TMPro;
+﻿using System.Collections;
+using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -47,10 +49,12 @@ public class Controller : MonoBehaviour
 
     //Achievements
     public AchievementManager achievementManager;
+    public float jumps;
 
     //Skin
     [SerializeField] SpriteRenderer playerSkin;
     [SerializeField] RuntimeAnimatorController animatorController;
+    private ShootingController shootingController;
 
     //Death handler
     [SerializeField] GameObject deathMenuUI;
@@ -58,9 +62,14 @@ public class Controller : MonoBehaviour
     [SerializeField] TMP_Text deathCoin_text;
     [SerializeField] GameObject gameManager;
     [SerializeField] Button pauseButton;
-    //update score
+    //Sound
+    public AudioSource highJump;
+
+    //Delay time
+    private DelayTimeScaleZero delayTimeScaleZero;
     void Start()
     {
+        delayTimeScaleZero = GameObject.Find("GameManager").GetComponent<DelayTimeScaleZero>();
         rb = GetComponent<Rigidbody2D>();
 
         ChangePlayerSkin();
@@ -86,7 +95,6 @@ public class Controller : MonoBehaviour
     }
     void Update()
     {
-
         UpdateScore();
 
         // Ghost platform script
@@ -108,6 +116,14 @@ public class Controller : MonoBehaviour
         animator.SetBool("A_isInv", isInvincible);
         animator.SetFloat("A_rbVel", rb.velocity.y);
         animator.SetBool("A_isInAir", isInAir);
+
+        //achievement
+        if (jumps == 10) achievementManager.UnlockAchievement(Achievements._JumpOnPlatforms10);
+        if (jumps == 50) achievementManager.UnlockAchievement(Achievements._JumpOnPlatforms50);
+        if (jumps == 100) achievementManager.UnlockAchievement(Achievements._JumpOnPlatforms100);
+
+        //sound
+        if (rb.velocity.y > 9) highJump.Play();
     }
 
     public void DeathHandler()
@@ -117,12 +133,13 @@ public class Controller : MonoBehaviour
         Doodler.SetActive(false);
         gameManager.GetComponent<ShootingController>().enabled = false;
         gameManager.GetComponent<GenerateMap>().enabled = false;
-        Time.timeScale = 0f;
         deathScore_text.text = "Score: "+ Mathf.Round(maxScore).ToString();
         deathCoin_text.text = "Coins: "+ coinAmount.ToString();
         SaveRunInfo();
         deathMenuUI.SetActive(true);
+        delayTimeScaleZero.Delay();
     }
+    
     void UpdateScore()
     {
         //pokud se hráč pohybuje směrem nahoru a zároveň pozice na y je větsí než aktuální skoré, tak se přepíše skóre podle pozice

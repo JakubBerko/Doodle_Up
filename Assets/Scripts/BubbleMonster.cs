@@ -15,10 +15,14 @@ public class BubbleMonster : MonoBehaviour
     public TextMeshProUGUI coinText;
     private float coinAmount;
 
+    //Animator
+    public Animator animator;
+
     //handle Death
     private Controller controller;
     private void Start()
     {
+        animator = GameObject.Find("Doodler").GetComponent<Animator>();
         controller = GameObject.FindGameObjectWithTag("Doodler").GetComponent<Controller>();
     }
     void Update()
@@ -40,7 +44,6 @@ public class BubbleMonster : MonoBehaviour
     public void ShootAtPlayer()
     {
         playerTrans = GameObject.Find("Doodler").transform;
-
         GameObject bubbleBullet = Instantiate(bubbleBulletPrefab, transform.position, transform.rotation);
         Vector3 playerPos = (playerTrans.position - transform.position).normalized;
         bubbleBullet.GetComponent<Rigidbody2D>().velocity = playerPos * 3;
@@ -49,10 +52,12 @@ public class BubbleMonster : MonoBehaviour
     {
         if (collision.relativeVelocity.y <= 0f && collision.gameObject.tag == "Doodler" || collision.relativeVelocity.y <= 0f && collision.gameObject.tag == "Doodler" && collision.gameObject.layer == 9)
         {
+            animator.SetTrigger("A_kill");
             Destroy(gameObject);
         }
         else if(collision.gameObject.tag == "SalivaBullet")
         {
+            animator.SetTrigger("A_kill");
             Destroy(gameObject);
             Destroy(collision.gameObject);
         }
@@ -61,14 +66,4 @@ public class BubbleMonster : MonoBehaviour
             controller.DeathHandler();
         }
     }
-    //TODO:
-    /*
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.tag == "Doodler" && collision.gameObject.layer == 9)
-        {
-            Destroy(gameObject);
-        }
-    }
-    */
 }

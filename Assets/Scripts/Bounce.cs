@@ -8,6 +8,11 @@ public class Bounce : MonoBehaviour
     public float vel = 9f; //pokud zmìnìno zde, zmìnit i v Ghost platform
     Rigidbody2D rb;
     Vector2 velocity;
+    Controller controller;
+    private void Awake()
+    {
+        controller = GameObject.FindGameObjectWithTag("Doodler").GetComponent<Controller>();
+    }
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.relativeVelocity.y > 0f) return;
@@ -18,6 +23,8 @@ public class Bounce : MonoBehaviour
         velocity = rb.velocity;
         velocity.y = vel;
         rb.velocity = velocity;
+        controller.jumps++;
+        
     }
     private void OnTriggerEnter(Collider col)
     {
@@ -28,5 +35,6 @@ public class Bounce : MonoBehaviour
         Vector2 velocity = rb.velocity;
         velocity.y = vel;
         rb.velocity = velocity;
+        controller.jumps++;
     }
 }
