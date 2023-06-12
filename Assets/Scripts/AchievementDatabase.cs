@@ -1,12 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Malee;
+using Malee; //reorderable list
 
-[CreateAssetMenu()]
-public class AchievementDatabase : ScriptableObject
+[CreateAssetMenu()] //zobrazitene v assets menu pr vytvareni assetu
+public class AchievementDatabase : ScriptableObject //chci mit achievement jako scriptable object
 {
-    [Reorderable(sortable = false, paginate = false)]
+    [Reorderable(sortable = false, paginate = false)] //uprava vlastnosti reorderable listu
     public AchievementsArray achievements;
     [System.Serializable]
 

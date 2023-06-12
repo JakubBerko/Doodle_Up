@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
+//struktura jednotliveho achievementu
 public class Achievement
 {
     public string id;
