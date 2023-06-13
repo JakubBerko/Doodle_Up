@@ -20,9 +20,9 @@ public class GenerateMap : MonoBehaviour
     void Awake()
     {
 
-        playerTrans = player.transform;
+        playerTrans = player.transform; //ziskam player transform
 
-        GenerateMapFce(30.0f);
+        GenerateMapFce(30.0f); //vygeneruji start mapy
     }
 
     void Update()

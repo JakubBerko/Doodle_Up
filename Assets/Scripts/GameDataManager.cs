@@ -2,14 +2,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 
-// Shop Data Holder
 [System.Serializable]
 public class SkinsShopData
 {
     public List<int> purchasedSkinsIndexes = new List<int>();
 }
 
-// Player Data Holder
 [System.Serializable]
 public class PlayerData
 {
@@ -24,7 +22,7 @@ public static class GameDataManager
 
     static Skin selectedSkin;
 
-    static string skinsShopDataFilePath = Application.persistentDataPath + "/skins-shop-data.json";
+    static string skinsShopDataFilePath = Application.persistentDataPath + "/skins-shop-data.json"; 
 
     static GameDataManager()
     {
@@ -32,12 +30,12 @@ public static class GameDataManager
     }
 
     // Player Data Methods -----------------------------------------------------------------------------
-    public static Skin GetSelectedCharacter()
+    public static Skin GetSelectedCharacter() //vrátí vybraný skin
     {
         return selectedSkin;
     }
 
-    public static void SetSelectedSkin(Skin skin, int index)
+    public static void SetSelectedSkin(Skin skin, int index) //urèi vybraný skin
     {
         selectedSkin = skin;
         playerData.selectedSkinIndex = index;
@@ -67,14 +65,14 @@ public static class GameDataManager
         SavePlayerData();
     }
 
-    static void SavePlayerData()
+    static void SavePlayerData() //ulozi data o hraci do jsonu
     {
         string json = JsonUtility.ToJson(playerData);
         File.WriteAllText(skinsShopDataFilePath, json);
         Debug.Log("<color=magenta>[PlayerData] Saved.</color>");
     }
 
-    // Characters Shop Data Methods -----------------------------------------------------------------------------
+                                                //funkce pro obchod
     public static void AddPurchasedSkin(int skinIndex)
     {
         skinsShopData.purchasedSkinsIndexes.Add(skinIndex);
@@ -106,7 +104,7 @@ public static class GameDataManager
         }
     }
 
-    static void SaveSkinsShopData()
+    static void SaveSkinsShopData() //ulozi data o itemech shopu do jsonu
     {
         string json = JsonUtility.ToJson(skinsShopData);
         File.WriteAllText(skinsShopDataFilePath, json);
