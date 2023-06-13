@@ -21,11 +21,11 @@ public class Bounce : MonoBehaviour
         rb = collision.gameObject.GetComponent<Rigidbody2D>();
         if (rb == null) return;
         //pokud nemají objekty velocity smìrem nahoru, tak se odrazí doodler smìrem nahoru
-        rb.position.Set(rb.position.x, rb.position.y + 100);
+        rb.position.Set(rb.position.x, rb.position.y + 100); //pokus o vyreseni bugu (neuspesne) 
         velocity = rb.velocity;
         velocity.y = vel;
         rb.velocity = velocity;
-        controller.jumps++;
+        controller.jumps++; //achievements param
         audioSource.clip = controller.jumpClip;
         audioSource.Play();
     }

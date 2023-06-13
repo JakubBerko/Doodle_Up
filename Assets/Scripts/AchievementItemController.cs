@@ -14,7 +14,7 @@ public class AchievementItemController : MonoBehaviour
     public bool unlocked;
     public Achievement achievement;
 
-    public void RefreshView()
+    public void RefreshView() //naète item achievementu
     {
         nazev.text = achievement.nazev;
         popis.text = achievement.popis;
@@ -23,7 +23,7 @@ public class AchievementItemController : MonoBehaviour
         lockedIcon.enabled = !unlocked;
     }
 
-    private void OnValidate()
+    private void OnValidate() //nate script, pokud se zmeni v inspektoru hodnota
     {
         RefreshView();
     }

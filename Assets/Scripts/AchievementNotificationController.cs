@@ -12,7 +12,7 @@ public class AchievementNotificationController : MonoBehaviour
     {
         m_animator = GetComponent<Animator>();
     }
-    public void ShowNotification(Achievement achievement)
+    public void ShowNotification(Achievement achievement) //ukáže notif. animaci
     {
         achievementTitleLabel.text = achievement.nazev;
         m_animator.SetTrigger("Appear");

@@ -198,7 +198,7 @@ public class Controller : MonoBehaviour
             }
         }
     }
-    void isPlayerInvincible()
+    void isPlayerInvincible() //pokud je hrac invincible tk se odpocitava cas a upravuje text powerupu
     {
         if (isInvincible)
         {
@@ -213,7 +213,7 @@ public class Controller : MonoBehaviour
                 powerUpTimeText.text = string.Format("{0:0}", invincibilityDuration - timeInvincible);
             }
             //Debug.Log(timeInAir);
-            if (timeInvincible >= invincibilityDuration)
+            if (timeInvincible >= invincibilityDuration) //pokud je hra na limitu nesmrtelnosti, vsechny hodnoty se restuji do normalu
             {
                 isInvincible = false;
                 gameObject.layer = 0;
@@ -292,7 +292,7 @@ public class Controller : MonoBehaviour
         platformsToBeDestroyed = GameObject.FindObjectsOfType<GameObject>();
         int numberOfObjectsToDestroy = platformsToBeDestroyed.Length / 2;
 
-        // zamíchání pole Fisher-Yates shuffle algoritmem ((VELMI zajímavý algoritmus!), kvůli tomu, že platformy jsou v poli od vrchu obrazovky dolu)
+        //zamíchání pole Fisher-Yates shuffle algoritmem ((VELMI zajímavý algoritmus!), kvůli tomu, že platformy jsou v poli od vrchu obrazovky dolu)
         for (int i = platformsToBeDestroyed.Length - 1; i > 0; i--)
         {
             int randomIndex = Random.Range(0, i + 1);
@@ -309,7 +309,7 @@ public class Controller : MonoBehaviour
             }
         }
     }
-    void ChangePlayerSkin()
+    void ChangePlayerSkin() //zmenim sprite i animator pro hrace 
     {
         Skin skin = GameDataManager.GetSelectedCharacter();
         if (skin.image != null)

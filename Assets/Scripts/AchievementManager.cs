@@ -15,7 +15,7 @@ public class AchievementManager : MonoBehaviour
 
     [SerializeField]
     [HideInInspector]
-    private List<AchievementItemController> achievementItems;
+    private List<AchievementItemController> achievementItems; //seznam achievementu
 
     private void Start()
     {
@@ -23,19 +23,19 @@ public class AchievementManager : MonoBehaviour
     }
     public void ShowNotification()
     {
-        Achievement achievement = database.achievements[(int)achievementToShow];
-        achievementNotificationController.ShowNotification(achievement);
+        Achievement achievement = database.achievements[(int)achievementToShow];//vytahne z databaze achievement
+        achievementNotificationController.ShowNotification(achievement);//zavola kod z jineho skriptu, ktery spusti notifikaci
     }
 
     [ContextMenu("LoadAchievementsTable()")]
     private void LoadAchievementsTable()
     {
-        foreach (AchievementItemController controller in achievementItems)
+        foreach (AchievementItemController controller in achievementItems) //smaze existujici achievementy
         {
             DestroyImmediate(controller.gameObject);
         }
         achievementItems.Clear();
-        foreach (Achievement achievement in database.achievements)
+        foreach (Achievement achievement in database.achievements) //naète znovu achievementy a jejich stav, zda-li jsou odemcena atd.
         {
             GameObject obj = Instantiate(achievementItemPrefab, content);
             AchievementItemController controller = obj.GetComponent<AchievementItemController>();
@@ -47,11 +47,11 @@ public class AchievementManager : MonoBehaviour
         }
         
     }
-    public void UnlockAchievement()
+    public void UnlockAchievement() //self explainatory
     {
         UnlockAchievement(achievementToShow);
     }
-    public void UnlockAchievement(Achievements achievement)
+    public void UnlockAchievement(Achievements achievement) //odemkne achievement a zobrazi notif. + naète znovu achievemnts list
     {
         achievementToShow = achievement;
         AchievementItemController item = achievementItems[(int)achievement];
@@ -63,7 +63,7 @@ public class AchievementManager : MonoBehaviour
         item.unlocked = true;
         item.RefreshView();
     }
-    public void LockAllAchievements()
+    public void LockAllAchievements() //zamkne vsechny achievementy
     {
         foreach (Achievement achievement in database.achievements)
         {

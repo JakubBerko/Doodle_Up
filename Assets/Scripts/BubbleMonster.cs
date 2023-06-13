@@ -27,7 +27,7 @@ public class BubbleMonster : MonoBehaviour
     }
     void Update()
     {
-        if (wasOnScreen)
+        if (wasOnScreen) //pokud byl na obrazovce tak zacne byt aktvni
         {
             lastShotTime += Time.deltaTime;
             if (lastShotTime >= ShootingInterval)
@@ -37,32 +37,35 @@ public class BubbleMonster : MonoBehaviour
             }
         }
     }
-    public void OnBecameVisible()
+    public void OnBecameVisible() //kontrola zda-li byl na obrazovce
     {
         wasOnScreen = true;
     }
-    public void ShootAtPlayer()
+    public void ShootAtPlayer() //støelba na pozici hrace
     {
         playerTrans = GameObject.Find("Doodler").transform;
         GameObject bubbleBullet = Instantiate(bubbleBulletPrefab, transform.position, transform.rotation);
-        Vector3 playerPos = (playerTrans.position - transform.position).normalized;
+        Vector3 playerPos = (playerTrans.position - transform.position).normalized; //zde vznika vektor ktery miri presne na pozici hrace
         bubbleBullet.GetComponent<Rigidbody2D>().velocity = playerPos * 3;
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.relativeVelocity.y <= 0f && collision.gameObject.tag == "Doodler" || collision.relativeVelocity.y <= 0f && collision.gameObject.tag == "Doodler" && collision.gameObject.layer == 9)
         {
+            //pokud hrac skoci na monstrum -> zabije monstrum
             animator.SetTrigger("A_kill");
             Destroy(gameObject);
         }
         else if(collision.gameObject.tag == "SalivaBullet")
         {
+            //pokud ho trefi slina od hrace -> zabije monstrum
             animator.SetTrigger("A_kill");
             Destroy(gameObject);
             Destroy(collision.gameObject);
         }
         else 
         {
+            //pokud se ho dotkne hrac, tak umøe hráè
             controller.DeathHandler();
         }
     }
