@@ -4022,6 +4022,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd8d5b8eecda20a44a32d5543a739fdf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  deathClip: {fileID: 8300000, guid: d6de2b73ae74c4f47b8b1d4d420c6c17, type: 3}
+  audioSource: {fileID: 1492171358}
 --- !u!4 &1495468499 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5269864528579768926, guid: 50d17025a0663dd48bb1f29eac0c3d55, type: 3}

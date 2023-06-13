@@ -12,8 +12,8 @@ public class Bounce : MonoBehaviour
     public AudioSource audioSource;
     private void Awake()
     {
-        audioSource = controller.GetComponent<AudioSource>();
         controller = GameObject.FindGameObjectWithTag("Doodler").GetComponent<Controller>();
+        audioSource = controller.GetComponent<AudioSource>();
     }
     void OnCollisionEnter2D(Collision2D collision)
     {
@@ -26,8 +26,6 @@ public class Bounce : MonoBehaviour
         velocity.y = vel;
         rb.velocity = velocity;
         controller.jumps++; //achievements param
-        audioSource.clip = controller.jumpClip;
-        audioSource.Play();
     }
     private void OnTriggerEnter(Collider col)
     {
