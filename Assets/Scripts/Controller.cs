@@ -68,6 +68,8 @@ public class Controller : MonoBehaviour
     public AudioClip highJumpClip;
     public AudioClip ghostClip;
     public AudioClip coinClip;
+    public AudioClip deathClip;
+    public AudioClip jumpClip;
 
     //Delay time
     private DelayTimeScaleZero delayTimeScaleZero;
@@ -146,6 +148,8 @@ public class Controller : MonoBehaviour
         deathScore_text.text = "Score: "+ Mathf.Round(maxScore).ToString();
         deathCoin_text.text = "Coins: "+ coinAmount.ToString();
         SaveRunInfo();
+        audioSource.clip = deathClip;
+        audioSource.Play();
         deathMenuUI.SetActive(true);
         delayTimeScaleZero.Delay();
     }

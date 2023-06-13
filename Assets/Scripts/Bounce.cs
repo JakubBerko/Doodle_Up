@@ -9,8 +9,10 @@ public class Bounce : MonoBehaviour
     Rigidbody2D rb;
     Vector2 velocity;
     Controller controller;
+    public AudioSource audioSource;
     private void Awake()
     {
+        audioSource = controller.GetComponent<AudioSource>();
         controller = GameObject.FindGameObjectWithTag("Doodler").GetComponent<Controller>();
     }
     void OnCollisionEnter2D(Collision2D collision)
@@ -24,7 +26,8 @@ public class Bounce : MonoBehaviour
         velocity.y = vel;
         rb.velocity = velocity;
         controller.jumps++;
-        
+        audioSource.clip = controller.jumpClip;
+        audioSource.Play();
     }
     private void OnTriggerEnter(Collider col)
     {
