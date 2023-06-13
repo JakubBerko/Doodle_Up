@@ -10,7 +10,6 @@ public class VirusEnemies : MonoBehaviour
 
     private Vector3 startPos;
     private Vector3 endPos;
-    private float journeyLength;
 
     private bool wasOnScreen;
 
@@ -48,17 +47,20 @@ public class VirusEnemies : MonoBehaviour
     {
         if (collision.relativeVelocity.y <= 0f && collision.gameObject.tag == "Doodler")
         {
+            //pokud skoci hrac na virus tak ho zabije a spusti animaci
             animator.SetTrigger("A_kill");
             Destroy(gameObject);
         }
         else if (collision.gameObject.tag == "SalivaBullet")
         {
+            //pokud slina hrace trefi virus tak ho zabije a spusti animaci
             Destroy(gameObject);
             Destroy(collision.gameObject);
             animator.SetTrigger("A_kill");
         }
         else
         {
+            //jinak zabije hrace
             controller.DeathHandler();
         }
     }

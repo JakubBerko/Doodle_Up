@@ -57,42 +57,42 @@ public class SkinShopUI : MonoBehaviour
 		for (int i = 0; i < skinDB.SkinsCount; i++)
 		{
 			
-			Skin skin = skinDB.GetSkin(i);
-			SkinUI uiSkin = Instantiate(skinPrefab, ShopSkinsContainer).GetComponent<SkinUI>();
+			Skin skin = skinDB.GetSkin(i); //ziskam skin
+			SkinUI uiSkin = Instantiate(skinPrefab, ShopSkinsContainer).GetComponent<SkinUI>(); //vytvorim skin v ui
 
 			
-			uiSkin.SetSkinPosition(Vector2.down * i * (skinHeight + skinSpacing));
+			uiSkin.SetSkinPosition(Vector2.down * i * (skinHeight + skinSpacing)); //pozicovani
 
 			
-			uiSkin.gameObject.name = "Skin" + i + "-" + skin.name;
+			uiSkin.gameObject.name = "Skin" + i + "-" + skin.name; //jmeno skinu
 
-			
-			uiSkin.SetSkinName(skin.name);
+			//nastaveni 
+			uiSkin.SetSkinName(skin.name); 
 			uiSkin.SetSkinImage(skin.image);
 			uiSkin.SetSkinPrice(skin.price);
 			uiSkin.SetSkinController(skin.animatorController);
 
-			if (skin.isPurchased)
+			if (skin.isPurchased) //pokud je skin koupen nastavi se v ui jako koupeny pres SkinUI a je k vybrani
 			{
 				uiSkin.SetSkinAsPurchased();
 				uiSkin.OnSkinSelect(i, OnSkinSelected);
 			}
-			else
+			else//pokud neni koupen tak se mu nastavi cena a je ke koupeni
 			{
 				uiSkin.SetSkinPrice(skin.price);
 				uiSkin.OnSkinPurchase(i, OnSkinPurchased);
 			}
-			ShopSkinsContainer.GetComponent<RectTransform>().sizeDelta =
+			ShopSkinsContainer.GetComponent<RectTransform>().sizeDelta = //resizing
 				Vector2.up * ((skinHeight + skinSpacing) * skinDB.SkinsCount + skinSpacing);
 		}
 	}
-	void OnSkinSelected(int index)
+	void OnSkinSelected(int index) 
 	{
 		SelectSkinUI(index);
 
 		GameDataManager.SetSelectedSkin(skinDB.GetSkin(index), index);
 	}
-	void SelectSkinUI(int skinIndex)
+	void SelectSkinUI(int skinIndex) //vybirani skinu
     {
 		previousSelectedSkinIndex = newSelectedSkinIndex;
 		newSelectedSkinIndex = skinIndex;
@@ -107,28 +107,28 @@ public class SkinShopUI : MonoBehaviour
 	{
 		return ShopSkinsContainer.GetChild(index).GetComponent<SkinUI>();
 	}
-	void OnSkinPurchased(int index)
+	void OnSkinPurchased(int index) //pri koupeni skinu
     {
-		Skin skin = skinDB.GetSkin(index);
-		SkinUI uiSkin = GetSkinUI(index);
+		Skin skin = skinDB.GetSkin(index);//ziskam skin
+		SkinUI uiSkin = GetSkinUI(index); //--
 
-		if (GameDataManager.CanSpendCoins(skin.price))
+		if (GameDataManager.CanSpendCoins(skin.price))//pokud muzu koupit, utratim penize
 		{
-			//Proceed with the purchase operation
+			//koupeni
 			GameDataManager.SpendCoins(skin.price);
-			//Update Coins UI text
+			//update textu penez
 			coinsUI.text = PlayerPrefs.GetFloat("coins").ToString();
 
-			//Update DB's Data
+			//update databaze
 			skinDB.PurchaseSkin(index);
 
 			uiSkin.SetSkinAsPurchased();
 			uiSkin.OnSkinSelect(index, OnSkinSelected);
 
-			//Add purchased item to Shop Data
+			//pridani koupeneho skinu do dat
 			GameDataManager.AddPurchasedSkin(index);
 		}
-        else
+        else //kdyz nemam penize
         {
 			Debug.Log("Nemáš prachy");
         }

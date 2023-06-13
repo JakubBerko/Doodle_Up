@@ -18,57 +18,57 @@ public class SkinUI : MonoBehaviour
 	[SerializeField] Image skin_Image;
 	[SerializeField] Outline skinOutline;
 
-	public void SetSkinPosition(Vector2 pos)
+	public void SetSkinPosition(Vector2 pos) //pozice skinu
 	{
 		GetComponent<RectTransform>().anchoredPosition += pos;
 	}
 
-	public void SetSkinImage(Sprite sprite)
+	public void SetSkinImage(Sprite sprite) //nastaveni obrazku skinu
 	{
 		skinImage.sprite = sprite;
 	}
-	public void SetSkinController(RuntimeAnimatorController runtimeAnimatorController)
-    {
+	public void SetSkinController(RuntimeAnimatorController runtimeAnimatorController) //nastaveni animator komponentu skinu
+	{
 		skinController = runtimeAnimatorController;
     }
 
-	public void SetSkinName(string name)
+	public void SetSkinName(string name) //nastaveni jmena skinu
 	{
 		skinNameText.text = name;
 	}
 
-	public void SetSkinPrice(int price)
+	public void SetSkinPrice(int price) //nastaveni ceny skinu
 	{
 		skinPriceText.text = price.ToString();
 	}
-	public void SetSkinAsPurchased()
+	public void SetSkinAsPurchased() //nastaveni skinu na koupeny
 	{
 		skinPurchaseButton.gameObject.SetActive(false);
 		skinButton.interactable = true;
 
 		skin_Image.color = skinNotSelectedColor;
 	}
-	public void OnSkinPurchase(int skinIndex, UnityAction<int> action)
+	public void OnSkinPurchase(int skinIndex, UnityAction<int> action) //pri koupi skinu
 	{
-		skinPurchaseButton.onClick.RemoveAllListeners();
-		skinPurchaseButton.onClick.AddListener(() => action.Invoke(skinIndex));
+		skinPurchaseButton.onClick.RemoveAllListeners(); //odstrani listenery
+		skinPurchaseButton.onClick.AddListener(() => action.Invoke(skinIndex)); //prida listenery, ktere pri kliknuti na button poslou index koupeneho skinu
 	}
 
 	public void OnSkinSelect(int skinIndex, UnityAction<int> action)
 	{
 		skinButton.interactable = true;
 
-		skinButton.onClick.RemoveAllListeners();
-		skinButton.onClick.AddListener(() => action.Invoke(skinIndex));
+		skinButton.onClick.RemoveAllListeners(); //odstrani listenery
+		skinButton.onClick.AddListener(() => action.Invoke(skinIndex)); //prida listenery, ktere pri kliknuti na button poslou index vybraneho skinu
 	}
-	public void SelectSkin()
+	public void SelectSkin() //vybrat skin? 
 	{
 		skinOutline.enabled = true;
 		skin_Image.color = skinSelectedColor;
 		skinButton.interactable = false;
 	}
 
-	public void DeselectSkin()
+	public void DeselectSkin() //od-vybrat skin? 
 	{
 		skinOutline.enabled = false;
 		skin_Image.color = skinNotSelectedColor;

@@ -18,7 +18,7 @@ public class TiltController : MonoBehaviour
     }
     void Start()
     {
-        //screenWrap
+        //screenWrap (aka. co kamera vidí)
         halfHeight = Camera.main.orthographicSize;
         halfWidth = halfHeight * Camera.main.aspect;
     }
