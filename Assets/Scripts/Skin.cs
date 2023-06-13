@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-	[System.Serializable]
+	[System.Serializable]//construkt skinu, zde jsou vsechny potrebne promenne skinu
 	public struct Skin
 	{
 		public Sprite image;

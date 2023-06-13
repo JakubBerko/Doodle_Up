@@ -22,35 +22,36 @@ public class ShootingController : MonoBehaviour
     }
     void Update()
     {
-        if (isPaused) return;
+        if (isPaused) return; //kdyz je hra paused, nestrili
         if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began && !controller.isInAir && canShoot)
         {
-            if (EventSystem.current.IsPointerOverGameObject())
+            if (EventSystem.current.IsPointerOverGameObject()) //pokud klikam na ui element
             {
                 return;
             }
             else 
             { 
-                Shoot();
-                StartCoroutine(ShotLimiter());
+                Shoot(); //støel
+                StartCoroutine(ShotLimiter()); //limitace støel (anti spam)
             }
         }
     }
-    IEnumerator ShotLimiter()
+    IEnumerator ShotLimiter() //antispam støel, zruš støíení, poèkej nìjaký èas, povol støílení
     {
         canShoot = false;
         yield return new WaitForSeconds(shootCooldown);
         canShoot = true;
     }
-    public void Shoot()
+    public void Shoot() 
     {
+        //spawni slinu trochu nad hráèem (offset)
         GameObject salivaBullet = Instantiate(salivaBulletPrefab, bulletDirection.position + new Vector3(0, 0.5f, 0), bulletDirection.rotation);
         Rigidbody2D rb = salivaBullet.GetComponent<Rigidbody2D>();
-        rb.AddForce(bulletDirection.up * 1000f);
-        animator.SetTrigger("A_shoot");
-        shootSound.clip = shootClip;
-        shootSound.Play();
-        achievementManager.UnlockAchievement(Achievements._Shoot);
+        rb.AddForce(bulletDirection.up * 1000f); //vymrštìní støely
+        animator.SetTrigger("A_shoot"); //animace hráèe
+        shootSound.clip = shootClip; //zvuk
+        shootSound.Play();//zvuk
+        achievementManager.UnlockAchievement(Achievements._Shoot);//achievement
     }
     
 }

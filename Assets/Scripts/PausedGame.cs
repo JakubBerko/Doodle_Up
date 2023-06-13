@@ -17,29 +17,29 @@ public class PausedGame : MonoBehaviour
     {
         pausedGame.SetActive(true); //zobrazí UI pausedGame
         Time.timeScale = 0f; //nastaví èas na 0
-        shootingController.isPaused = true;
+        shootingController.isPaused = true; //zastaví støílení
     }
     public void ResumeGame()
     {
         pausedGame.SetActive(false); //schová UI pausedGame
         Time.timeScale = 1f; //nastaví èas na 1
-        shootingController.isPaused = false;
+        shootingController.isPaused = false; //povolí støílení
     }
     public void ReturnToMainMenu()
     {
-        deathMenu = GameObject.Find("DeathMenu");
+        deathMenu = GameObject.Find("DeathMenu"); //navíc øádek kodu
         pausedGame.SetActive(false); //schová UI pausedGame
         Time.timeScale = 1f; //nastaví èas na 1
-        shootingController.isPaused = false;
+        shootingController.isPaused = false;//povolí støílení
         SceneManager.LoadScene("MainMenuScreen"); //naète novou scénu
     }
     public void Retry()
     {
-        deathMenu = GameObject.Find("DeathMenu");
-        deathMenu.SetActive(false);
-        Time.timeScale = 1f;
-        shootingController.isPaused = false;
-        SceneManager.LoadScene("MainGameScene");
+        deathMenu = GameObject.Find("DeathMenu"); 
+        deathMenu.SetActive(false); //schová UI
+        Time.timeScale = 1f;//nastaví èas na 1
+        shootingController.isPaused = false;//povolí støílení
+        SceneManager.LoadScene("MainGameScene"); //naète scenu
     }
     
 }

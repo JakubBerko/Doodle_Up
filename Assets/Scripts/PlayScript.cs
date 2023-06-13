@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class PlayScript : MonoBehaviour
 {
-    // Start is called before the first frame update
     [SerializeField] GameObject pausedGame;
     public void StartGame()
     {
@@ -16,7 +15,7 @@ public class PlayScript : MonoBehaviour
         Application.Quit(); //vypne aplikaci
         Debug.Log("Zavírání aplikace funguje!");
     }
-    public void OpenAchievements()
+    public void OpenAchievements() //nic nedela, achievement menu je v paused game
     {
         SceneManager.LoadScene("AchievementScene");
     }

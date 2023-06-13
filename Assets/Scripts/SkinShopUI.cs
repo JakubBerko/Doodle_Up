@@ -29,24 +29,24 @@ public class SkinShopUI : MonoBehaviour
 
 	private void Start()
     {
-		AddShopEvents();
+		AddShopEvents(); 
 		GenerateShopSkinsUI();
 		SetSelectedCharacter();
 		SelectSkinUI(GameDataManager.GetSelectedSkinIndex());
 	}
 	void SetSelectedCharacter()
 	{
-		//Get saved index
+		//ziskej index
 		int index = GameDataManager.GetSelectedSkinIndex();
 
-		//Set selected character
+		//nastav vybraný skin
 		GameDataManager.SetSelectedSkin(skinDB.GetSkin(index), index);
 	}
 	private void GenerateShopSkinsUI()
     {
 		for (int i = 0; i < GameDataManager.GetAllPurchasedSkin().Count; i++)
 		{
-			int purchasedSkinIndex = GameDataManager.GetPurchasedSkin(i);
+			int purchasedSkinIndex = GameDataManager.GetPurchasedSkin(i); //ziskam vsechny koupene skiny
 			skinDB.PurchaseSkin(purchasedSkinIndex);
 		}
 
